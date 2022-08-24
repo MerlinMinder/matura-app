@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Neomorphism } from "../Neomorphism";
+import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 
 let SCALE = 0.95486111111111;
@@ -18,6 +18,7 @@ export const WorkoutTrailer = (props) => {
       colorS1="rgba(0, 0, 0, 0.7)"
       colorS2="rgba(153, 153, 153, 0.7)"
       colorB={props.bg2}
+      pady={24 / SCALE}
     >
       <Text style={styles.title}>{props.workout.title}</Text>
       <View

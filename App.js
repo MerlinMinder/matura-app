@@ -12,7 +12,8 @@ import { useFonts } from "expo-font";
 import Constants from "expo-constants";
 import { Title } from "./components/Title";
 import GradientText from "./GradientText";
-import { WorkoutTrailer } from "./components/WorkoutTrailer";
+import { Workouts } from "./components/Workouts";
+import { Physique } from "./components/Physique";
 
 const BG1 = "#3C3C3C";
 const BG2 = "#464646";
@@ -55,49 +56,20 @@ export default function App() {
 
         {/* Workouts */}
         <View style={{ left: -100 / SCALE, marginTop: 10 / SCALE }}>
-          <GradientText text="Workouts" style={styles.workout} />
+          <GradientText text="Workouts" style={styles.titles} />
         </View>
+
         <View style={{ marginTop: 10 / SCALE }}>
-          <WorkoutTrailer
-            scale={SCALE}
-            bg2={BG2}
-            workout={{
-              title: "Push Workout",
-              color: "#42FFFF",
-              exercises: "7",
-              time: "48m 23s",
-            }}
-          />
-          <WorkoutTrailer
-            scale={SCALE}
-            bg2={BG2}
-            workout={{
-              title: "Push Workout",
-              color: "#42FF62",
-              exercises: "6",
-              time: "67m 02s",
-            }}
-          />
-          <WorkoutTrailer
-            scale={SCALE}
-            bg2={BG2}
-            workout={{
-              title: "Push Workout",
-              color: "#FFFF42",
-              exercises: "4",
-              time: "5m 58s",
-            }}
-          />
-          <WorkoutTrailer
-            scale={SCALE}
-            bg2={BG2}
-            workout={{
-              title: "Push Workout",
-              color: "#FFC042",
-              exercises: "12",
-              time: "128m 43s",
-            }}
-          />
+          <Workouts scale={SCALE} bg2={BG2} />
+        </View>
+
+        {/* Physique */}
+        <View style={{ left: -100 / SCALE, marginTop: 20 / SCALE }}>
+          <GradientText text="Physique" style={styles.titles} />
+        </View>
+
+        <View>
+          <Physique scale={SCALE} bg2={BG2} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -111,7 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: BG1,
     paddingTop: Platform.OS === "android" ? Constants.statusBarHeight : 0,
   },
-  workout: {
+  titles: {
     fontFamily: "WorkSans-SemiBold",
     fontStyle: "normal",
     fontWeight: "600",

@@ -22,7 +22,7 @@ export const Neomorphism = (props) => {
         height: inset
           ? props.height
           : props.pady
-          ? props.width + props.pady
+          ? props.height + props.pady
           : props.height + Y * 2,
       }}
     >

@@ -3,7 +3,6 @@ import { Neomorphism } from "../../Neomorphism";
 import { Day } from "./Day";
 
 let SCALE = 1;
-console.log(Math.random());
 
 export const Week = (props) => {
   SCALE = props.scale;
