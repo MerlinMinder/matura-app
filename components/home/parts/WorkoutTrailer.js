@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Neomorphism } from "../../Neomorphism";
+import { Neomorphism } from "../../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 
 let SCALE = 1.0416666666666667;

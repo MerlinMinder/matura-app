@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import { Neomorphism } from "../../Neomorphism";
-import GradientText from "../../GradientText";
+import { Neomorphism } from "../../../Neomorphism";
+import GradientText from "../../../GradientText";
 
 export const Weektitle = (props) => {
   const weekshort = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];

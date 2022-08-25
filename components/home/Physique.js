@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import GradientText from "../GradientText";
-import { Neomorphism } from "../Neomorphism";
+import GradientText from "../../GradientText";
+import { Neomorphism } from "../../Neomorphism";
 import { Measure } from "./parts/Measure";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";

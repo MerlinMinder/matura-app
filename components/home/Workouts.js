@@ -1,6 +1,6 @@
 import { Image, View } from "react-native";
 import { WorkoutTrailer } from "./parts/WorkoutTrailer";
-import { Neomorphism } from "../Neomorphism";
+import { Neomorphism } from "../../Neomorphism";
 
 export const Workouts = (props) => {
   let workouts = [
@@ -74,7 +74,7 @@ export const Workouts = (props) => {
               height: 50 / SCALE,
               resizeMode: "cover",
             }}
-            source={require("../assets/pngs/Plus.png")}
+            source={require("../../assets/pngs/Plus.png")}
           />
         </Neomorphism>
       </View>

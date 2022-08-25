@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Text, TextInput, View } from "react-native";
-import { Neomorphism } from "../../Neomorphism";
+import { Neomorphism } from "../../../Neomorphism";
 
 export const Measure = (props) => {
   let SCALE = props.scale;

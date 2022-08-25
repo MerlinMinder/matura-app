@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Neomorphism } from "../Neomorphism";
+import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Week } from "./parts/Week";
 import { Weektitle } from "./parts/Weektitle";
