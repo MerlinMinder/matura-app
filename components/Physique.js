@@ -2,6 +2,7 @@ import { StyleSheet, View } from "react-native";
 import GradientText from "../GradientText";
 import { Neomorphism } from "../Neomorphism";
 import { Measure } from "./parts/Measure";
+import { LinearGradient } from "expo-linear-gradient";
 
 let SCALE = 0.954861111111111;
 let BG2 = "#464646";
@@ -44,15 +45,36 @@ export const Physique = (props) => {
           scale={SCALE}
           bg2={BG2}
           word="Height"
-          mes="184 cm"
+          mes="cm"
         />
         <Measure
           style={{ marginTop: 10 / SCALE }}
           scale={SCALE}
           bg2={BG2}
           word="Weight"
-          mes="84 kg"
+          mes="kg"
         />
+        <LinearGradient
+          style={{
+            width: 280 / SCALE,
+            height: 10 / SCALE,
+            borderRadius: 5 / SCALE,
+            marginTop: 22 / SCALE,
+          }}
+          colors={[
+            "#42FFFF",
+            "#42FFFF",
+            "#62FF42",
+            "#62FF42",
+            "#FFC042",
+            "#FFA142",
+            "#FF8142",
+            "#FF5242",
+          ]}
+          locations={[0, 0.15, 0.3, 0.6, 0.7, 0.8, 0.9, 1]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        ></LinearGradient>
       </Neomorphism>
     </View>
   );
