@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import { Day } from "./Day";
 
-let SCALE = 1;
+let SCALE = 1.0416666666666667;
 
 export const Week = (props) => {
   SCALE = props.scale;

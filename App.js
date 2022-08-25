@@ -18,11 +18,12 @@ import { Physique } from "./components/Physique";
 const BG1 = "#3C3C3C";
 const BG2 = "#464646";
 
-let SCALE = 0.954861111111111;
+let SCALE = 1.0416666666666667;
 
 export default function App() {
   // setting scale from design to phone size
   SCALE = 375 / Dimensions.get("screen").width;
+  console.log(SCALE);
 
   // load the WorkSans fonts
   const [fontsLoaded] = useFonts({

@@ -4,7 +4,7 @@ import Svg, { Path } from "react-native-svg";
 import { Week } from "./parts/Week";
 import { Weektitle } from "./parts/Weektitle";
 
-let SCALE = 1;
+let SCALE = 1.0416666666666667;
 
 export const Calendar = (props) => {
   const BG2 = props.bg2;

@@ -6,9 +6,7 @@ export const Measure = (props) => {
   let SCALE = props.scale;
   let BG2 = props.bg2;
 
-  const [text, onChangeText] = useState(props.word ? props.word : "");
   const [number, onChangeNumber] = useState(0);
-  const variable = props.word ? true : true;
 
   return (
     <View style={props.style}>
@@ -24,10 +22,11 @@ export const Measure = (props) => {
         colorS2="rgba(153, 153, 153, 0.5)"
         inset={true}
       >
-        <TextInput
+        <Text
           style={{
             position: "absolute",
-            height: 40 / SCALE,
+            height: 21 / SCALE,
+            top: 10 / SCALE,
             left: 15 / SCALE,
             width: 130 / SCALE,
             fontFamily: "WorkSans-SemiBold",
@@ -37,13 +36,9 @@ export const Measure = (props) => {
             lineHeight: 21 / SCALE,
             color: "white",
           }}
-          placeholder="Height"
-          placeholderTextColor="white"
-          value={text}
-          onChangeText={onChangeText}
-          selectTextOnFocus={true}
-          editable={variable}
-        ></TextInput>
+        >
+          {props.word}
+        </Text>
         <TextInput
           style={{
             position: "absolute",
@@ -58,12 +53,15 @@ export const Measure = (props) => {
             lineHeight: 21 / SCALE,
             color: "white",
           }}
+          multiline={true}
+          numberOfLines={1}
           onChangeText={onChangeNumber}
           placeholder="?"
           placeholderTextColor="white"
           value={number}
           keyboardType="number-pad"
           selectTextOnFocus={true}
+          editable={props.edit}
         ></TextInput>
         <Text
           style={{

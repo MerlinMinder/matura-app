@@ -1,7 +1,7 @@
 import GradientText from "../GradientText";
 import { StyleSheet, View } from "react-native";
 
-let SCALE = 0.954861111111111;
+let SCALE = 1.0416666666666667;
 
 export const Title = (props) => {
   SCALE = props.scale;

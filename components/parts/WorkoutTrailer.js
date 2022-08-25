@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 
-let SCALE = 0.95486111111111;
+let SCALE = 1.0416666666666667;
 
 export const WorkoutTrailer = (props) => {
   SCALE = props.scale;
