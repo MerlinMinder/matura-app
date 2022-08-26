@@ -14,14 +14,15 @@ export const Top = (props) => {
     <View style={{ width: 320 / SCALE }}>
       <TextInput
         style={styles.title}
-        multiline={true}
-        numberOfLines={1}
         onChangeText={onChangeTitle}
         placeholder="Workout"
         placeholderTextColor="white"
         value={title}
         selectTextOnFocus={true}
+        keyboardType="default"
         editable={edit}
+        multiline={true}
+        numberOfLines={1}
       ></TextInput>
       <View style={styles.pen}>
         <Svg
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   title: {
     position: "absolute",
     width: 250 / SCALE,
-    height: 28 / SCALE,
+    height: 30 / SCALE,
     left: 20 / SCALE,
     top: 20 / SCALE,
     fontFamily: "WorkSans-SemiBold",
@@ -98,6 +99,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 24 / SCALE,
     lineHeight: 28 / SCALE,
+    textAlign: "left",
+    color: "white",
   },
   pen: {
     position: "absolute",

@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, Text, View } from "react-native";
 import { Title } from "../components/Title";
+import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Start } from "../components/workout/Start";
 import { Top } from "../components/workout/Top";
 import GradientText from "../GradientText";
@@ -12,6 +13,13 @@ let SCALE = 1.0416666666666667;
 export const Workoutpage = (props) => {
   SCALE = props.scale;
   BG2 = props.bg2;
+
+  let exercises = [
+    { name: "Deadlift" },
+    { name: "Seated Back Row" },
+    { name: "Hyperextensions" },
+    { name: "Straight Bar Bicep Curls" },
+  ];
 
   return (
     <ScrollView
@@ -109,6 +117,24 @@ export const Workoutpage = (props) => {
                 PROGRESS
               </Text>
             </LinearGradient>
+          </View>
+          <View
+            style={{
+              position: "absolute",
+              top: 241 / SCALE,
+            }}
+          >
+            {exercises.map((exercise) => {
+              return (
+                <View style={{ marginBottom: 15 / SCALE }} key={exercise.name}>
+                  <ExerciseTrailer
+                    scale={SCALE}
+                    bg2={BG2}
+                    name={exercise.name}
+                  />
+                </View>
+              );
+            })}
           </View>
         </Neomorphism>
       </View>
