@@ -1,14 +1,16 @@
 import { Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
+import { Settrailer } from "./Settrailer";
 
 export const ExerciseTrailer = (props) => {
   let SCALE = props.scale;
   let BG2 = props.bg2;
+  let sets = props.sets;
   return (
     <Neomorphism
       width={280 / SCALE}
-      height={80 / SCALE}
+      height={sets.length < 7 ? 80 / SCALE : 124 / SCALE}
       x={4 / SCALE}
       y={4 / SCALE}
       r={10 / SCALE}
@@ -55,6 +57,25 @@ export const ExerciseTrailer = (props) => {
             fill="white"
           />
         </Svg>
+      </View>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          position: "absolute",
+          top: 28 / SCALE,
+          left: 8 / SCALE,
+          width: 264 / SCALE,
+        }}
+      >
+        {sets.map((set) => {
+          return (
+            <View key={Math.random()} style={{ margin: 2 / SCALE }}>
+              <Settrailer scale={SCALE} set={set} />
+            </View>
+          );
+        })}
       </View>
     </Neomorphism>
   );

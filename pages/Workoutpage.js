@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { Title } from "../components/Title";
 import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Start } from "../components/workout/Start";
@@ -15,11 +15,59 @@ export const Workoutpage = (props) => {
   BG2 = props.bg2;
 
   let exercises = [
-    { name: "Deadlift" },
-    { name: "Seated Back Row" },
-    { name: "Hyperextensions" },
-    { name: "Straight Bar Bicep Curls" },
+    {
+      name: "Deadlift",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+    {
+      name: "Seated Back Row",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+    {
+      name: "Hyperextensions",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+    {
+      name: "Straight Bar Bicep Curls",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
   ];
+
+  let extraHeight = exercises
+    .map((exercise) => (exercise.length < 7 ? 95 : 139))
+    .reduce((a, b) => a + b, 0);
 
   return (
     <ScrollView
@@ -50,7 +98,7 @@ export const Workoutpage = (props) => {
             alignItems: "center",
           }}
           width={320 / SCALE}
-          height={880 / SCALE}
+          height={315 / SCALE + extraHeight / SCALE}
           x={10 / SCALE}
           y={10 / SCALE}
           r={15 / SCALE}
@@ -131,10 +179,44 @@ export const Workoutpage = (props) => {
                     scale={SCALE}
                     bg2={BG2}
                     name={exercise.name}
+                    sets={exercise.sets}
                   />
                 </View>
               );
             })}
+          </View>
+          <View
+            style={{
+              position: "absolute",
+              bottom: 13 / SCALE,
+            }}
+          >
+            <Neomorphism
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              width={60 / SCALE}
+              height={60 / SCALE}
+              x={4 / SCALE}
+              y={4 / SCALE}
+              r={30 / SCALE}
+              b={4 / SCALE}
+              colorB={BG2}
+              colorS2="rgba(0, 0, 0, 0.7)"
+              colorS1="rgba(128, 128, 128, 0.7)"
+              inset={true}
+            >
+              <Image
+                style={{
+                  width: 45 / SCALE,
+                  height: 45 / SCALE,
+                  resizeMode: "cover",
+                }}
+                source={require("../assets/pngs/Plus.png")}
+              />
+            </Neomorphism>
           </View>
         </Neomorphism>
       </View>

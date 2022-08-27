@@ -21,7 +21,7 @@ export const Top = (props) => {
         selectTextOnFocus={true}
         keyboardType="default"
         editable={edit}
-        multiline={true}
+        multiline={false}
         numberOfLines={1}
       ></TextInput>
       <View style={styles.pen}>
