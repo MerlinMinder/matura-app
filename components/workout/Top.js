@@ -16,7 +16,7 @@ export const Top = (props) => {
         style={styles.title}
         onChangeText={onChangeTitle}
         placeholder="Workout"
-        placeholderTextColor="white"
+        placeholderTextColor="rgba(255, 255, 255, 0.5)"
         value={title}
         selectTextOnFocus={true}
         keyboardType="default"
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
   title: {
     position: "absolute",
     width: 250 / SCALE,
-    height: 30 / SCALE,
+    height: 40 / SCALE,
     left: 20 / SCALE,
-    top: 20 / SCALE,
+    top: 10 / SCALE,
     fontFamily: "WorkSans-SemiBold",
     fontStyle: "normal",
     fontWeight: "600",

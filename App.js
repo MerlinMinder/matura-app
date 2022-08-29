@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import Constants from "expo-constants";
 import { Homepage } from "./pages/Homepage";
 import { Workoutpage } from "./pages/Workoutpage";
+import { Exercisepage } from "./pages/Exercisepage";
 
 const BG1 = "#3C3C3C";
 const BG2 = "#464646";
@@ -31,7 +32,8 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={"transparent"} />
       {/* <Homepage scale={SCALE} bg2={BG2} /> */}
-      <Workoutpage scale={SCALE} bg2={BG2} />
+      {/* <Workoutpage scale={SCALE} bg2={BG2} /> */}
+      <Exercisepage scale={SCALE} bg2={BG2} />
     </SafeAreaView>
   );
 }
