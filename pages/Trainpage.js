@@ -1,4 +1,4 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { Title } from "../components/Title";
 
 export const Trainpage = (props) => {

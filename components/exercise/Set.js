@@ -154,10 +154,10 @@ export const Set = (props) => {
                 margin: 0,
                 padding: 0,
               }}
-              onChangeText={onChangeReps}
+              onChangeText={onChangeWeight}
               placeholder="0"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
-              value={reps}
+              value={weight}
               selectTextOnFocus={true}
               keyboardType="default"
               editable={true}

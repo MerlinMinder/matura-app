@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     fontFamily: "WorkSans-SemiBold",
     fontStyle: "normal",
     fontWeight: "600",
+    width: 60 / SCALE,
     fontSize: 34 / SCALE,
     lineHeight: 40 / SCALE,
   },

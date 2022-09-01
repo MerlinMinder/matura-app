@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image, ScrollView, Text, View } from "react-native";
 import { Title } from "../components/Title";
 import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
+import { Progress } from "../components/workout/Progress";
 import { Start } from "../components/workout/Start";
 import { Top } from "../components/workout/Top";
 import GradientText from "../GradientText";
@@ -131,40 +132,11 @@ export const Workoutpage = (props) => {
           <View
             style={{
               position: "absolute",
-              left: 195 / SCALE,
+              left: 192 / SCALE,
               top: 196 / SCALE,
             }}
           >
-            <LinearGradient
-              style={{
-                width: 110 / SCALE,
-                height: 30 / SCALE,
-                borderRadius: 15 / SCALE,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              colors={["#42FFFF", "#FFC042"]}
-            >
-              <Text
-                style={{
-                  fontFamily: "WorkSans-Bold",
-                  fontStyle: "normal",
-                  fontWeight: "700",
-                  fontSize: 16 / SCALE,
-                  lineHeight: 19 / SCALE,
-                  color: "#FFFFFF",
-                  textShadowOffset: {
-                    width: 1,
-                    height: 1,
-                  },
-                  textShadowRadius: 2,
-                  textShadowColor: "rgba(0, 0, 0, 0.5)",
-                }}
-              >
-                PROGRESS
-              </Text>
-            </LinearGradient>
+            <Progress scale={SCALE} />
           </View>
           <View
             style={{
