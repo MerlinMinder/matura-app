@@ -32,12 +32,11 @@ export const Trainpage = (props) => {
     color: "white",
   };
   return (
-    <View
-      style={{
+    <ScrollView
+      contentContainerStyle={{
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        paddingBottom: 25 / SCALE,
       }}
     >
       {/* Title */}
@@ -90,6 +89,6 @@ export const Trainpage = (props) => {
         scale={SCALE}
         bg2={BG2}
       />
-    </View>
+    </ScrollView>
   );
 };
