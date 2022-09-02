@@ -4,7 +4,7 @@ import { Title } from "../components/Title";
 import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Progress } from "../components/workout/Progress";
 import { Start } from "../components/workout/Start";
-import { Top } from "../components/workout/Top";
+import { Name } from "../components/workout/Name";
 import GradientText from "../GradientText";
 import { Neomorphism } from "../Neomorphism";
 
@@ -108,7 +108,7 @@ export const Workoutpage = (props) => {
           colorS1="rgba(0, 0, 0, 0.7)"
           colorS2="rgba(128, 128, 128, 0.7)"
         >
-          <Top scale={SCALE} />
+          <Name scale={SCALE} />
           <Start
             scale={SCALE}
             text="Start"

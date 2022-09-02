@@ -5,7 +5,7 @@ import { Neomorphism } from "../../Neomorphism";
 
 let SCALE = 1.0416666666666667;
 
-export const Top = (props) => {
+export const Name = (props) => {
   SCALE = props.scale;
   const [title, onChangeTitle] = useState("");
   const [edit, onChangeEdit] = useState(true);
