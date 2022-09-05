@@ -1,25 +1,61 @@
-import { Dimensions, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { Title } from "../components/Title";
 import { Timer } from "../components/train/Timer";
 import { Top } from "../components/train/Top";
 import Svg, { Path } from "react-native-svg";
 import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Dots } from "../components/train/Dots";
+import { Workout } from "../components/train/Workout";
 
 export const Trainpage = (props) => {
   let SCALE = props.scale;
   let BG2 = props.bg2;
-  let exercise = {
-    name: "Straight Bar Bicep Curls",
-    sets: [
-      { reps: 12, weight: 150, mes: "kg" },
-      { reps: 12, weight: 150, mes: "kg" },
-      { reps: 12, weight: 150, mes: "kg" },
-      { reps: 12, weight: 150, mes: "kg" },
-      { reps: 12, weight: 150, mes: "kg" },
-      { reps: 12, weight: 150, mes: "kg" },
-    ],
-  };
+  let exercises = [
+    {
+      name: "Deadlift",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+    {
+      name: "Seated Back Row",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+    {
+      name: "Hyperextensions",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+    {
+      name: "Straight Bar Bicep Curls",
+      sets: [
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+        { reps: 12, weight: 150, mes: "kg" },
+      ],
+    },
+  ];
 
   const textstyle = {
     width: 103 / SCALE,
@@ -84,11 +120,13 @@ export const Trainpage = (props) => {
       </View>
 
       <ExerciseTrailer
-        name={exercise.name}
-        sets={exercise.sets}
+        name={exercises[0].name}
+        sets={exercises[0].sets}
         scale={SCALE}
         bg2={BG2}
       />
+
+      <Workout scale={SCALE} bg2={BG2} ex={exercises} />
     </ScrollView>
   );
 };

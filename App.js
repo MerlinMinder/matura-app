@@ -7,6 +7,7 @@ import { Homepage } from "./pages/Homepage";
 import { Workoutpage } from "./pages/Workoutpage";
 import { Exercisepage } from "./pages/Exercisepage";
 import { Trainpage } from "./pages/Trainpage";
+import { Graphpage } from "./pages/Graphpage";
 
 const BG1 = "#3C3C3C";
 const BG2 = "#464646";
@@ -36,6 +37,7 @@ export default function App() {
       {/* <Workoutpage scale={SCALE} bg2={BG2} /> */}
       {/* <Exercisepage scale={SCALE} bg2={BG2} /> */}
       <Trainpage scale={SCALE} bg2={BG2} />
+      {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
     </SafeAreaView>
   );
 }

@@ -3,8 +3,9 @@ import { Neomorphism } from "../../Neomorphism";
 
 export const Start = (props) => {
   let SCALE = props.scale;
+  let buffer = props.buffer || 0;
   return (
-    <View style={{ position: "absolute", top: 132 / SCALE }}>
+    <View style={{ position: "absolute", top: 132 / SCALE + buffer }}>
       <Neomorphism
         width={120 / SCALE}
         height={30 / SCALE}
