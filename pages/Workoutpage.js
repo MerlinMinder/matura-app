@@ -25,13 +25,11 @@ export const Workoutpage = (props) => {
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
       ],
     },
     {
       name: "Seated Back Row",
       sets: [
-        { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
@@ -49,13 +47,11 @@ export const Workoutpage = (props) => {
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
       ],
     },
     {
       name: "Straight Bar Bicep Curls",
       sets: [
-        { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },
         { reps: 12, weight: 150, mes: "kg" },

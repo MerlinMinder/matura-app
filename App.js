@@ -36,8 +36,8 @@ export default function App() {
       {/* <Homepage scale={SCALE} bg2={BG2} /> */}
       {/* <Workoutpage scale={SCALE} bg2={BG2} /> */}
       {/* <Exercisepage scale={SCALE} bg2={BG2} /> */}
-      <Trainpage scale={SCALE} bg2={BG2} />
-      {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
+      {/* <Trainpage scale={SCALE} bg2={BG2} /> */}
+      <Graphpage scale={SCALE} bg2={BG2} />
     </SafeAreaView>
   );
 }
