@@ -1,23 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView, Dimensions } from "react-native";
-import React from "react";
+import { SafeAreaView, Dimensions, StyleSheet } from "react-native";
+import React, { useState } from "react";
 import { useFonts } from "expo-font";
-import Constants from "expo-constants";
 import { Homepage } from "./pages/Homepage";
 import { Workoutpage } from "./pages/Workoutpage";
 import { Exercisepage } from "./pages/Exercisepage";
 import { Trainpage } from "./pages/Trainpage";
 import { Graphpage } from "./pages/Graphpage";
-
-const BG1 = "#3C3C3C";
-const BG2 = "#464646";
-
-let SCALE = 1.0416666666666667;
+import { Save } from "./Store";
 
 export default function App() {
   // setting scale from design to phone size
-  SCALE = 375 / Dimensions.get("screen").width;
-  console.log(SCALE);
+  const SCALE = 375 / Dimensions.get("screen").width;
+  const BG2 = "#454545";
+
+  // Saving scale in storage
+  Save("SCALE", SCALE);
 
   // load the WorkSans fonts
   const [fontsLoaded] = useFonts({
@@ -31,22 +29,22 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.appContainer}>
       <StatusBar backgroundColor={"transparent"} />
-      {/* <Homepage scale={SCALE} bg2={BG2} /> */}
+      <Homepage scale={SCALE} bg2={BG2} />
       {/* <Workoutpage scale={SCALE} bg2={BG2} /> */}
       {/* <Exercisepage scale={SCALE} bg2={BG2} /> */}
       {/* <Trainpage scale={SCALE} bg2={BG2} /> */}
-      <Graphpage scale={SCALE} bg2={BG2} />
+      {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: BG1,
+    backgroundColor: "#3C3C3C",
     paddingTop: Platform.OS === "android" ? Constants.statusBarHeight : 0,
   },
 });

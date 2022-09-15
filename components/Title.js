@@ -1,11 +1,7 @@
 import GradientText from "../GradientText";
 import { StyleSheet, View } from "react-native";
 
-let SCALE = 1.0416666666666667;
-
-export const Title = (props) => {
-  SCALE = props.scale;
-
+export const Title = () => {
   return (
     <View style={styles.title}>
       <View style={styles.progresspos}>

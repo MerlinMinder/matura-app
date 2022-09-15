@@ -1,5 +1,5 @@
 import { ScrollView, Text, View } from "react-native";
-import { Graph } from "../components/graph/Graph";
+import { Graphcontainer } from "../components/graph/Graphcontainer";
 import { Title } from "../components/Title";
 import GradientText from "../GradientText";
 import { Neomorphism } from "../Neomorphism";
@@ -80,7 +80,7 @@ export const Graphpage = (props) => {
         </Neomorphism>
       </View>
 
-      <Graph scale={SCALE} bg2={BG2} />
+      <Graphcontainer scale={SCALE} bg2={BG2} />
     </ScrollView>
   );
 };

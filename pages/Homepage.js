@@ -4,11 +4,13 @@ import { Workouts } from "../components/home/Workouts";
 import { Physique } from "../components/home/Physique";
 import { Calendar } from "../components/home/Calendar";
 import { View, ScrollView, StyleSheet } from "react-native";
-
-let SCALE = 1.0416666666666667;
+import { styles } from "../Styles";
+import { Get } from "../Store";
+import { useState } from "react";
 
 export const Homepage = (props) => {
-  SCALE = props.scale;
+  const [SCALE, setSCALE] = useState(1);
+  Get("SCALE", setSCALE);
   let BG2 = props.bg2;
   return (
     <ScrollView
@@ -20,7 +22,7 @@ export const Homepage = (props) => {
       }}
     >
       {/* Title */}
-      <Title scale={SCALE} />
+      <Title />
 
       {/* Calendar */}
       <View style={{ marginTop: 20 / SCALE }}>

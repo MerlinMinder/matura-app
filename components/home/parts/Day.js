@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
-let SCALE = 1.0416666666666667;
-let BG2 = "#464646";
+
 export const Day = (props) => {
   SCALE = props.scale;
   BG2 = props.bg2;
