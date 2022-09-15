@@ -4,13 +4,14 @@ import { Workouts } from "../components/home/Workouts";
 import { Physique } from "../components/home/Physique";
 import { Calendar } from "../components/home/Calendar";
 import { View, ScrollView, StyleSheet } from "react-native";
-import { styles } from "../Styles";
 import { Get } from "../Store";
 import { useState } from "react";
 
+let SCALE = 1;
+
 export const Homepage = (props) => {
-  const [SCALE, setSCALE] = useState(1);
-  Get("SCALE", setSCALE);
+  // let [SCALE, setSCALE] = useState(1);
+  // Get("SCALE", setSCALE);
   let BG2 = props.bg2;
   return (
     <ScrollView

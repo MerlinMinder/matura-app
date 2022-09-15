@@ -1,6 +1,8 @@
 import GradientText from "../GradientText";
 import { StyleSheet, View } from "react-native";
 
+let SCALE = 1;
+
 export const Title = () => {
   return (
     <View style={styles.title}>

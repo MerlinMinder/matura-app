@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
 
+let SCALE = 1;
+
 export const Day = (props) => {
   SCALE = props.scale;
   BG2 = props.bg2;
@@ -56,6 +58,6 @@ const styles = StyleSheet.create({
     width: 20 / SCALE,
     height: 20 / SCALE,
     textAlign: "center",
-    color: BG2,
+    color: "#454545",
   },
 });

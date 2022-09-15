@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import Constants from "expo-constants";
 import { SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
@@ -9,13 +10,15 @@ import { Trainpage } from "./pages/Trainpage";
 import { Graphpage } from "./pages/Graphpage";
 import { Save } from "./Store";
 
+let a = Constants;
+
 export default function App() {
   // setting scale from design to phone size
   const SCALE = 375 / Dimensions.get("screen").width;
   const BG2 = "#454545";
 
   // Saving scale in storage
-  Save("SCALE", SCALE);
+  // Save("SCALE", SCALE);
 
   // load the WorkSans fonts
   const [fontsLoaded] = useFonts({
