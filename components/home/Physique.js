@@ -5,6 +5,7 @@ import { Measure } from "./parts/Measure";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import Svg, { Path } from "react-native-svg";
+import styles from "../../Styles";
 
 let SCALE = 1.0416666666666667;
 let BG2 = "#464646";
@@ -30,6 +31,17 @@ export const Physique = (props) => {
     "Calf (left)",
   ];
 
+  const colors = [
+    "#42FFFF",
+    "#42FFFF",
+    "#62FF42",
+    "#62FF42",
+    "#FFC042",
+    "#FFA142",
+    "#FF8142",
+    "#FF5242",
+  ];
+
   return (
     <View>
       <Neomorphism
@@ -48,19 +60,11 @@ export const Physique = (props) => {
         colorS1="rgba(0, 0, 0, 0.7)"
         colorS2="rgba(153, 153, 153, 0.6)"
       >
-        <View
-          style={{
-            position: "absolute",
-            width: 38 / SCALE,
-            height: 23 / SCALE,
-            left: 15 / SCALE,
-            top: 15 / SCALE,
-          }}
-        >
-          <GradientText text="BMI" style={styles.titles} />
+        <View style={styles.physiquebmi}>
+          <GradientText text="BMI" style={styles.font20} />
         </View>
         <Measure
-          style={{ marginTop: 48 / SCALE }}
+          style={styles.top48}
           scale={SCALE}
           bg2={BG2}
           word="Height"
@@ -68,7 +72,7 @@ export const Physique = (props) => {
           edit={edit}
         />
         <Measure
-          style={{ marginTop: 10 / SCALE }}
+          style={styles.top10}
           scale={SCALE}
           bg2={BG2}
           word="Weight"
@@ -76,33 +80,13 @@ export const Physique = (props) => {
           edit={edit}
         />
         <LinearGradient
-          style={{
-            width: 280 / SCALE,
-            height: 10 / SCALE,
-            borderRadius: 5 / SCALE,
-            marginTop: 22 / SCALE,
-          }}
-          colors={[
-            "#42FFFF",
-            "#42FFFF",
-            "#62FF42",
-            "#62FF42",
-            "#FFC042",
-            "#FFA142",
-            "#FF8142",
-            "#FF5242",
-          ]}
+          style={styles.physiquegradient}
+          colors={colors}
           locations={[0, 0.15, 0.3, 0.6, 0.7, 0.8, 0.9, 1]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
         ></LinearGradient>
-        <View
-          style={{
-            position: "absolute",
-            top: 156 / SCALE,
-            left: bmiwidth,
-          }}
-        >
+        <View style={[styles.physiquecircle, { left: bmiwidth }]}>
           <Neomorphism
             width={18 / SCALE}
             height={18 / SCALE}
@@ -115,41 +99,12 @@ export const Physique = (props) => {
             colorS1="rgba(220, 220, 220, 0.7)"
             inset={true}
           ></Neomorphism>
-          <Text
-            style={{
-              fontFamily: "WorkSans-SemiBold",
-              fontStyle: "normal",
-              fontWeight: "600",
-              fontSize: 14 / SCALE,
-              lineHeight: 16 / SCALE,
-              color: "white",
-              marginTop: 3 / SCALE,
-              textAlign: "center",
-            }}
-          >
-            {bmi}
-          </Text>
+          <Text style={styles.physiquebmitext}>{bmi}</Text>
         </View>
-        <View
-          style={{
-            left: 15 / SCALE,
-            top: 200 / SCALE,
-            width: 50 / SCALE,
-            height: 23 / SCALE,
-            position: "absolute",
-          }}
-        >
-          <GradientText text="Body" style={styles.titles} />
+        <View style={styles.physiquebody}>
+          <GradientText text="Body" style={styles.font20} />
         </View>
-        <View
-          style={{
-            position: "absolute",
-            width: 30 / SCALE,
-            height: 30 / SCALE,
-            left: 251 / SCALE,
-            top: 197 / SCALE,
-          }}
-        >
+        <View style={styles.physiquesettings}>
           <Svg
             width="30"
             height="30"
@@ -167,12 +122,12 @@ export const Physique = (props) => {
             />
           </Svg>
         </View>
-        <View style={{ marginTop: 55 / SCALE }}>
+        <View style={styles.top55}>
           {measures.map((measure) => {
             return (
               <Measure
                 key={measure}
-                style={{ marginTop: 10 / SCALE }}
+                style={styles.top10}
                 scale={SCALE}
                 bg2={BG2}
                 word={measure}
@@ -182,7 +137,7 @@ export const Physique = (props) => {
             );
           })}
         </View>
-        <View style={{ marginTop: 10 / SCALE }}>
+        <View style={styles.top10}>
           <Neomorphism
             style={{
               display: "flex",
@@ -200,16 +155,7 @@ export const Physique = (props) => {
             colorS1="rgba(220, 220, 220, 0.7)"
             inset={true}
           >
-            <Text
-              style={{
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 20,
-                lineHeight: 23,
-                color: "white",
-              }}
-            >
+            <Text style={[styles.font20, { color: "white" }]}>
               {edit ? "Save" : "Edit"}
             </Text>
           </Neomorphism>
@@ -218,13 +164,3 @@ export const Physique = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  titles: {
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 20 / SCALE,
-    lineHeight: 23 / SCALE,
-  },
-});

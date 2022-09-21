@@ -2,18 +2,17 @@ import { useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
-
-let SCALE = 1.0416666666666667;
+import styles from "../../Styles";
 
 export const Name = (props) => {
-  SCALE = props.scale;
+  let SCALE = props.scale;
   const [title, onChangeTitle] = useState("");
   const [edit, onChangeEdit] = useState(true);
 
   return (
-    <View style={{ width: 320 / SCALE }}>
+    <View style={styles.width320}>
       <TextInput
-        style={styles.title}
+        style={styles.nametitle}
         onChangeText={onChangeTitle}
         placeholder="Workout"
         placeholderTextColor="rgba(255, 255, 255, 0.5)"
@@ -24,7 +23,7 @@ export const Name = (props) => {
         multiline={false}
         numberOfLines={1}
       ></TextInput>
-      <View style={styles.pen}>
+      <View style={styles.namepen}>
         <Svg
           width="20"
           height="20"
@@ -38,7 +37,7 @@ export const Name = (props) => {
           />
         </Svg>
       </View>
-      <View style={{ position: "absolute", left: 20 / SCALE, top: 68 / SCALE }}>
+      <View style={styles.l20t68}>
         <Neomorphism
           width={280 / SCALE}
           height={20 / SCALE}
@@ -52,7 +51,7 @@ export const Name = (props) => {
           inset={true}
         ></Neomorphism>
       </View>
-      <View style={styles.dumbbell}>
+      <View style={styles.namedumbbell}>
         <Svg
           width="20"
           height="14"
@@ -66,9 +65,9 @@ export const Name = (props) => {
           />
         </Svg>
       </View>
-      <Text style={styles.exercises}>{"12"} Exercises</Text>
-      <Text style={styles.recent}>recent</Text>
-      <View style={styles.timer}>
+      <Text style={styles.nameexercises}>{"12"} Exercises</Text>
+      <Text style={styles.namerecent}>recent</Text>
+      <View style={styles.nametimer}>
         <Svg
           width="14"
           height="14"
@@ -82,85 +81,7 @@ export const Name = (props) => {
           />
         </Svg>
       </View>
-      <Text style={styles.time}>{"128m 47s"}</Text>
+      <Text style={styles.nametime}>{"128m 47s"}</Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    position: "absolute",
-    width: 250 / SCALE,
-    height: 40 / SCALE,
-    left: 20 / SCALE,
-    top: 10 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 24 / SCALE,
-    lineHeight: 28 / SCALE,
-    textAlign: "left",
-    color: "white",
-  },
-  pen: {
-    position: "absolute",
-    top: 24 / SCALE,
-    width: 20 / SCALE,
-    height: 20 / SCALE,
-    left: 273 / SCALE,
-  },
-  dumbbell: {
-    position: "absolute",
-    top: 108 / SCALE,
-    left: 21 / SCALE,
-    width: 20 / SCALE,
-    height: 14 / SCALE,
-  },
-  exercises: {
-    position: "absolute",
-    width: 74 / SCALE,
-    height: 14 / SCALE,
-    left: 47 / SCALE,
-    top: 108 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 12 / SCALE,
-    lineHeight: 14 / SCALE,
-    color: "white",
-    textAlign: "center",
-  },
-  recent: {
-    position: "absolute",
-    width: 39 / SCALE,
-    height: 14 / SCALE,
-    left: 172 / SCALE,
-    top: 108 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 12 / SCALE,
-    lineHeight: 14 / SCALE,
-    color: "white",
-  },
-  timer: {
-    position: "absolute",
-    top: 108 / SCALE,
-    left: 217 / SCALE,
-    height: 14 / SCALE,
-    width: 14 / SCALE,
-  },
-  time: {
-    position: "absolute",
-    width: 57 / SCALE,
-    height: 14 / SCALE,
-    left: 237 / SCALE,
-    top: 108 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 12 / SCALE,
-    lineHeight: 14 / SCALE,
-    color: "white",
-  },
-});

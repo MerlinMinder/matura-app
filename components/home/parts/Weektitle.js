@@ -1,21 +1,14 @@
 import { View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
 import GradientText from "../../../GradientText";
+import styles from "../../../Styles";
 
 export const Weektitle = (props) => {
   const weekshort = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   let SCALE = props.scale;
 
   return (
-    <View
-      style={{
-        height: 38 / SCALE,
-        width: 258 / SCALE,
-        marginTop: 5 / SCALE,
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
+    <View style={styles.weektitlecontainer}>
       {weekshort.map((short) => {
         return (
           <Neomorphism
@@ -33,19 +26,10 @@ export const Weektitle = (props) => {
             colorS1="rgba(0, 0, 0, 0.5)"
             colorS2="rgba(150, 150, 150, 0.5)"
             colorB={props.bg2}
-            padx={6 / SCALE}
+            padx={6.5 / SCALE}
             key={short}
           >
-            <GradientText
-              text={short}
-              style={{
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 13 / SCALE,
-                lineHeight: 15 / SCALE,
-              }}
-            />
+            <GradientText text={short} style={styles.font13} />
           </Neomorphism>
         );
       })}

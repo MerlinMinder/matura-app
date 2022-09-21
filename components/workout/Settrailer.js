@@ -1,5 +1,6 @@
 import { Text } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
+import styles from "../../Styles";
 
 export const Settrailer = (props) => {
   let SCALE = props.scale;
@@ -23,15 +24,13 @@ export const Settrailer = (props) => {
       inset={true}
     >
       <Text
-        style={{
-          fontFamily: "WorkSans-SemiBold",
-          fontStyle: "normal",
-          fontWeight: "600",
-          fontSize: 10,
-          lineHeight: 12,
-          color: "white",
-          textAlign: "center",
-        }}
+        style={[
+          styles.font10,
+          {
+            color: "white",
+            textAlign: "center",
+          },
+        ]}
       >
         {props.set.reps} x {props.set.weight}
         {props.set.mes}

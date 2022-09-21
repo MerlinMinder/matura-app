@@ -7,6 +7,7 @@ import { Start } from "../components/workout/Start";
 import { Name } from "../components/workout/Name";
 import GradientText from "../GradientText";
 import { Neomorphism } from "../Neomorphism";
+import styles from "../Styles";
 
 let BG2 = "#464646";
 let SCALE = 1.0416666666666667;
@@ -62,32 +63,17 @@ export const Workoutpage = (props) => {
     },
   ];
 
-  let extraHeight = exercises
-    .map((exercise) => (exercise.length < 7 ? 95 : 139))
-    .reduce((a, b) => a + b, 0);
+  let extraHeight = exercises.length * 95;
+  // .map((exercise) => (exercise.length < 7 ? 95 : 139))
+  // .reduce((a, b) => a + b, 0);
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        paddingBottom: 25 / SCALE,
-      }}
-    >
+    <ScrollView contentContainerStyle={styles.scrollview}>
       {/* Title */}
-      <Title scale={SCALE} />
+      <Title />
 
       {/* Body */}
-      <View
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          width: 375 / SCALE,
-          marginTop: 20 / SCALE,
-        }}
-      >
+      <View style={styles.workoutpagebody}>
         <Neomorphism
           style={{
             display: "flex",
@@ -111,38 +97,16 @@ export const Workoutpage = (props) => {
             color="#62FF42"
             shadow="rgba(213, 255, 204, 0.7)"
           />
-          <View
-            style={{ position: "absolute", top: 200 / SCALE, left: 20 / SCALE }}
-          >
-            <GradientText
-              text="Exercises"
-              style={{
-                FontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 20 / SCALE,
-                lineHeight: 23 / SCALE,
-              }}
-            />
+          <View style={styles.t200l20}>
+            <GradientText text="Exercises" style={styles.font20} />
           </View>
-          <View
-            style={{
-              position: "absolute",
-              left: 192 / SCALE,
-              top: 196 / SCALE,
-            }}
-          >
-            <Progress scale={SCALE} />
+          <View style={styles.workoutpageprogress}>
+            <Progress />
           </View>
-          <View
-            style={{
-              position: "absolute",
-              top: 241 / SCALE,
-            }}
-          >
+          <View style={styles.workoutpageexercise}>
             {exercises.map((exercise) => {
               return (
-                <View style={{ marginBottom: 15 / SCALE }} key={exercise.name}>
+                <View style={styles.bottom15} key={exercise.name}>
                   <ExerciseTrailer
                     scale={SCALE}
                     bg2={BG2}
@@ -153,12 +117,7 @@ export const Workoutpage = (props) => {
               );
             })}
           </View>
-          <View
-            style={{
-              position: "absolute",
-              bottom: 13 / SCALE,
-            }}
-          >
+          <View style={styles.workoutpageplusc}>
             <Neomorphism
               style={{
                 display: "flex",
@@ -177,11 +136,7 @@ export const Workoutpage = (props) => {
               inset={true}
             >
               <Image
-                style={{
-                  width: 45 / SCALE,
-                  height: 45 / SCALE,
-                  resizeMode: "cover",
-                }}
+                style={styles.workoutpageplus}
                 source={require("../assets/pngs/Plus.png")}
               />
             </Neomorphism>

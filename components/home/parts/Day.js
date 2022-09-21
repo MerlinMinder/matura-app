@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
+import styles from "../../../Styles";
 
 let SCALE = 1;
 
@@ -26,20 +27,11 @@ export const Day = (props) => {
           colorB={props.color}
           inset={true}
         >
-          <Text style={styles.number}>{props.children}</Text>
+          <Text style={styles.daynumber}>{props.children}</Text>
         </Neomorphism>
       ) : (
-        <View
-          style={{
-            width: 30 / SCALE,
-            height: 30 / SCALE,
-            borderRadius: 8 / SCALE,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={[styles.number, { color: "white" }]}>
+        <View style={styles.daycontainer}>
+          <Text style={[styles.daynumber, { color: "white" }]}>
             {props.children}
           </Text>
         </View>
@@ -47,17 +39,3 @@ export const Day = (props) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  number: {
-    fontFamily: "WorkSans-Bold",
-    fontStyle: "normal",
-    fontWeight: "900",
-    fontSize: 15 / SCALE,
-    lineHeight: 20 / SCALE,
-    width: 20 / SCALE,
-    height: 20 / SCALE,
-    textAlign: "center",
-    color: "#454545",
-  },
-});

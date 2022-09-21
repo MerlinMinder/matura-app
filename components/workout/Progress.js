@@ -6,19 +6,15 @@ import {
   Shadow,
   vec,
 } from "@shopify/react-native-skia";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
+import styles from "../../Styles";
 
-export const Progress = (props) => {
-  let SCALE = props.scale;
+export const Progress = () => {
+  const SCALE = 375 / Dimensions.get("screen").width;
+
   return (
     <View style={{ display: "flex", alignItems: "center" }}>
-      <Canvas
-        style={{
-          // adjust size to inset , dropshadow with padding
-          width: 110 / SCALE,
-          height: 30 / SCALE,
-        }}
-      >
+      <Canvas style={styles.progresscanvas}>
         <Fill color="transparent" />
         <RoundedRect
           x={0}
@@ -49,44 +45,8 @@ export const Progress = (props) => {
           />
         </RoundedRect>
       </Canvas>
-      <Text
-        style={{
-          position: "absolute",
-          color: "white",
-          fontFamily: "WorkSans-Bold",
-          fontWeight: "700",
-          fontSize: 16 / SCALE,
-          textShadowColor: "rgba(0, 0, 0, 0.4)",
-          textShadowOffset: { width: 2 / SCALE, height: 2 / SCALE },
-          textShadowRadius: 6 / SCALE,
-          height: 19 / SCALE,
-          width: 87 / SCALE,
-          lineHeight: 19 / SCALE,
-          top: 5 / SCALE,
-          paddingLeft: 1 / SCALE,
-        }}
-      >
-        PROGRESS
-      </Text>
-      <Text
-        style={{
-          position: "absolute",
-          color: "white",
-          fontFamily: "WorkSans-Bold",
-          fontWeight: "700",
-          fontSize: 16 / SCALE,
-          textShadowColor: "rgba(255, 255, 255, 0.4)",
-          textShadowOffset: { width: -2 / SCALE, height: -2 / SCALE },
-          textShadowRadius: 6 / SCALE,
-          height: 19 / SCALE,
-          width: 87 / SCALE,
-          lineHeight: 19 / SCALE,
-          top: 5 / SCALE,
-          paddingLeft: 1 / SCALE,
-        }}
-      >
-        PROGRESS
-      </Text>
+      <Text style={styles.progresstext}>PROGRESS</Text>
+      <Text style={[styles.progresstext, styles.progresstext2]}>PROGRESS</Text>
     </View>
   );
 };

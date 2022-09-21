@@ -14,7 +14,7 @@ export const Week = (props) => {
         display: "flex",
         alignItems: "center",
         flexDirection: "row",
-        paddingHorizontal: 4 / SCALE,
+        justifyContent: "center",
       }}
       height={38 / SCALE}
       width={265 / SCALE}

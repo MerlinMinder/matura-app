@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Settrailer } from "./Settrailer";
+import styles from "../../Styles";
 
 export const ExerciseTrailer = (props) => {
   let SCALE = props.scale;
@@ -10,7 +11,7 @@ export const ExerciseTrailer = (props) => {
   return (
     <Neomorphism
       width={280 / SCALE}
-      height={sets.length < 7 ? 80 / SCALE : 124 / SCALE}
+      height={80 / SCALE}
       x={4 / SCALE}
       y={4 / SCALE}
       r={10 / SCALE}
@@ -20,31 +21,8 @@ export const ExerciseTrailer = (props) => {
       colorS2="rgba(153, 153, 153, 0.6)"
       inset={true}
     >
-      <Text
-        style={{
-          position: "absolute",
-          height: 19 / SCALE,
-          left: 10 / SCALE,
-          top: 5 / SCALE,
-          fontFamily: "WorkSans-SemiBold",
-          fontStyle: "normal",
-          fontWeight: "600",
-          fontSize: 16 / SCALE,
-          lineHeight: 19 / SCALE,
-          color: "white",
-        }}
-      >
-        {props.name}
-      </Text>
-      <View
-        style={{
-          position: "absolute",
-          width: 24 / SCALE,
-          height: 24 / SCALE,
-          left: 246 / SCALE,
-          top: 3 / SCALE,
-        }}
-      >
+      <Text style={styles.exercisetrailername}>{props.name}</Text>
+      <View style={styles.exercisetrailerdots}>
         <Svg
           width="24"
           height="24"
@@ -58,17 +36,7 @@ export const ExerciseTrailer = (props) => {
           />
         </Svg>
       </View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          position: "absolute",
-          top: 28 / SCALE,
-          left: 8 / SCALE,
-          width: 264 / SCALE,
-        }}
-      >
+      <View style={styles.exercisetrailersets}>
         {sets.map((set) => {
           return (
             <View key={Math.random()} style={{ margin: 2 / SCALE }}>

@@ -1,11 +1,11 @@
 import { Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
+import styles from "../../Styles";
 
 export const Start = (props) => {
   let SCALE = props.scale;
-  let buffer = props.buffer || 0;
   return (
-    <View style={{ position: "absolute", top: 132 / SCALE + buffer }}>
+    <View style={styles.top132}>
       <Neomorphism
         width={120 / SCALE}
         height={30 / SCALE}
@@ -34,16 +34,7 @@ export const Start = (props) => {
           colorS1={props.shadow}
           inset={true}
         >
-          <Text
-            style={{
-              fontFamily: "WorkSans-SemiBold",
-              fontStyle: "normal",
-              fontWeight: "600",
-              fontSize: 24 / SCALE,
-              lineHeight: 28 / SCALE,
-              color: "#464646",
-            }}
-          >
+          <Text style={[styles.font24, { color: "#464646" }]}>
             {props.text}
           </Text>
         </Neomorphism>

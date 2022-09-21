@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
-
-let SCALE = 1.0416666666666667;
+import styles from "../../../Styles";
 
 export const WorkoutTrailer = (props) => {
-  SCALE = props.scale;
+  let SCALE = props.scale;
 
   return (
     <Neomorphism
@@ -20,11 +19,14 @@ export const WorkoutTrailer = (props) => {
       colorB={props.bg2}
       pady={24 / SCALE}
     >
-      <Text style={styles.title}>{props.workout.title}</Text>
+      <Text style={styles.workouttrailertitle}>{props.workout.title}</Text>
       <View
-        style={[styles.color, { backgroundColor: props.workout.color }]}
+        style={[
+          styles.workouttrailercolor,
+          { backgroundColor: props.workout.color },
+        ]}
       ></View>
-      <View style={styles.dumbbell}>
+      <View style={styles.workouttrailerdumbbell}>
         <Svg
           width="20"
           height="14"
@@ -38,9 +40,11 @@ export const WorkoutTrailer = (props) => {
           />
         </Svg>
       </View>
-      <Text style={styles.exercises}>{props.workout.exercises} Exercises</Text>
-      <Text style={styles.recent}>recent</Text>
-      <View style={styles.timer}>
+      <Text style={styles.workouttrailerexercises}>
+        {props.workout.exercises} Exercises
+      </Text>
+      <Text style={styles.workouttrailerrecent}>recent</Text>
+      <View style={styles.workouttrailertimer}>
         <Svg
           width="14"
           height="14"
@@ -54,87 +58,7 @@ export const WorkoutTrailer = (props) => {
           />
         </Svg>
       </View>
-      <Text style={styles.time}>{props.workout.time}</Text>
+      <Text style={styles.workouttrailertime}>{props.workout.time}</Text>
     </Neomorphism>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    position: "absolute",
-    width: 106 / SCALE,
-    height: 18 / SCALE,
-    left: 10 / SCALE,
-    top: 10 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 15 / SCALE,
-    lineHeight: 18 / SCALE,
-    color: "white",
-    textAlign: "center",
-  },
-  color: {
-    position: "absolute",
-    width: 100 / SCALE,
-    height: 15 / SCALE,
-    left: 188 / SCALE,
-    top: 12 / SCALE,
-
-    borderRadius: 7 / SCALE,
-  },
-  dumbbell: {
-    position: "absolute",
-    top: 48 / SCALE,
-    left: 18 / SCALE,
-    width: 20 / SCALE,
-    height: 14 / SCALE,
-  },
-  exercises: {
-    position: "absolute",
-    width: 74 / SCALE,
-    height: 14 / SCALE,
-    left: 46 / SCALE,
-    top: 48 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 12 / SCALE,
-    lineHeight: 14 / SCALE,
-    color: "white",
-    textAlign: "center",
-  },
-  recent: {
-    position: "absolute",
-    width: 39 / SCALE,
-    height: 14 / SCALE,
-    left: 170 / SCALE,
-    top: 48 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 12 / SCALE,
-    lineHeight: 14 / SCALE,
-    color: "white",
-  },
-  timer: {
-    position: "absolute",
-    top: 48 / SCALE,
-    left: 217 / SCALE,
-    height: 14 / SCALE,
-    width: 14 / SCALE,
-  },
-  time: {
-    position: "absolute",
-    width: 57 / SCALE,
-    height: 14 / SCALE,
-    left: 238 / SCALE,
-    top: 48 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 12 / SCALE,
-    lineHeight: 14 / SCALE,
-    color: "white",
-  },
-});
