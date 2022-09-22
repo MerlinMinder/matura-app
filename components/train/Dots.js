@@ -6,11 +6,12 @@ import {
   Shadow,
   vec,
 } from "@shopify/react-native-skia";
-import { Text, View } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
+import styles from "../../Styles";
 
 export const Dots = (props) => {
-  let SCALE = props.scale;
+  const SCALE = 375 / Dimensions.get("screen").width;
   const stepsize = 320 / (props.amount - 1);
   const dotamount = [];
   for (var i = 1; i <= props.amount; i++) {
@@ -25,23 +26,8 @@ export const Dots = (props) => {
     "rgba(69, 69, 69, 1)",
   ];
   return (
-    <View
-      style={{
-        marginVertical: 20 / SCALE,
-        height: 20 / SCALE,
-        width: 340 / SCALE,
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <Canvas
-        style={{
-          // adjust size to inset , dropshadow with padding
-          width: 320 / SCALE,
-          height: 10 / SCALE,
-          marginHorizontal: 10 / SCALE,
-        }}
-      >
+    <View style={styles.dotscontainer}>
+      <Canvas style={styles.dotscanvas}>
         <Fill color="transparent" />
         <RoundedRect
           x={0}
@@ -103,23 +89,7 @@ const Dot = (props) => {
         colorS1="rgba(255, 255, 255, 0.5)"
         inset={true}
       >
-        <Text
-          style={{
-            position: "absolute",
-            width: 16 / SCALE,
-            height: 18 / SCALE,
-            left: 2 / SCALE,
-            fontFamily: "WorkSans-SemiBold",
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: 15 / SCALE,
-            lineHeight: 18 / SCALE,
-            color: "white",
-            textAlign: "center",
-          }}
-        >
-          {props.number}
-        </Text>
+        <Text style={styles.dotnumber}>{props.number}</Text>
       </Neomorphism>
     </View>
   );

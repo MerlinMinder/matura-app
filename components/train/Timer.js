@@ -1,11 +1,12 @@
 import { Image, Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
+import styles from "../../Styles";
 
 export const Timer = (props) => {
   let SCALE = props.scale;
   let BG2 = props.bg2;
   return (
-    <View style={{ top: 5 / SCALE }}>
+    <View style={styles.Top5}>
       <Neomorphism
         width={325 / SCALE}
         height={115 / SCALE}
@@ -17,9 +18,7 @@ export const Timer = (props) => {
         colorS1="rgba(0, 0, 0, 0.7)"
         colorS2="rgba(153, 153, 153, 0.7)"
       >
-        <View
-          style={{ position: "absolute", top: 32 / SCALE, left: 13 / SCALE }}
-        >
+        <View style={styles.t32l13}>
           <Neomorphism
             style={{
               display: "flex",
@@ -37,59 +36,12 @@ export const Timer = (props) => {
             colorS2="rgba(153, 153, 153, 0.7)"
             inset={true}
           >
-            <Text
-              style={{
-                fontSize: 22 / SCALE,
-                lineHeight: 26 / SCALE,
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                color: "#42FFFF",
-              }}
-            >
-              Skip
-            </Text>
+            <Text style={[styles.font22, { color: "#42FFFF" }]}>Skip</Text>
           </Neomorphism>
         </View>
-        <Text
-          style={{
-            position: "absolute",
-            width: 120 / SCALE,
-            height: 56 / SCALE,
-            left: 102 / SCALE,
-            top: 16 / SCALE,
-            fontFamily: "WorkSans-SemiBold",
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: 24 / SCALE,
-            lineHeight: 28 / SCALE,
-            color: "white",
-            textAlign: "center",
-          }}
-        >
-          {"DO THE EXERCISE"}
-        </Text>
-        <Text
-          style={{
-            position: "absolute",
-            width: 51 / SCALE,
-            height: 23 / SCALE,
-            left: 136 / SCALE,
-            top: 78 / SCALE,
-            fontFamily: "WorkSans-SemiBold",
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: 20 / SCALE,
-            lineHeight: 23 / SCALE,
-            textAlign: "center",
-            color: "#FFC042",
-          }}
-        >
-          {"01:23"}
-        </Text>
-        <View
-          style={{ position: "absolute", top: 32 / SCALE, right: 13 / SCALE }}
-        >
+        <Text style={styles.timerexercisetext}>{"DO THE EXERCISE"}</Text>
+        <Text style={styles.timerexercisetime}>{"01:23"}</Text>
+        <View style={styles.t32r13}>
           <Neomorphism
             style={{
               display: "flex",

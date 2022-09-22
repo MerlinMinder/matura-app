@@ -6,6 +6,7 @@ import Svg, { Path } from "react-native-svg";
 import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Dots } from "../components/train/Dots";
 import { Workout } from "../components/train/Workout";
+import styles from "../Styles";
 
 export const Trainpage = (props) => {
   let SCALE = props.scale;
@@ -57,16 +58,6 @@ export const Trainpage = (props) => {
     },
   ];
 
-  const textstyle = {
-    width: 103 / SCALE,
-    height: 18 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 15 / SCALE,
-    lineHeight: 18 / SCALE,
-    color: "white",
-  };
   return (
     <ScrollView
       contentContainerStyle={{
@@ -84,23 +75,12 @@ export const Trainpage = (props) => {
 
       <Dots scale={SCALE} bg2={BG2} amount={5} />
 
-      <View
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "row",
-          marginBottom: 20 / SCALE,
-        }}
-      >
-        <Text style={[textstyle, { marginRight: 100 / SCALE }]}>
+      <View style={styles.trainpagetext}>
+        <Text style={[styles.trainpagetextstyle, styles.r100]}>
           Next Exercise
         </Text>
-        <Text
-          style={[textstyle, { width: 38 / SCALE, marginRight: 3 / SCALE }]}
-        >
-          Total
-        </Text>
-        <View style={{ top: 1 / SCALE, marginHorizontal: 3 / SCALE }}>
+        <Text style={[styles.trainpagetextstyle, styles.w38r3]}>Total</Text>
+        <View style={styles.t1h3}>
           <Svg
             width="17"
             height="17"
@@ -114,7 +94,13 @@ export const Trainpage = (props) => {
             />
           </Svg>
         </View>
-        <Text style={[textstyle, { color: "#FFC042", width: 72 / SCALE }]}>
+        <Text
+          style={[
+            styles.trainpagetextstyle,
+            { color: "#FFC042" },
+            styles.width72,
+          ]}
+        >
           128m 23s
         </Text>
       </View>

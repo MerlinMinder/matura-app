@@ -5,7 +5,7 @@ import styles from "../../Styles";
 export const Start = (props) => {
   let SCALE = props.scale;
   return (
-    <View style={styles.top132}>
+    <View style={[styles.top132, props.buffer]}>
       <Neomorphism
         width={120 / SCALE}
         height={30 / SCALE}

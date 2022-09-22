@@ -3,6 +3,7 @@ import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Start } from "../workout/Start";
 import { ExerciseTrailer } from "../workout/Exercisetrailer";
+import styles from "../../Styles";
 
 export const Workout = (props) => {
   let SCALE = props.scale;
@@ -29,7 +30,7 @@ export const Workout = (props) => {
         colorS1="rgba(0, 0, 0, 0.7)"
         colorS2="rgba(128, 128, 128, 0.7)"
       >
-        <View style={{ top: 5 / SCALE }}>
+        <View style={styles.Top5}>
           <Svg
             width="45"
             height="30"
@@ -43,21 +44,9 @@ export const Workout = (props) => {
             />
           </Svg>
         </View>
-        <Text
-          style={{
-            width: 250 / SCALE,
-            height: 40 / SCALE,
-            fontSize: 24 / SCALE,
-            fontFamily: "WorkSans-SemiBold",
-            fontWeight: "600",
-            color: "white",
-            textAlign: "center",
-          }}
-        >
-          Full Body Workout
-        </Text>
+        <Text style={styles.workouttitle}>Full Body Workout</Text>
 
-        <View style={{ top: 25 / SCALE }}>
+        <View style={styles.Top25}>
           <Neomorphism
             width={280 / SCALE}
             height={20 / SCALE}
@@ -71,15 +60,7 @@ export const Workout = (props) => {
             inset={true}
           ></Neomorphism>
         </View>
-        <View
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "row",
-            top: 45 / SCALE,
-            width: 280 / SCALE,
-          }}
-        >
+        <View style={styles.workoutdumbbell}>
           <Svg
             width="20"
             height="14"
@@ -92,37 +73,9 @@ export const Workout = (props) => {
               fill="white"
             />
           </Svg>
-          <Text
-            style={{
-              left: 6 / SCALE,
-              width: 72 / SCALE,
-              fontSize: 12 / SCALE,
-              color: "white",
-              height: 14 / SCALE,
-              lineHeight: 14 / SCALE,
-              fontFamily: "WorkSans-SemiBold",
-              textAlign: "center",
-            }}
-          >
-            {"12"} exercises
-          </Text>
-          <Text
-            style={{
-              left: 43 / SCALE,
-              width: 51 / SCALE,
-              fontSize: 12 / SCALE,
-              color: "white",
-              height: 14 / SCALE,
-              lineHeight: 14 / SCALE,
-              fontFamily: "WorkSans-SemiBold",
-              textAlign: "center",
-            }}
-          >
-            duration
-          </Text>
-          <View
-            style={{ left: 50 / SCALE, width: 14 / SCALE, height: 14 / SCALE }}
-          >
+          <Text style={styles.workoutexercisetext}>{"12"} exercises</Text>
+          <Text style={styles.workoutdurationtext}>duration</Text>
+          <View style={styles.workouttimer}>
             <Svg
               width="14"
               height="14"
@@ -136,20 +89,7 @@ export const Workout = (props) => {
               />
             </Svg>
           </View>
-          <Text
-            style={{
-              left: 56 / SCALE,
-              width: 60 / SCALE,
-              fontSize: 12 / SCALE,
-              color: "#FFC042",
-              height: 14 / SCALE,
-              lineHeight: 14 / SCALE,
-              fontFamily: "WorkSans-SemiBold",
-              textAlign: "center",
-            }}
-          >
-            {"128m 47s"}
-          </Text>
+          <Text style={styles.workouttime}>{"128m 47s"}</Text>
         </View>
 
         <Start
@@ -157,31 +97,16 @@ export const Workout = (props) => {
           text="Finish"
           color="#FF4242"
           shadow="rgba(255, 204, 204, 0.7)"
-          buffer={30 / SCALE}
+          buffer={styles.Top162}
         />
-        <View
-          style={{ position: "absolute", top: 225 / SCALE, left: 20 / SCALE }}
-        >
-          <GradientText
-            text="Exercises"
-            style={{
-              FontFamily: "WorkSans-SemiBold",
-              fontStyle: "normal",
-              fontWeight: "600",
-              fontSize: 20 / SCALE,
-              lineHeight: 23 / SCALE,
-            }}
-          />
+
+        <View style={styles.t225l20}>
+          <GradientText text="Exercises" style={styles.font20} />
         </View>
-        <View
-          style={{
-            position: "absolute",
-            top: 265 / SCALE,
-          }}
-        >
+        <View style={styles.Top265}>
           {exercises.map((exercise) => {
             return (
-              <View style={{ marginBottom: 15 / SCALE }} key={exercise.name}>
+              <View style={styles.bottom15} key={exercise.name}>
                 <ExerciseTrailer
                   scale={SCALE}
                   bg2={BG2}
