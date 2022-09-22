@@ -1,6 +1,7 @@
 import { Text, View } from "react-native";
 import GradientText from "../../GradientText";
 import { Neomorphism } from "../../Neomorphism";
+import styles from "../../Styles";
 import { Progressionpart } from "./Progressionpart";
 
 export const Progression = (props) => {
@@ -36,39 +37,12 @@ export const Progression = (props) => {
         colorS2="rgba(153, 153, 153, 0.5)"
         inset={true}
       >
-        <View
-          style={{
-            position: "absolute",
-            width: 120 / SCALE,
-            height: 23 / SCALE,
-            left: 11 / SCALE,
-            top: 8 / SCALE,
-          }}
-        >
-          <GradientText
-            text="Progression"
-            style={{
-              fontFamily: "WorkSans-SemiBold",
-              fontStyle: "normal",
-              fontWeight: "600",
-              fontSize: 20 / SCALE,
-              lineHeight: 23 / SCALE,
-            }}
-          />
+        <View style={styles.progressiontextpos}>
+          <GradientText text="Progression" style={styles.font20} />
         </View>
-        <View
-          style={{
-            top: 9 / SCALE,
-            left: 209 / SCALE,
-          }}
-        >
+        <View style={styles.l9t209}>
           <Neomorphism
-            style={{
-              borderWidth: 2 / SCALE,
-              borderColor: "rgba(98, 255, 66, 0.5)",
-              borderStyle: "solid",
-              borderRadius: 12 / SCALE,
-            }}
+            style={styles.progressionborder}
             width={54 / SCALE}
             height={24 / SCALE}
             x={2 / SCALE}
@@ -80,9 +54,7 @@ export const Progression = (props) => {
             colorS2="rgba(213, 255, 204, 0.7)"
             inset={true}
           >
-            <View
-              style={{ right: 1 / SCALE, position: "absolute", top: 1 / SCALE }}
-            >
+            <View style={styles.r1t1}>
               <Neomorphism
                 width={18 / SCALE}
                 height={18 / SCALE}
@@ -98,12 +70,12 @@ export const Progression = (props) => {
             </View>
           </Neomorphism>
         </View>
-        <View style={{ top: 15 / SCALE }}>
+        <View style={styles.Top15}>
           {progression.map((prog) => {
             return <Progressionpart key={prog} scale={SCALE} bg2={BG2} />;
           })}
         </View>
-        <View style={{ top: 40 / SCALE, left: 61 / SCALE }}>
+        <View style={styles.t40l61}>
           <Neomorphism
             style={{
               display: "flex",
@@ -121,18 +93,7 @@ export const Progression = (props) => {
             colorS1="rgba(153, 153, 153, 0.6)"
             inset={true}
           >
-            <Text
-              style={{
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 16 / SCALE,
-                lineHeight: 19 / SCALE,
-                color: "white",
-              }}
-            >
-              add step
-            </Text>
+            <Text style={[styles.font16, { color: "white" }]}>add step</Text>
           </Neomorphism>
         </View>
       </Neomorphism>

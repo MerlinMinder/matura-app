@@ -76,7 +76,7 @@ export const Trainpage = (props) => {
       }}
     >
       {/* Title */}
-      <Title scale={SCALE} bg2={BG2} />
+      <Title />
 
       <Top scale={SCALE} title="Incline Benchpress" bg2={BG2} />
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
+import styles from "../../Styles";
 
 export const Set = (props) => {
   let SCALE = props.scale;
@@ -23,7 +24,7 @@ export const Set = (props) => {
         colorS1="rgba(0, 0, 0, 0.7)"
         colorS2="rgba(153, 153, 153, 0.7)"
       >
-        <View style={{ left: 10 / SCALE }}>
+        <View style={styles.l10}>
           <Neomorphism
             width={50 / SCALE}
             height={40 / SCALE}
@@ -36,42 +37,11 @@ export const Set = (props) => {
             colorS2="rgba(153, 153, 153, 0.6)"
             inset={true}
           >
-            <Text
-              style={{
-                position: "absolute",
-                width: 50 / SCALE,
-                height: 24 / SCALE,
-                top: 9 / SCALE,
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 24 / SCALE,
-                lineHeight: 24 / SCALE,
-                color: "white",
-                textAlign: "center",
-              }}
-            >
-              {props.set.num}.
-            </Text>
+            <Text style={styles.setsetnum}>{props.set.num}.</Text>
           </Neomorphism>
         </View>
-        <Text
-          style={{
-            position: "absolute",
-            width: 35 / SCALE,
-            height: 19 / SCALE,
-            left: 68 / SCALE,
-            fontFamily: "WorkSans-SemiBold",
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: 16 / SCALE,
-            lineHeight: 19 / SCALE,
-            color: "white",
-          }}
-        >
-          reps
-        </Text>
-        <View style={{ left: 110 / SCALE, position: "absolute" }}>
+        <Text style={styles.setrepstext}>reps</Text>
+        <View style={styles.l110}>
           <Neomorphism
             width={50 / SCALE}
             height={40 / SCALE}
@@ -85,19 +55,7 @@ export const Set = (props) => {
             inset={true}
           >
             <TextInput
-              style={{
-                width: 50 / SCALE,
-                height: 40 / SCALE,
-                textAlign: "center",
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 22 / SCALE,
-                lineHeight: 26 / SCALE,
-                color: "white",
-                margin: 0,
-                padding: 0,
-              }}
+              style={styles.setrepsinput}
               onChangeText={onChangeReps}
               placeholder="0"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
@@ -110,24 +68,8 @@ export const Set = (props) => {
             ></TextInput>
           </Neomorphism>
         </View>
-        <Text
-          style={{
-            position: "absolute",
-            width: 25 / SCALE,
-            height: 19 / SCALE,
-            left: 164 / SCALE,
-            fontFamily: "WorkSans-SemiBold",
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: 16 / SCALE,
-            lineHeight: 19 / SCALE,
-            color: "white",
-            textAlign: "center",
-          }}
-        >
-          {props.set.mes}
-        </Text>
-        <View style={{ position: "absolute", left: 195 / SCALE }}>
+        <Text style={styles.setmestext}>{props.set.mes}</Text>
+        <View style={styles.l195}>
           <Neomorphism
             width={60 / SCALE}
             height={40 / SCALE}
@@ -141,19 +83,7 @@ export const Set = (props) => {
             inset={true}
           >
             <TextInput
-              style={{
-                width: 60 / SCALE,
-                height: 40 / SCALE,
-                textAlign: "center",
-                fontFamily: "WorkSans-SemiBold",
-                fontStyle: "normal",
-                fontWeight: "600",
-                fontSize: 22 / SCALE,
-                lineHeight: 26 / SCALE,
-                color: "white",
-                margin: 0,
-                padding: 0,
-              }}
+              style={[styles.setrepsinput, styles.setmesinput]}
               onChangeText={onChangeWeight}
               placeholder="0"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
@@ -166,13 +96,7 @@ export const Set = (props) => {
             ></TextInput>
           </Neomorphism>
         </View>
-        <View
-          style={{
-            position: "absolute",
-            left: 256 / SCALE,
-            transform: [{ rotate: "90deg" }],
-          }}
-        >
+        <View style={styles.setdots}>
           <Svg
             width="24"
             height="24"
