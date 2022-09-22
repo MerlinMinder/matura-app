@@ -1,5 +1,6 @@
 import { View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
+import { neostyles } from "../../../NeoStyles";
 import { Day } from "./Day";
 
 let SCALE = 1.0416666666666667;
@@ -11,21 +12,11 @@ export const Week = (props) => {
   return (
     <Neomorphism
       style={{
-        display: "flex",
-        alignItems: "center",
         flexDirection: "row",
-        justifyContent: "center",
       }}
-      height={38 / SCALE}
-      width={265 / SCALE}
-      x={4 / SCALE}
-      y={4 / SCALE}
-      r={10 / SCALE}
-      b={4 / SCALE}
-      colorS1="rgba(0, 0, 0, 0.5)"
-      colorS2="rgba(153, 153, 153, 0.5)"
-      colorB={props.bg2}
-      inset={true}
+      center
+      inset
+      settings={neostyles.week}
     >
       {days.map((day) => {
         return (

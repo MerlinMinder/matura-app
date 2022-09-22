@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import styles from "../../Styles";
+import { neostyles } from "../../NeoStyles";
 
 let SCALE = 1.0416666666666667;
 let BG2 = "#464646";
@@ -44,22 +45,7 @@ export const Physique = (props) => {
 
   return (
     <View>
-      <Neomorphism
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-        width={300 / SCALE}
-        height={777 / SCALE}
-        x={8 / SCALE}
-        y={8 / SCALE}
-        r={15 / SCALE}
-        b={7 / SCALE}
-        colorB={BG2}
-        colorS1="rgba(0, 0, 0, 0.7)"
-        colorS2="rgba(153, 153, 153, 0.6)"
-      >
+      <Neomorphism center settings={neostyles.physiquecontainer}>
         <View style={styles.physiquebmi}>
           <GradientText text="BMI" style={styles.font20} />
         </View>
@@ -88,16 +74,8 @@ export const Physique = (props) => {
         ></LinearGradient>
         <View style={[styles.physiquecircle, { left: bmiwidth }]}>
           <Neomorphism
-            width={18 / SCALE}
-            height={18 / SCALE}
-            x={2 / SCALE}
-            y={2 / SCALE}
-            b={1 / SCALE}
-            r={9 / SCALE}
-            colorB={"#62FF42"}
-            colorS2="rgba(0, 0, 0, 0.5)"
-            colorS1="rgba(220, 220, 220, 0.7)"
-            inset={true}
+            settings={{ ...neostyles.physiqueball, ...{ colorB: "#62FF42" } }}
+            inset
           ></Neomorphism>
           <Text style={styles.physiquebmitext}>{bmi}</Text>
         </View>
@@ -138,23 +116,7 @@ export const Physique = (props) => {
           })}
         </View>
         <View style={styles.top10}>
-          <Neomorphism
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            width={130 / SCALE}
-            height={30 / SCALE}
-            x={3 / SCALE}
-            y={3 / SCALE}
-            b={3 / SCALE}
-            r={10 / SCALE}
-            colorB={BG2}
-            colorS2="rgba(0, 0, 0, 0.5)"
-            colorS1="rgba(220, 220, 220, 0.7)"
-            inset={true}
-          >
+          <Neomorphism center inset settings={neostyles.physiqueedit}>
             <Text style={[styles.font20, { color: "white" }]}>
               {edit ? "Save" : "Edit"}
             </Text>

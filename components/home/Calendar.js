@@ -4,6 +4,7 @@ import Svg, { Path } from "react-native-svg";
 import { Week } from "./parts/Week";
 import { Weektitle } from "./parts/Weektitle";
 import styles from "../../Styles";
+import { neostyles } from "../../NeoStyles";
 
 let SCALE = 1.0416666666666667;
 
@@ -62,15 +63,7 @@ export const Calendar = (props) => {
   return (
     <Neomorphism
       style={styles.calendarcontainer}
-      height={330 / SCALE}
-      width={300 / SCALE}
-      x={10 / SCALE}
-      y={10 / SCALE}
-      r={15 / SCALE}
-      b={10 / SCALE}
-      colorS1="rgba(0, 0, 0, 0.7)"
-      colorS2="rgba(128, 128, 128, 0.7)"
-      colorB={BG2}
+      settings={neostyles.calendarcontainer}
     >
       {/* title / month selector */}
       <View style={styles.calendartitle}>

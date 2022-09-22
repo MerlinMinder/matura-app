@@ -2,23 +2,11 @@ import { Text, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import styles from "../../../Styles";
+import { neostyles } from "../../../NeoStyles";
 
 export const WorkoutTrailer = (props) => {
-  let SCALE = props.scale;
-
   return (
-    <Neomorphism
-      height={80 / SCALE}
-      width={300 / SCALE}
-      x={5 / SCALE}
-      y={5 / SCALE}
-      r={10 / SCALE}
-      b={4 / SCALE}
-      colorS1="rgba(0, 0, 0, 0.7)"
-      colorS2="rgba(153, 153, 153, 0.7)"
-      colorB={props.bg2}
-      pady={24 / SCALE}
-    >
+    <Neomorphism settings={neostyles.workouttrailer}>
       <Text style={styles.workouttrailertitle}>{props.workout.title}</Text>
       <View
         style={[

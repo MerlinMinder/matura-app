@@ -2,6 +2,7 @@ import { Image, View } from "react-native";
 import { WorkoutTrailer } from "./parts/WorkoutTrailer";
 import { Neomorphism } from "../../Neomorphism";
 import styles from "../../Styles";
+import { neostyles } from "../../NeoStyles";
 
 export const Workouts = (props) => {
   let workouts = [
@@ -46,23 +47,7 @@ export const Workouts = (props) => {
         );
       })}
       <View style={styles.workoutspluscontainer}>
-        <Neomorphism
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          width={275 / SCALE}
-          height={70 / SCALE}
-          x={10 / SCALE}
-          y={10 / SCALE}
-          r={10 / SCALE}
-          b={10 / SCALE}
-          colorB={BG2}
-          colorS2="rgba(0, 0, 0, 0.5)"
-          colorS1="rgba(130, 130, 130, 0.7)"
-          inset
-        >
+        <Neomorphism center settings={neostyles.workouts} inset>
           <Image
             style={styles.workoutsplus}
             source={require("../../assets/pngs/Plus.png")}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
+import { neostyles } from "../../../NeoStyles";
 import styles from "../../../Styles";
 
 export const Measure = (props) => {
@@ -8,21 +9,9 @@ export const Measure = (props) => {
   let BG2 = props.bg2;
 
   const [number, onChangeNumber] = useState(0);
-
   return (
     <View style={props.style}>
-      <Neomorphism
-        width={280 / SCALE}
-        height={40 / SCALE}
-        x={4 / SCALE}
-        y={4 / SCALE}
-        r={10 / SCALE}
-        b={3 / SCALE}
-        colorB={BG2}
-        colorS1="rgba(0, 0, 0, 0.5)"
-        colorS2="rgba(153, 153, 153, 0.5)"
-        inset={true}
-      >
+      <Neomorphism inset settings={neostyles.measure}>
         <Text style={styles.measureword}>{props.word}</Text>
         <TextInput
           style={styles.measureinput}

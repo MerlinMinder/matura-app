@@ -350,7 +350,7 @@ const styles = {
   },
   physiquecircle: {
     position: "absolute",
-    top: 156 / SCALE,
+    top: 162 / SCALE,
   },
   physiquebmitext: {
     fontFamily: "WorkSans-SemiBold",

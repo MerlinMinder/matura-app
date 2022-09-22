@@ -27,10 +27,10 @@ export default function App() {
   return (
     <SafeAreaView style={styles.appContainer}>
       <StatusBar backgroundColor={"transparent"} />
-      {/* <Homepage scale={SCALE} bg2={BG2} /> */}
+      <Homepage scale={SCALE} bg2={BG2} />
       {/* <Workoutpage scale={SCALE} bg2={BG2} /> */}
       {/* <Exercisepage scale={SCALE} bg2={BG2} /> */}
-      <Trainpage scale={SCALE} bg2={BG2} />
+      {/* <Trainpage scale={SCALE} bg2={BG2} /> */}
       {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
     </SafeAreaView>
   );
