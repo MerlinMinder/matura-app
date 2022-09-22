@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, Dimensions, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import Svg, { Path } from "react-native-svg";
 import { Counter } from "../components/exercise/Counter";
@@ -7,11 +7,12 @@ import { Progression } from "../components/exercise/Progression";
 import { Set } from "../components/exercise/Set";
 import { Title } from "../components/Title";
 import { Neomorphism } from "../Neomorphism";
+import { neostyles } from "../NeoStyles";
 import styles from "../Styles";
 
-export const Exercisepage = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
+export const Exercisepage = () => {
+  const SCALE = 375 / Dimensions.get("screen").width;
+
   const [title, onChangeTitle] = useState("");
   const [edit, onChangeEdit] = useState(true);
 
@@ -28,7 +29,7 @@ export const Exercisepage = (props) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollview}>
       {/* Title */}
-      <Title scale={SCALE} />
+      <Title />
 
       <Neomorphism
         style={{
@@ -36,29 +37,13 @@ export const Exercisepage = (props) => {
           flexDirection: "column",
           alignItems: "center",
         }}
-        width={320 / SCALE}
-        height={330 / SCALE + extraHeight / SCALE}
-        x={10 / SCALE}
-        y={10 / SCALE}
-        r={15 / SCALE}
-        b={10 / SCALE}
-        colorB={BG2}
-        colorS1="rgba(0, 0, 0, 0.7)"
-        colorS2="rgba(128, 128, 128, 0.7)"
+        settings={{
+          ...neostyles.exercisepagecontainer,
+          ...{ height: 330 / SCALE + extraHeight / SCALE },
+        }}
       >
         <View style={styles.t10h40}>
-          <Neomorphism
-            width={300 / SCALE}
-            height={40 / SCALE}
-            x={3 / SCALE}
-            y={3 / SCALE}
-            r={10 / SCALE}
-            b={2 / SCALE}
-            colorB={BG2}
-            colorS2="rgba(0, 0, 0, 0.7)"
-            colorS1="rgba(153, 153, 153, 0.7)"
-            inset={true}
-          >
+          <Neomorphism inset settings={neostyles.exercisepagetitle}>
             <TextInput
               style={styles.exercisepagetitle}
               onChangeText={onChangeTitle}
@@ -89,27 +74,23 @@ export const Exercisepage = (props) => {
         </View>
         <Counter
           text="Sets"
-          scale={SCALE}
-          bg2={BG2}
           style={styles.Top26}
-          width={80 / SCALE}
+          width={84 / SCALE}
           textwidth={23 / SCALE}
         />
         <View style={styles.Top34}>
           {sets.map((set) => {
-            return <Set key={set.num} set={set} scale={SCALE} bg2={BG2} />;
+            return <Set key={set.num} set={set} />;
           })}
         </View>
         <Counter
           text="Rest"
-          scale={SCALE}
-          bg2={BG2}
           style={styles.Top45}
           width={100 / SCALE}
           textwidth={47 / SCALE}
         />
         <View style={styles.Top55}>
-          <Progression scale={SCALE} bg2={BG2} progression={progression} />
+          <Progression progression={progression} />
         </View>
       </Neomorphism>
     </ScrollView>

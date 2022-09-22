@@ -1,59 +1,27 @@
-import { rotate } from "@shopify/react-native-skia";
 import { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
+import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Set = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
   const [reps, onChangeReps] = useState(0);
   const [weight, onChangeWeight] = useState(0);
   return (
     <View>
       <Neomorphism
         style={{ display: "flex", alignItems: "center", flexDirection: "row" }}
-        width={280 / SCALE}
-        height={50 / SCALE}
-        x={2 / SCALE}
-        y={2 / SCALE}
-        r={10 / SCALE}
-        b={2 / SCALE}
-        colorB={BG2}
-        colorS1="rgba(0, 0, 0, 0.7)"
-        colorS2="rgba(153, 153, 153, 0.7)"
+        settings={neostyles.setwrapper}
       >
         <View style={styles.l10}>
-          <Neomorphism
-            width={50 / SCALE}
-            height={40 / SCALE}
-            x={2 / SCALE}
-            y={2 / SCALE}
-            r={5 / SCALE}
-            b={1.5 / SCALE}
-            colorB={BG2}
-            colorS1="rgba(0, 0, 0, 0.6)"
-            colorS2="rgba(153, 153, 153, 0.6)"
-            inset={true}
-          >
+          <Neomorphism inset settings={neostyles.setnum}>
             <Text style={styles.setsetnum}>{props.set.num}.</Text>
           </Neomorphism>
         </View>
         <Text style={styles.setrepstext}>reps</Text>
         <View style={styles.l110}>
-          <Neomorphism
-            width={50 / SCALE}
-            height={40 / SCALE}
-            x={2 / SCALE}
-            y={2 / SCALE}
-            r={5 / SCALE}
-            b={1.5 / SCALE}
-            colorB={BG2}
-            colorS1="rgba(0, 0, 0, 0.6)"
-            colorS2="rgba(153, 153, 153, 0.6)"
-            inset={true}
-          >
+          <Neomorphism inset settings={neostyles.setnum}>
             <TextInput
               style={styles.setrepsinput}
               onChangeText={onChangeReps}
@@ -71,16 +39,8 @@ export const Set = (props) => {
         <Text style={styles.setmestext}>{props.set.mes}</Text>
         <View style={styles.l195}>
           <Neomorphism
-            width={60 / SCALE}
-            height={40 / SCALE}
-            x={2 / SCALE}
-            y={2 / SCALE}
-            r={5 / SCALE}
-            b={1.5 / SCALE}
-            colorB={BG2}
-            colorS1="rgba(0, 0, 0, 0.6)"
-            colorS2="rgba(153, 153, 153, 0.6)"
-            inset={true}
+            inset
+            settings={{ ...neostyles.setnum, ...neostyles.setmes }}
           >
             <TextInput
               style={[styles.setrepsinput, styles.setmesinput]}
