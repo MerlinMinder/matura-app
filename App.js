@@ -29,8 +29,8 @@ export default function App() {
       <StatusBar backgroundColor={"transparent"} />
       {/* <Homepage /> */}
       {/* <Workoutpage /> */}
-      <Exercisepage />
-      {/* <Trainpage scale={SCALE} bg2={BG2} /> */}
+      {/* <Exercisepage /> */}
+      <Trainpage />
       {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
     </SafeAreaView>
   );

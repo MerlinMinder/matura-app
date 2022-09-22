@@ -1,13 +1,14 @@
-import { Text, View } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Start } from "../workout/Start";
 import { ExerciseTrailer } from "../workout/Exercisetrailer";
 import styles from "../../Styles";
+import { neostyles } from "../../NeoStyles";
 
 export const Workout = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
+  const SCALE = 375 / Dimensions.get("screen").width;
+
   let exercises = props.ex;
 
   let extraHeight = exercises.length * 95;
@@ -20,15 +21,10 @@ export const Workout = (props) => {
           flexDirection: "column",
           alignItems: "center",
         }}
-        width={320 / SCALE}
-        height={280 / SCALE + extraHeight / SCALE}
-        x={10 / SCALE}
-        y={10 / SCALE}
-        r={15 / SCALE}
-        b={10 / SCALE}
-        colorB={BG2}
-        colorS1="rgba(0, 0, 0, 0.7)"
-        colorS2="rgba(128, 128, 128, 0.7)"
+        settings={{
+          ...neostyles.workoutpagecontainer,
+          ...{ height: 280 / SCALE + extraHeight / SCALE },
+        }}
       >
         <View style={styles.Top5}>
           <Svg
@@ -48,16 +44,8 @@ export const Workout = (props) => {
 
         <View style={styles.Top25}>
           <Neomorphism
-            width={280 / SCALE}
-            height={20 / SCALE}
-            x={3 / SCALE}
-            y={3 / SCALE}
-            r={10 / SCALE}
-            b={2 / SCALE}
-            colorB={"#42FFFF"}
-            colorS2="rgba(0, 0, 0, 0.5)"
-            colorS1="rgba(255, 255, 255, 0.5)"
-            inset={true}
+            inset
+            settings={{ ...neostyles.nameline, ...{ colorB: "#42FFFF" } }}
           ></Neomorphism>
         </View>
         <View style={styles.workoutdumbbell}>
@@ -93,7 +81,6 @@ export const Workout = (props) => {
         </View>
 
         <Start
-          scale={SCALE}
           text="Finish"
           color="#FF4242"
           shadow="rgba(255, 204, 204, 0.7)"
@@ -107,12 +94,7 @@ export const Workout = (props) => {
           {exercises.map((exercise) => {
             return (
               <View style={styles.bottom15} key={exercise.name}>
-                <ExerciseTrailer
-                  scale={SCALE}
-                  bg2={BG2}
-                  name={exercise.name}
-                  sets={exercise.sets}
-                />
+                <ExerciseTrailer name={exercise.name} sets={exercise.sets} />
               </View>
             );
           })}

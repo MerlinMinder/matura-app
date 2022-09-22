@@ -2,36 +2,30 @@ import { Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 
 export const Setmorph = (props) => {
-  let BG2 = props.bg2;
+  const settings = {
+    width: props.width,
+    height: props.height,
+    x: props.s,
+    y: props.s,
+    r: props.r,
+    b: props.b,
+    colorB: "#464646",
+    colorS1: "rgba(0, 0, 0, 0.7)",
+    colorS2: "rgba(153, 153, 153, 0.7)",
+  };
   return (
     <View style={props.style}>
-      <Neomorphism
-        width={props.width}
-        height={props.height}
-        x={props.s}
-        y={props.s}
-        r={props.r}
-        b={props.b}
-        colorB={BG2}
-        colorS1="rgba(0, 0, 0, 0.7)"
-        colorS2="rgba(153, 153, 153, 0.7)"
-      >
+      <Neomorphism settings={settings}>
         <Neomorphism
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+          center
+          inset
+          settings={{
+            ...settings,
+            ...{
+              colorS2: "rgba(0, 0, 0, 0.7)",
+              colorS1: "rgba(153, 153, 153, 0.7)",
+            },
           }}
-          width={props.width}
-          height={props.height}
-          x={props.s}
-          y={props.s}
-          r={props.r}
-          b={props.b}
-          colorB={BG2}
-          colorS2="rgba(0, 0, 0, 0.7)"
-          colorS1="rgba(153, 153, 153, 0.7)"
-          inset={true}
         >
           <Text
             style={[

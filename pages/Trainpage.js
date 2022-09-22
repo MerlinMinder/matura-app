@@ -8,9 +8,7 @@ import { Dots } from "../components/train/Dots";
 import { Workout } from "../components/train/Workout";
 import styles from "../Styles";
 
-export const Trainpage = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
+export const Trainpage = () => {
   let exercises = [
     {
       name: "Deadlift",
@@ -69,11 +67,11 @@ export const Trainpage = (props) => {
       {/* Title */}
       <Title />
 
-      <Top scale={SCALE} title="Incline Benchpress" bg2={BG2} />
+      <Top title="Incline Benchpress" />
 
-      <Timer scale={SCALE} bg2={BG2} />
+      <Timer />
 
-      <Dots scale={SCALE} bg2={BG2} amount={5} />
+      <Dots amount={5} />
 
       <View style={styles.trainpagetext}>
         <Text style={[styles.trainpagetextstyle, styles.r100]}>
@@ -105,14 +103,9 @@ export const Trainpage = (props) => {
         </Text>
       </View>
 
-      <ExerciseTrailer
-        name={exercises[0].name}
-        sets={exercises[0].sets}
-        scale={SCALE}
-        bg2={BG2}
-      />
+      <ExerciseTrailer name={exercises[0].name} sets={exercises[0].sets} />
 
-      <Workout scale={SCALE} bg2={BG2} ex={exercises} />
+      <Workout ex={exercises} />
     </ScrollView>
   );
 };

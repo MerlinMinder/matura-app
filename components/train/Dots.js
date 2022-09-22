@@ -8,6 +8,7 @@ import {
 } from "@shopify/react-native-skia";
 import { Text, View, Dimensions } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
+import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Dots = (props) => {
@@ -62,7 +63,6 @@ export const Dots = (props) => {
         return (
           <Dot
             key={dot}
-            scale={SCALE}
             color={colors[dot - 1]}
             number={dot}
             left={((dot - 1) * stepsize) / SCALE}
@@ -74,20 +74,11 @@ export const Dots = (props) => {
 };
 
 const Dot = (props) => {
-  let SCALE = props.scale;
   return (
     <View style={{ left: props.left, position: "absolute" }}>
       <Neomorphism
-        width={20 / SCALE}
-        height={20 / SCALE}
-        x={2 / SCALE}
-        y={2 / SCALE}
-        r={10 / SCALE}
-        b={2 / SCALE}
-        colorB={props.color}
-        colorS2="rgba(0, 0, 0, 0.5)"
-        colorS1="rgba(255, 255, 255, 0.5)"
-        inset={true}
+        inset
+        settings={{ ...neostyles.dot, ...{ colorB: props.color } }}
       >
         <Text style={styles.dotnumber}>{props.number}</Text>
       </Neomorphism>
