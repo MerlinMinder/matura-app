@@ -5,9 +5,6 @@ import { neostyles } from "../../../NeoStyles";
 import styles from "../../../Styles";
 
 export const Measure = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
-
   const [number, onChangeNumber] = useState(0);
   return (
     <View style={props.style}>

@@ -31,20 +31,11 @@ export const Workouts = (props) => {
       time: "128m 43s",
     },
   ];
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
 
   return (
     <View>
       {workouts.map((workout) => {
-        return (
-          <WorkoutTrailer
-            key={workout.color}
-            scale={SCALE}
-            bg2={BG2}
-            workout={workout}
-          />
-        );
+        return <WorkoutTrailer key={workout.color} workout={workout} />;
       })}
       <View style={styles.workoutspluscontainer}>
         <Neomorphism center settings={neostyles.workouts} inset>

@@ -3,24 +3,12 @@ import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Settrailer } from "./Settrailer";
 import styles from "../../Styles";
+import { neostyles } from "../../NeoStyles";
 
 export const ExerciseTrailer = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
   let sets = props.sets;
   return (
-    <Neomorphism
-      width={280 / SCALE}
-      height={80 / SCALE}
-      x={4 / SCALE}
-      y={4 / SCALE}
-      r={10 / SCALE}
-      b={4 / SCALE}
-      colorB={BG2}
-      colorS1="rgba(0, 0, 0, 0.6)"
-      colorS2="rgba(153, 153, 153, 0.6)"
-      inset={true}
-    >
+    <Neomorphism inset settings={neostyles.exercisetrailer}>
       <Text style={styles.exercisetrailername}>{props.name}</Text>
       <View style={styles.exercisetrailerdots}>
         <Svg
@@ -39,8 +27,8 @@ export const ExerciseTrailer = (props) => {
       <View style={styles.exercisetrailersets}>
         {sets.map((set) => {
           return (
-            <View key={Math.random()} style={{ margin: 2 / SCALE }}>
-              <Settrailer scale={SCALE} set={set} />
+            <View key={Math.random()} style={styles.m2}>
+              <Settrailer set={set} />
             </View>
           );
         })}

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Week } from "./parts/Week";
@@ -6,12 +6,7 @@ import { Weektitle } from "./parts/Weektitle";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
 
-let SCALE = 1.0416666666666667;
-
-export const Calendar = (props) => {
-  const BG2 = props.bg2;
-  SCALE = props.scale;
-
+export const Calendar = () => {
   let month1 = [
     [
       { number: "28", color: "" },
@@ -99,13 +94,13 @@ export const Calendar = (props) => {
       </View>
 
       {/* weektitles */}
-      <Weektitle scale={SCALE} bg2={BG2} />
+      <Weektitle />
 
       {/* Weeks mapped out containing days */}
       {month1.map((week) => {
         return (
-          <View key={Math.random()} style={{ marginTop: 5 / SCALE }}>
-            <Week scale={SCALE} bg2={BG2} days={week}></Week>
+          <View key={Math.random()} style={styles.top5}>
+            <Week days={week}></Week>
           </View>
         );
       })}

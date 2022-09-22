@@ -2,10 +2,10 @@ import { useState } from "react";
 import { StyleSheet, TextInput, View, Text } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
+import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
-export const Name = (props) => {
-  let SCALE = props.scale;
+export const Name = () => {
   const [title, onChangeTitle] = useState("");
   const [edit, onChangeEdit] = useState(true);
 
@@ -39,16 +39,8 @@ export const Name = (props) => {
       </View>
       <View style={styles.l20t68}>
         <Neomorphism
-          width={280 / SCALE}
-          height={20 / SCALE}
-          x={3 / SCALE}
-          y={3 / SCALE}
-          r={10 / SCALE}
-          b={2 / SCALE}
-          colorB={"#42FFFF"}
-          colorS2="rgba(0, 0, 0, 0.5)"
-          colorS1="rgba(255, 255, 255, 0.5)"
-          inset={true}
+          inset
+          settings={{ ...neostyles.nameline, ...{ colorB: "#42FFFF" } }}
         ></Neomorphism>
       </View>
       <View style={styles.namedumbbell}>

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import GradientText from "../../GradientText";
 import { Neomorphism } from "../../Neomorphism";
 import { Measure } from "./parts/Measure";
@@ -8,14 +8,9 @@ import Svg, { Path } from "react-native-svg";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
 
-let SCALE = 1.0416666666666667;
-let BG2 = "#464646";
-
-export const Physique = (props) => {
-  SCALE = props.scale;
-  BG2 = props.bg2;
+export const Physique = () => {
   let bmi = 21.7;
-  let bmiwidth = 130 / SCALE;
+  let bmiwidth = 130;
   const [mes, onChangeMes] = useState("cm");
   const [edit, onChangeEdit] = useState(true);
 
@@ -49,22 +44,8 @@ export const Physique = (props) => {
         <View style={styles.physiquebmi}>
           <GradientText text="BMI" style={styles.font20} />
         </View>
-        <Measure
-          style={styles.top48}
-          scale={SCALE}
-          bg2={BG2}
-          word="Height"
-          mes={mes}
-          edit={edit}
-        />
-        <Measure
-          style={styles.top10}
-          scale={SCALE}
-          bg2={BG2}
-          word="Weight"
-          mes="kg"
-          edit={edit}
-        />
+        <Measure style={styles.top48} word="Height" mes={mes} edit={edit} />
+        <Measure style={styles.top10} word="Weight" mes="kg" edit={edit} />
         <LinearGradient
           style={styles.physiquegradient}
           colors={colors}
@@ -106,8 +87,6 @@ export const Physique = (props) => {
               <Measure
                 key={measure}
                 style={styles.top10}
-                scale={SCALE}
-                bg2={BG2}
                 word={measure}
                 mes={mes}
                 edit={edit}

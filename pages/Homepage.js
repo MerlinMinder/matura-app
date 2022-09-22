@@ -6,9 +6,7 @@ import { Calendar } from "../components/home/Calendar";
 import { View, ScrollView } from "react-native";
 import styles from "../Styles";
 
-export const Homepage = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
+export const Homepage = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollview}>
       {/* Title */}
@@ -16,7 +14,7 @@ export const Homepage = (props) => {
 
       {/* Calendar */}
       <View style={styles.top20}>
-        <Calendar scale={SCALE} bg2={BG2} />
+        <Calendar />
       </View>
 
       {/* Workouts */}
@@ -25,7 +23,7 @@ export const Homepage = (props) => {
       </View>
 
       <View style={styles.top10}>
-        <Workouts scale={SCALE} bg2={BG2} />
+        <Workouts />
       </View>
 
       {/* Physique */}
@@ -34,7 +32,7 @@ export const Homepage = (props) => {
       </View>
 
       <View>
-        <Physique scale={SCALE} bg2={BG2} />
+        <Physique />
       </View>
     </ScrollView>
   );
