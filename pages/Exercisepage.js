@@ -7,11 +7,10 @@ import { Progression } from "../components/exercise/Progression";
 import { Set } from "../components/exercise/Set";
 import { Title } from "../components/Title";
 import { Neomorphism } from "../Neomorphism";
-
-let SCALE = 0.954861111111111;
+import styles from "../Styles";
 
 export const Exercisepage = (props) => {
-  SCALE = props.scale;
+  let SCALE = props.scale;
   let BG2 = props.bg2;
   const [title, onChangeTitle] = useState("");
   const [edit, onChangeEdit] = useState(true);
@@ -27,14 +26,7 @@ export const Exercisepage = (props) => {
 
   let extraHeight = sets.length * 61 + progression.length * 53;
   return (
-    <ScrollView
-      contentContainerStyle={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        paddingBottom: 25 / SCALE,
-      }}
-    >
+    <ScrollView contentContainerStyle={styles.scrollview}>
       {/* Title */}
       <Title scale={SCALE} />
 
@@ -54,7 +46,7 @@ export const Exercisepage = (props) => {
         colorS1="rgba(0, 0, 0, 0.7)"
         colorS2="rgba(128, 128, 128, 0.7)"
       >
-        <View style={{ top: 10 / SCALE, height: 40 / SCALE }}>
+        <View style={styles.t10h40}>
           <Neomorphism
             width={300 / SCALE}
             height={40 / SCALE}
@@ -68,7 +60,7 @@ export const Exercisepage = (props) => {
             inset={true}
           >
             <TextInput
-              style={styles.title}
+              style={styles.exercisepagetitle}
               onChangeText={onChangeTitle}
               placeholder="Benchpress"
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
@@ -79,7 +71,7 @@ export const Exercisepage = (props) => {
               multiline={false}
               numberOfLines={1}
             ></TextInput>
-            <View style={styles.pen}>
+            <View style={styles.exercisepagepen}>
               <Svg
                 width="20"
                 height="20"
@@ -99,11 +91,11 @@ export const Exercisepage = (props) => {
           text="Sets"
           scale={SCALE}
           bg2={BG2}
-          style={{ top: 26 / SCALE }}
+          style={styles.Top26}
           width={80 / SCALE}
           textwidth={23 / SCALE}
         />
-        <View style={{ top: 34 / SCALE }}>
+        <View style={styles.Top34}>
           {sets.map((set) => {
             return <Set key={set.num} set={set} scale={SCALE} bg2={BG2} />;
           })}
@@ -112,38 +104,14 @@ export const Exercisepage = (props) => {
           text="Rest"
           scale={SCALE}
           bg2={BG2}
-          style={{ top: 45 / SCALE }}
+          style={styles.Top45}
           width={100 / SCALE}
           textwidth={47 / SCALE}
         />
-        <View style={{ top: 55 / SCALE }}>
+        <View style={styles.Top55}>
           <Progression scale={SCALE} bg2={BG2} progression={progression} />
         </View>
       </Neomorphism>
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    width: 250 / SCALE,
-    height: 40 / SCALE,
-    left: 10 / SCALE,
-    fontFamily: "WorkSans-SemiBold",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 20 / SCALE,
-    lineHeight: 23 / SCALE,
-    textAlign: "left",
-    color: "white",
-    margin: 0,
-    padding: 0,
-  },
-  pen: {
-    position: "absolute",
-    top: 10 / SCALE,
-    width: 20 / SCALE,
-    height: 20 / SCALE,
-    left: 267 / SCALE,
-  },
-});
