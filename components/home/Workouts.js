@@ -3,6 +3,7 @@ import { WorkoutTrailer } from "./parts/WorkoutTrailer";
 import { Neomorphism } from "../../Neomorphism";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 export const Workouts = (props) => {
   let workouts = [
@@ -32,19 +33,25 @@ export const Workouts = (props) => {
     },
   ];
 
+  const gesture = Gesture.Tap().onBegin(() => {
+    console.log("Hello");
+  });
+
   return (
     <View>
       {workouts.map((workout) => {
         return <WorkoutTrailer key={workout.color} workout={workout} />;
       })}
-      <View style={styles.workoutspluscontainer}>
-        <Neomorphism center settings={neostyles.workouts} inset>
-          <Image
-            style={styles.workoutsplus}
-            source={require("../../assets/pngs/Plus.png")}
-          />
-        </Neomorphism>
-      </View>
+      <GestureDetector gesture={gesture}>
+        <View style={styles.workoutspluscontainer}>
+          <Neomorphism center settings={neostyles.workouts} inset>
+            <Image
+              style={styles.workoutsplus}
+              source={require("../../assets/pngs/Plus.png")}
+            />
+          </Neomorphism>
+        </View>
+      </GestureDetector>
     </View>
   );
 };

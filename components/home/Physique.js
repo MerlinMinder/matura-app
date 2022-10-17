@@ -7,6 +7,7 @@ import { useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
+import Animated from "react-native-reanimated";
 
 export const Physique = () => {
   let bmi = 21.7;
@@ -94,13 +95,13 @@ export const Physique = () => {
             );
           })}
         </View>
-        <View style={styles.top10}>
+        <Animated.View style={styles.top10}>
           <Neomorphism center inset settings={neostyles.physiqueedit}>
             <Text style={[styles.font20, { color: "white" }]}>
               {edit ? "Save" : "Edit"}
             </Text>
           </Neomorphism>
-        </View>
+        </Animated.View>
       </Neomorphism>
     </View>
   );
