@@ -7,13 +7,16 @@ import { useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
-import Animated from "react-native-reanimated";
+import { useSharedValue } from "react-native-reanimated";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useSharedValueEffect } from "@shopify/react-native-skia";
 
 export const Physique = () => {
   let bmi = 21.7;
   let bmiwidth = 130;
   const [mes, onChangeMes] = useState("cm");
-  const [edit, onChangeEdit] = useState(true);
+  const [edittext, onChangeEdittext] = useState("Edit");
+  const edit = useSharedValue("Edit");
 
   const measures = [
     "Arm (right)",
@@ -38,6 +41,13 @@ export const Physique = () => {
     "#FF8142",
     "#FF5242",
   ];
+  const gesture = Gesture.Tap().onStart(() => {
+    edit.value = edit.value === "Edit" ? "Save" : "Edit";
+  });
+
+  useSharedValueEffect(() => {
+    onChangeEdittext(edit.value);
+  }, edit);
 
   return (
     <View>
@@ -95,13 +105,15 @@ export const Physique = () => {
             );
           })}
         </View>
-        <Animated.View style={styles.top10}>
-          <Neomorphism center inset settings={neostyles.physiqueedit}>
-            <Text style={[styles.font20, { color: "white" }]}>
-              {edit ? "Save" : "Edit"}
-            </Text>
-          </Neomorphism>
-        </Animated.View>
+        <GestureDetector gesture={gesture}>
+          <View style={styles.top10}>
+            <Neomorphism center inset settings={neostyles.physiqueedit}>
+              <Text style={[styles.font20, { color: "white" }]}>
+                {edittext}
+              </Text>
+            </Neomorphism>
+          </View>
+        </GestureDetector>
       </Neomorphism>
     </View>
   );

@@ -5,6 +5,11 @@ import { Week } from "./parts/Week";
 import { Weektitle } from "./parts/Weektitle";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
 
 export const Calendar = () => {
   let month1 = [
@@ -55,6 +60,10 @@ export const Calendar = () => {
     ],
   ];
 
+  const gesture = Gesture.Tap().onStart((evt) => {
+    console.log(evt.absoluteX > 200 ? "right" : "left");
+  });
+
   return (
     <Neomorphism
       style={styles.calendarcontainer}
@@ -62,35 +71,39 @@ export const Calendar = () => {
     >
       {/* title / month selector */}
       <View style={styles.calendartitle}>
-        <View style={styles.calendararrow}>
-          <Svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <Path
-              d="M16.88 18.12L10.7733 12L16.88 5.88L15 4L7 12L15 20L16.88 18.12Z"
-              fill="white"
-            />
-          </Svg>
-        </View>
+        <GestureDetector gesture={gesture}>
+          <View style={styles.calendararrow}>
+            <Svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <Path
+                d="M16.88 18.12L10.7733 12L16.88 5.88L15 4L7 12L15 20L16.88 18.12Z"
+                fill="white"
+              />
+            </Svg>
+          </View>
+        </GestureDetector>
         <Text style={styles.calendarmonth}>July 2022</Text>
-        <View style={styles.calendararrow}>
-          <Svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <Path
-              d="M7 18.12L13.1067 12L7 5.88L8.88 4L16.88 12L8.88 20L7 18.12Z"
-              fill="white"
-            />
-          </Svg>
-        </View>
+        <GestureDetector gesture={gesture}>
+          <View style={styles.calendararrow}>
+            <Svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <Path
+                d="M7 18.12L13.1067 12L7 5.88L8.88 4L16.88 12L8.88 20L7 18.12Z"
+                fill="white"
+              />
+            </Svg>
+          </View>
+        </GestureDetector>
       </View>
 
       {/* weektitles */}
