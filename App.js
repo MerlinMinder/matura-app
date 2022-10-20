@@ -9,23 +9,30 @@ import { Graphpage } from "./pages/Graphpage";
 import styles from "./Styles";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
-import { Get, Save } from "./Store";
+import { Del, Get, GetAll, Save } from "./Store";
 
 export default function App() {
   const SCALE = 375 / Dimensions.get("screen").width;
   const BG2 = "#454545";
   const [calendar, setCalendar] = useState({});
+  const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
     // get calendar/database or set first date in calendar
 
-    Get("calendar", setCalendar).then((res) => {
-      console.log(calendar);
-      if (calendar == {}) {
-        Save("calendar", { calendar: { day: Date() } });
-        Get("calendar", setCalendar);
-      }
-    });
+    Get("calendar", setCalendar);
+    if (calendar === null) {
+      console.log("first load");
+      Save("calendar", { calendar: { day: Date() } });
+      Get("calendar", setCalendar);
+    }
+
+    Get("workouts", setWorkouts);
+    if (workouts === null) {
+      console.log("first load");
+      Save("workouts", {});
+      Get("workouts", setWorkouts);
+    }
   }, []);
 
   // load the WorkSans fonts

@@ -5,8 +5,6 @@ import { Physique } from "../components/home/Physique";
 import { Calendar } from "../components/home/Calendar";
 import { View, ScrollView, Text } from "react-native";
 import styles from "../Styles";
-import { Del, Get, GetAll, Save } from "../Store";
-import { useState } from "react";
 
 export const Homepage = () => {
   return (
