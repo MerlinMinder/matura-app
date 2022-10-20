@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, Dimensions } from "react-native";
+import { SafeAreaView, Dimensions, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Homepage } from "./pages/Homepage";
 import { Workoutpage } from "./pages/Workoutpage";
@@ -7,14 +7,26 @@ import { Exercisepage } from "./pages/Exercisepage";
 import { Trainpage } from "./pages/Trainpage";
 import { Graphpage } from "./pages/Graphpage";
 import styles from "./Styles";
-import {
-  gestureHandlerRootHOC,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { gestureHandlerRootHOC } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import { Get, Save } from "./Store";
 
 export default function App() {
   const SCALE = 375 / Dimensions.get("screen").width;
   const BG2 = "#454545";
+  const [calendar, setCalendar] = useState({});
+
+  useEffect(() => {
+    // get calendar/database or set first date in calendar
+
+    Get("calendar", setCalendar).then((res) => {
+      console.log(calendar);
+      if (calendar == {}) {
+        Save("calendar", { calendar: { day: Date() } });
+        Get("calendar", setCalendar);
+      }
+    });
+  }, []);
 
   // load the WorkSans fonts
 

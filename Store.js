@@ -18,7 +18,11 @@ export const Merge = async (key, value) => {
 };
 export const Del = async (key) => {
   await AsyncStorage.removeItem(key);
+  console.log("deleted " + key);
 };
-export const GetAll = async () => {
-  return await AsyncStorage.getAllKeys();
+export const GetAll = async (setValue) => {
+  const all = await AsyncStorage.getAllKeys();
+  setValue(all);
+  console.log(all);
+  return;
 };

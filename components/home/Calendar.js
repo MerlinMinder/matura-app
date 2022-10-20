@@ -5,11 +5,7 @@ import { Week } from "./parts/Week";
 import { Weektitle } from "./parts/Weektitle";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 export const Calendar = () => {
   let month1 = [
