@@ -14,9 +14,13 @@ import GradientText from "../GradientText";
 import { Neomorphism } from "../Neomorphism";
 import styles from "../Styles";
 import { neostyles } from "../NeoStyles";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useSharedValue } from "react-native-reanimated";
+import { useSharedValueEffect } from "@shopify/react-native-skia";
 
 export const Workoutpage = ({ navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
+  const pressed = useSharedValue(false);
 
   let exercises = [
     {
@@ -69,6 +73,16 @@ export const Workoutpage = ({ navigation }) => {
   // .map((exercise) => (exercise.length < 7 ? 95 : 139))
   // .reduce((a, b) => a + b, 0);
 
+  useSharedValueEffect(() => {
+    if (pressed.value) {
+      navigation.navigate("home");
+    }
+  }, pressed);
+
+  const gesture = Gesture.Tap().onBegin(() => {
+    pressed.value = true;
+  });
+
   return (
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>
@@ -112,14 +126,16 @@ export const Workoutpage = ({ navigation }) => {
                 );
               })}
             </View>
-            <View style={styles.workoutpageplusc}>
-              <Neomorphism center inset settings={neostyles.workoutpageplus}>
-                <Image
-                  style={styles.workoutpageplus}
-                  source={require("../assets/pngs/Plus.png")}
-                />
-              </Neomorphism>
-            </View>
+            <GestureDetector gesture={gesture}>
+              <View style={styles.workoutpageplusc}>
+                <Neomorphism center inset settings={neostyles.workoutpageplus}>
+                  <Image
+                    style={styles.workoutpageplus}
+                    source={require("../assets/pngs/Plus.png")}
+                  />
+                </Neomorphism>
+              </View>
+            </GestureDetector>
           </Neomorphism>
         </View>
       </ScrollView>

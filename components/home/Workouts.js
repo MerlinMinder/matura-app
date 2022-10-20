@@ -39,7 +39,7 @@ export const Workouts = (props) => {
   const [data, setData] = useState({ workouts: [] });
   const colorS1 = useValue("rgba(130, 130, 130, 0.7)");
   const colorS2 = useValue("rgba(0, 0, 0, 0.5)");
-  const pressed = useSharedValue(0);
+  const pressed = useSharedValue(false);
   const [plus, onChangePlus] = useState(require("../../assets/pngs/Plus.png"));
 
   useEffect(() => {
@@ -73,8 +73,8 @@ export const Workouts = (props) => {
 
       Get("workouts", setData).then(() => {
         pressed.value = false;
+        props.nav.navigate("workout");
       });
-      props.nav.navigate("workout");
     }
 
     // testing
