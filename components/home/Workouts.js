@@ -9,7 +9,7 @@ import { useSharedValue } from "react-native-reanimated";
 import { useEffect, useState } from "react";
 import { Get, Merge, Save } from "../../Store";
 
-export const Workouts = () => {
+export const Workouts = (props) => {
   // let workouts = [
   //   {
   //     title: "Push Workout",
@@ -74,6 +74,7 @@ export const Workouts = () => {
       Get("workouts", setData).then(() => {
         pressed.value = false;
       });
+      props.nav.navigate("workout");
     }
 
     // testing

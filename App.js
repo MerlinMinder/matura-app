@@ -10,6 +10,8 @@ import styles from "./Styles";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { Del, Get, GetAll, Save } from "./Store";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   const SCALE = 375 / Dimensions.get("screen").width;
@@ -46,19 +48,31 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
-  // Wrap Actual app ( SafeAreaView ) in gestureHandlerRoot
+  // Wrap App (SafeAreaView) in NavigationContainer for navigation
+  // Wrap all in gestureHandlerRoot
   // to account for gesture detection over the whole app
 
+  const Stack = createNativeStackNavigator();
+
   const App = gestureHandlerRootHOC(() => (
-    <SafeAreaView style={styles.appContainer}>
+    <NavigationContainer>
       <StatusBar backgroundColor={"transparent"} />
-      <Homepage />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName="home"
+      >
+        <Stack.Screen name="home" component={Homepage} />
+        <Stack.Screen name="workout" component={Workoutpage} />
+        <Stack.Screen name="exercise" component={Exercisepage} />
+        <Stack.Screen name="train" component={Trainpage} />
+      </Stack.Navigator>
       {/* <Workoutpage /> */}
       {/* <Exercisepage /> */}
       {/* <Trainpage /> */}
       {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
-    </SafeAreaView>
+    </NavigationContainer>
   ));
 
   return <App />;

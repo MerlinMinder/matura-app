@@ -3,37 +3,39 @@ import GradientText from "../GradientText";
 import { Workouts } from "../components/home/Workouts";
 import { Physique } from "../components/home/Physique";
 import { Calendar } from "../components/home/Calendar";
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView, SafeAreaView } from "react-native";
 import styles from "../Styles";
 
-export const Homepage = () => {
+export const Homepage = ({ navigation }) => {
   return (
-    <ScrollView contentContainerStyle={styles.scrollview}>
-      {/* Title */}
-      <Title />
+    <SafeAreaView style={styles.appContainer}>
+      <ScrollView contentContainerStyle={styles.scrollview}>
+        {/* Title */}
+        <Title />
 
-      {/* Calendar */}
-      <View style={styles.top20}>
-        <Calendar />
-      </View>
+        {/* Calendar */}
+        <View style={styles.top20}>
+          <Calendar />
+        </View>
 
-      {/* Workouts */}
-      <View style={styles.l100t10}>
-        <GradientText text="Workouts" style={styles.hometitles} />
-      </View>
+        {/* Workouts */}
+        <View style={styles.l100t10}>
+          <GradientText text="Workouts" style={styles.hometitles} />
+        </View>
 
-      <View style={styles.top10}>
-        <Workouts />
-      </View>
+        <View style={styles.top10}>
+          <Workouts nav={navigation} />
+        </View>
 
-      {/* Physique */}
-      <View style={styles.l100t20}>
-        <GradientText text="Physique" style={styles.hometitles} />
-      </View>
+        {/* Physique */}
+        <View style={styles.l100t20}>
+          <GradientText text="Physique" style={styles.hometitles} />
+        </View>
 
-      <View>
-        <Physique />
-      </View>
-    </ScrollView>
+        <View>
+          <Physique />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
