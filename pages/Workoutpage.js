@@ -18,9 +18,11 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
 import { useSharedValueEffect } from "@shopify/react-native-skia";
 
-export const Workoutpage = ({ navigation }) => {
+export const Workoutpage = ({ route, navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const pressed = useSharedValue(false);
+  const { id } = route.params;
+  console.log(id);
 
   let exercises = [
     {
@@ -69,13 +71,11 @@ export const Workoutpage = ({ navigation }) => {
     },
   ];
 
-  let extraHeight = exercises.length * 95;
-  // .map((exercise) => (exercise.length < 7 ? 95 : 139))
-  // .reduce((a, b) => a + b, 0);
+  const extraHeight = exercises.length * 95;
 
   useSharedValueEffect(() => {
     if (pressed.value) {
-      navigation.navigate("home");
+      navigation.navigate("exercise");
     }
   }, pressed);
 
@@ -87,7 +87,7 @@ export const Workoutpage = ({ navigation }) => {
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>
         {/* Title */}
-        <Title />
+        <Title nav={navigation} />
 
         {/* Body */}
         <View style={styles.workoutpagebody}>

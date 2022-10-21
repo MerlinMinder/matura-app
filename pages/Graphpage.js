@@ -18,7 +18,7 @@ export const Graphpage = ({ navigation }) => {
         }}
       >
         {/* Title */}
-        <Title scale={SCALE} />
+        <Title scale={SCALE} nav={navigation} />
 
         <View style={{ marginTop: 30 / SCALE }}>
           <Neomorphism

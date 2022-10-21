@@ -11,7 +11,7 @@ export const Homepage = ({ navigation }) => {
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>
         {/* Title */}
-        <Title />
+        <Title nav={navigation} />
 
         {/* Calendar */}
         <View style={styles.top20}>

@@ -30,7 +30,7 @@ export const Exercisepage = ({ navigation }) => {
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>
         {/* Title */}
-        <Title />
+        <Title nav={navigation} />
 
         <Neomorphism
           style={{

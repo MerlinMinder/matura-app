@@ -66,7 +66,7 @@ export const Trainpage = ({ navigation }) => {
         }}
       >
         {/* Title */}
-        <Title />
+        <Title nav={navigation} />
 
         <Top title="Incline Benchpress" />
 

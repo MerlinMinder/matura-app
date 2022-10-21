@@ -10,32 +10,6 @@ import { useEffect, useState } from "react";
 import { Get, Merge, Save } from "../../Store";
 
 export const Workouts = (props) => {
-  // let workouts = [
-  //   {
-  //     title: "Push Workout",
-  //     color: "#42FFFF",
-  //     exercises: "7",
-  //     time: "48m 23s",
-  //   },
-  //   {
-  //     title: "Push Workout",
-  //     color: "#42FF62",
-  //     exercises: "6",
-  //     time: "67m 02s",
-  //   },
-  //   {
-  //     title: "Push Workout",
-  //     color: "#FFFF42",
-  //     exercises: "4",
-  //     time: "5m 58s",
-  //   },
-  //   {
-  //     title: "Push Workout",
-  //     color: "#FFC042",
-  //     exercises: "12",
-  //     time: "128m 43s",
-  //   },
-  // ];
   const [data, setData] = useState({ workouts: [] });
   const colorS1 = useValue("rgba(130, 130, 130, 0.7)");
   const colorS2 = useValue("rgba(0, 0, 0, 0.5)");
@@ -59,21 +33,22 @@ export const Workouts = (props) => {
       ? onChangePlus(require("../../assets/pngs/Plus2.png"))
       : onChangePlus(require("../../assets/pngs/Plus.png"));
 
-    if (pressed.value) {
+    if (pressed.value == true) {
+      const timeid = Date.now();
       const datasend = new Object();
-      datasend[Date.now()] = {
+      datasend[timeid] = {
         title: "",
         color: "",
         exercises: "",
         time: "",
-        key: Date.now(),
+        id: timeid,
       };
 
       Merge("workouts", datasend);
 
       Get("workouts", setData).then(() => {
         pressed.value = false;
-        props.nav.navigate("workout");
+        props.nav.navigate("workout", { id: timeid });
       });
     }
 
@@ -101,7 +76,7 @@ export const Workouts = (props) => {
   return (
     <View>
       {Object.values(data).map((workout) => {
-        return <WorkoutTrailer key={workout.key} workout={workout} />;
+        return <WorkoutTrailer key={workout.id} workout={workout} />;
       })}
       <GestureDetector gesture={gesture}>
         <View style={styles.workoutspluscontainer}>
