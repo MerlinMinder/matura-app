@@ -16,72 +16,67 @@ import styles from "../Styles";
 import { neostyles } from "../NeoStyles";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
-import { useSharedValueEffect } from "@shopify/react-native-skia";
+import { useSharedValueEffect, useValue } from "@shopify/react-native-skia";
+import { useEffect, useState } from "react";
+import { Get, Merge } from "../Store";
 
 export const Workoutpage = ({ route, navigation }) => {
-  const SCALE = 375 / Dimensions.get("screen").width;
-  const pressed = useSharedValue(false);
   const { id } = route.params;
+  const initialdata = new Object();
+  initialdata[id] = { exercises: {} };
+  const SCALE = 375 / Dimensions.get("screen").width;
+  const colorS1 = useValue("rgba(130, 130, 130, 0.7)");
+  const colorS2 = useValue("rgba(0, 0, 0, 0.7)");
+  const [plus, onChangePlus] = useState(require("../assets/pngs/Plus.png"));
+  const [data, setData] = useState(initialdata);
+  const pressed = useSharedValue(false);
+
   console.log(id);
 
-  let exercises = [
-    {
-      name: "Deadlift",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-    {
-      name: "Seated Back Row",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-    {
-      name: "Hyperextensions",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-    {
-      name: "Straight Bar Bicep Curls",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-  ];
-
-  const extraHeight = exercises.length * 95;
+  useEffect(() => {
+    Get("workouts", setData);
+  }, []);
 
   useSharedValueEffect(() => {
+    colorS1.current = pressed.value
+      ? "rgba(90, 90, 90, 0.7)"
+      : "rgba(130, 130, 130, 0.7)";
+
+    colorS2.current = pressed.value
+      ? "rgba(50, 50, 50, 0.7)"
+      : "rgba(0, 0, 0, 0.7)";
+
+    pressed.value
+      ? onChangePlus(require("../assets/pngs/Plus2.png"))
+      : onChangePlus(require("../assets/pngs/Plus.png"));
+
     if (pressed.value) {
-      navigation.navigate("exercise");
+      const timeid = Date.now();
+      const datasend = new Object();
+      const exercisesend = new Object();
+      exercisesend[timeid] = {
+        name: "",
+        sets: [],
+        rest: "",
+        progression: "",
+        id: timeid,
+      };
+      datasend[id] = { exercises: exercisesend };
+
+      Merge("workouts", datasend);
+
+      Get("workouts", setData).then(() => {
+        pressed.value = false;
+        navigation.navigate("exercise");
+      });
     }
   }, pressed);
 
   const gesture = Gesture.Tap().onBegin(() => {
     pressed.value = true;
   });
+
+  const extraHeight = Object.values(data[id].exercises).length * 95;
 
   return (
     <SafeAreaView style={styles.appContainer}>
@@ -115,7 +110,7 @@ export const Workoutpage = ({ route, navigation }) => {
               <Progress />
             </View>
             <View style={styles.workoutpageexercise}>
-              {exercises.map((exercise) => {
+              {Object.values(data[id].exercises).map((exercise) => {
                 return (
                   <View style={styles.bottom15} key={exercise.name}>
                     <ExerciseTrailer
@@ -128,11 +123,15 @@ export const Workoutpage = ({ route, navigation }) => {
             </View>
             <GestureDetector gesture={gesture}>
               <View style={styles.workoutpageplusc}>
-                <Neomorphism center inset settings={neostyles.workoutpageplus}>
-                  <Image
-                    style={styles.workoutpageplus}
-                    source={require("../assets/pngs/Plus.png")}
-                  />
+                <Neomorphism
+                  center
+                  inset
+                  settings={{
+                    ...neostyles.workoutpageplus,
+                    ...{ colorS1: colorS1, colorS2: colorS2 },
+                  }}
+                >
+                  <Image style={styles.workoutpageplus} source={plus} />
                 </Neomorphism>
               </View>
             </GestureDetector>

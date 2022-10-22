@@ -10,11 +10,12 @@ import { useEffect, useState } from "react";
 import { Get, Merge, Save } from "../../Store";
 
 export const Workouts = (props) => {
-  const [data, setData] = useState({ workouts: [] });
+  const [data, setData] = useState({});
   const colorS1 = useValue("rgba(130, 130, 130, 0.7)");
   const colorS2 = useValue("rgba(0, 0, 0, 0.5)");
-  const pressed = useSharedValue(false);
   const [plus, onChangePlus] = useState(require("../../assets/pngs/Plus.png"));
+
+  const pressed = useSharedValue(false);
 
   useEffect(() => {
     Get("workouts", setData);

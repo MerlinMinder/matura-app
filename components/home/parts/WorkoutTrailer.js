@@ -29,7 +29,7 @@ export const WorkoutTrailer = (props) => {
         </Svg>
       </View>
       <Text style={styles.workouttrailerexercises}>
-        {props.workout.exercises} Exercises
+        {Object.values(props.workout.exercises).length} Exercises
       </Text>
       <Text style={styles.workouttrailerrecent}>recent</Text>
       <View style={styles.workouttrailertimer}>
