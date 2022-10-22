@@ -67,7 +67,7 @@ export const Workoutpage = ({ route, navigation }) => {
 
       Get("workouts", setData).then(() => {
         pressed.value = false;
-        navigation.navigate("exercise");
+        navigation.navigate("exercise", { workid: id, exid: timeid });
       });
     }
   }, pressed);
