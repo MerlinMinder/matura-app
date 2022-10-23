@@ -1,12 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, Dimensions, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Homepage } from "./pages/Homepage";
 import { Workoutpage } from "./pages/Workoutpage";
 import { Exercisepage } from "./pages/Exercisepage";
 import { Trainpage } from "./pages/Trainpage";
 import { Graphpage } from "./pages/Graphpage";
-import styles from "./Styles";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { Del, Get, GetAll, Save } from "./Store";
@@ -14,10 +12,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
-  const SCALE = 375 / Dimensions.get("screen").width;
-  const BG2 = "#454545";
+  // const SCALE = 375 / Dimensions.get("screen").width;
+  // const BG2 = "#454545";
   const [calendar, setCalendar] = useState({});
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState(null);
 
   useEffect(() => {
     // get calendar/database or set first date in calendar

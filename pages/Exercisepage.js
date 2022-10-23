@@ -1,22 +1,25 @@
+import { useSharedValueEffect } from "@shopify/react-native-skia";
 import { useEffect, useRef, useState } from "react";
 import { ScrollView, Dimensions, View, SafeAreaView } from "react-native";
 import {
   TextInput,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
-import Svg, { G, Path } from "react-native-svg";
+import { useSharedValue } from "react-native-reanimated";
+import Svg, { Path } from "react-native-svg";
 import { Counter } from "../components/exercise/Counter";
 import { Progression } from "../components/exercise/Progression";
 import { Set } from "../components/exercise/Set";
 import { Title } from "../components/Title";
 import { Neomorphism } from "../Neomorphism";
 import { neostyles } from "../NeoStyles";
-import { Get } from "../Store";
+import { Get, Merge } from "../Store";
 import styles from "../Styles";
 
 export const Exercisepage = ({ route, navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const [title, onChangeTitle] = useState("");
+  const sets = useSharedValue([]);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;
@@ -30,11 +33,19 @@ export const Exercisepage = ({ route, navigation }) => {
     Get("workouts", setData);
   }, []);
 
-  let sets = [];
+  useSharedValueEffect(() => {
+    const senddata = new Object();
+    const sendex = new Object();
+    sendex[exid] = { sets: sets.value };
+    senddata[workid] = { exercises: sendex };
+    Merge("workouts", senddata);
+
+    Get("workouts", setData);
+  }, sets);
 
   let progression = [1, 2, 3, 4];
 
-  let extraHeight = sets.length * 61 + progression.length * 53;
+  let extraHeight = sets.value.length * 61 + progression.length * 53;
   return (
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>
@@ -94,9 +105,7 @@ export const Exercisepage = ({ route, navigation }) => {
             style={styles.Top26}
             width={84 / SCALE}
             textwidth={23 / SCALE}
-            setData={setData}
-            workid={workid}
-            exid={exid}
+            sets={sets}
           />
           <View style={styles.Top34}>
             {Object.values(data[workid].exercises[exid].sets).map((set) => {
@@ -108,9 +117,7 @@ export const Exercisepage = ({ route, navigation }) => {
             style={styles.Top45}
             width={100 / SCALE}
             textwidth={47 / SCALE}
-            setData={setData}
-            workid={workid}
-            exid={exid}
+            sets={sets}
           />
           <View style={styles.Top55}>
             <Progression progression={progression} />
