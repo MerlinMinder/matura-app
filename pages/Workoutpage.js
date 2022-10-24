@@ -22,13 +22,11 @@ import { Get, Merge } from "../Store";
 
 export const Workoutpage = ({ route, navigation }) => {
   const { id } = route.params;
-  const initialdata = new Object();
-  initialdata[id] = { exercises: {} };
   const SCALE = 375 / Dimensions.get("screen").width;
   const colorS1 = useValue("rgba(130, 130, 130, 0.7)");
   const colorS2 = useValue("rgba(0, 0, 0, 0.7)");
   const [plus, onChangePlus] = useState(require("../assets/pngs/Plus.png"));
-  const [data, setData] = useState(initialdata);
+  const [data, setData] = useState(null);
   const pressed = useSharedValue(false);
 
   console.log(id);
@@ -75,6 +73,10 @@ export const Workoutpage = ({ route, navigation }) => {
   const gesture = Gesture.Tap().onBegin(() => {
     pressed.value = true;
   });
+
+  if (!data) {
+    return null;
+  }
 
   const extraHeight = Object.values(data[id].exercises).length * 95;
 

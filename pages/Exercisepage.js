@@ -19,16 +19,12 @@ import styles from "../Styles";
 export const Exercisepage = ({ route, navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const [title, onChangeTitle] = useState("");
+  const [data, setData] = useState(null);
   const sets = useSharedValue([]);
   const progression1 = useSharedValue([]);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;
-  const initialdata = new Object();
-  const initialex = new Object();
-  initialex[exid] = { sets: [] };
-  initialdata[workid] = { exercises: initialex };
-  const [data, setData] = useState(initialdata);
 
   useEffect(() => {
     Get("workouts", setData);
@@ -47,6 +43,10 @@ export const Exercisepage = ({ route, navigation }) => {
   let progression = [1, 2, 3, 4];
 
   let extraHeight = sets.value.length * 61 + progression.length * 53;
+
+  if (!data) {
+    return null;
+  }
   return (
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>

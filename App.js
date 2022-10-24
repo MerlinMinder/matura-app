@@ -15,7 +15,7 @@ export default function App() {
   // const SCALE = 375 / Dimensions.get("screen").width;
   // const BG2 = "#454545";
   const [calendar, setCalendar] = useState({});
-  const [workouts, setWorkouts] = useState(null);
+  const [workouts, setWorkouts] = useState({});
 
   useEffect(() => {
     // get calendar/database or set first date in calendar
@@ -27,12 +27,14 @@ export default function App() {
       Get("calendar", setCalendar);
     }
 
-    Get("workouts", setWorkouts);
-    if (workouts === null) {
-      console.log("first load");
-      Save("workouts", {});
-      Get("workouts", setWorkouts);
-    }
+    Get("workouts", setWorkouts).then(() => {
+      console.log(workouts);
+      if (workouts === null) {
+        console.log("first load");
+        Save("workouts", {});
+        Get("workouts", setWorkouts);
+      }
+    });
   }, []);
 
   // load the WorkSans fonts
