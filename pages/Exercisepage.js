@@ -20,6 +20,7 @@ export const Exercisepage = ({ route, navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const [title, onChangeTitle] = useState("");
   const sets = useSharedValue([]);
+  const progression1 = useSharedValue([]);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;
