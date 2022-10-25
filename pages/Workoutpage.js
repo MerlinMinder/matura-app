@@ -56,7 +56,7 @@ export const Workoutpage = ({ route, navigation }) => {
         name: "",
         sets: [],
         rest: "",
-        progression: "",
+        progression: [],
         id: timeid,
       };
       datasend[id] = { exercises: exercisesend };

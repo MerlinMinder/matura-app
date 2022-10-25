@@ -21,7 +21,7 @@ export const Exercisepage = ({ route, navigation }) => {
   const [title, onChangeTitle] = useState("");
   const [data, setData] = useState(null);
   const sets = useSharedValue([]);
-  const progression1 = useSharedValue([]);
+  const progression = useSharedValue([]);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;
@@ -40,9 +40,17 @@ export const Exercisepage = ({ route, navigation }) => {
     Get("workouts", setData);
   }, sets);
 
-  let progression = [1, 2, 3, 4];
+  useSharedValueEffect(() => {
+    const senddata = new Object();
+    const sendex = new Object();
+    sendex[exid] = { progression: progression.value };
+    senddata[workid] = { exercises: sendex };
+    Merge("workouts", senddata);
 
-  let extraHeight = sets.value.length * 61 + progression.length * 53;
+    Get("workouts", setData);
+  }, progression);
+
+  let extraHeight = sets.value.length * 61 + progression.value.length * 53;
 
   if (!data) {
     return null;
@@ -121,7 +129,10 @@ export const Exercisepage = ({ route, navigation }) => {
             sets={sets}
           />
           <View style={styles.Top55}>
-            <Progression progression={progression} />
+            <Progression
+              progression={progression}
+              data={Object.values(data[workid].exercises[exid].progression)}
+            />
           </View>
         </Neomorphism>
       </ScrollView>
