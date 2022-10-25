@@ -1,10 +1,24 @@
-import { Text, View } from "react-native";
+import { useState } from "react";
+import { Text, TouchableWithoutFeedback, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
-export const Progressionpart = () => {
+export const Progressionpart = (props) => {
+  const [repcount, onChangeRepcount] = useState(0);
+  const [weightcount, onChangeWeightcount] = useState(0);
+
+  const runcheck = (rep, weight) => {
+    const sendarr = [...props.progression.value];
+    sendarr[props.id] = {
+      key: props.id,
+      reps: rep,
+      weight: weight,
+    };
+    props.progression.value = sendarr;
+  };
+
   return (
     <Neomorphism
       style={{ display: "flex", alignItems: "center", flexDirection: "row" }}
@@ -13,17 +27,33 @@ export const Progressionpart = () => {
       <Text style={styles.progressionpartrepstext}>reps</Text>
       <View style={styles.l50}>
         <Neomorphism inset settings={neostyles.progressionpartreps}>
-          <Text style={styles.progressionpartop}>-</Text>
-          <Text style={styles.progressionparttext}>+2</Text>
-          <Text
-            style={[
-              styles.progressionpartop,
-              { color: "#FFC042" },
-              styles.t2l42,
-            ]}
+          <TouchableWithoutFeedback
+            onPress={() => {
+              onChangeRepcount((prev) => prev - 1);
+              runcheck(repcount - 1, weightcount);
+            }}
           >
-            +
+            <Text style={styles.progressionpartop}>-</Text>
+          </TouchableWithoutFeedback>
+          <Text style={styles.progressionparttext}>
+            {repcount < 0 ? repcount : "+" + repcount}
           </Text>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              onChangeRepcount((prev) => prev + 1);
+              runcheck(repcount + 1, weightcount);
+            }}
+          >
+            <Text
+              style={[
+                styles.progressionpartop,
+                { color: "#FFC042" },
+                styles.t2l39,
+              ]}
+            >
+              +
+            </Text>
+          </TouchableWithoutFeedback>
         </Neomorphism>
       </View>
       <Text style={styles.progressionpartmestext}>kg</Text>
@@ -35,19 +65,33 @@ export const Progressionpart = () => {
             ...neostyles.progressionpartmes,
           }}
         >
-          <Text style={styles.progressionpartop}>-</Text>
-          <Text style={[styles.progressionparttext, styles.width42]}>
-            +3.75
-          </Text>
-          <Text
-            style={[
-              styles.progressionpartop,
-              { color: "#FFC042" },
-              styles.t2l66,
-            ]}
+          <TouchableWithoutFeedback
+            onPress={() => {
+              onChangeWeightcount((prev) => prev - 1.25);
+              runcheck(repcount, weightcount - 1.25);
+            }}
           >
-            +
+            <Text style={styles.progressionpartop}>-</Text>
+          </TouchableWithoutFeedback>
+          <Text style={[styles.progressionparttext, styles.width46]}>
+            {weightcount < 0 ? weightcount : "+" + weightcount}
           </Text>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              onChangeWeightcount((prev) => prev + 1.25);
+              runcheck(repcount, weightcount + 1.25);
+            }}
+          >
+            <Text
+              style={[
+                styles.progressionpartop,
+                { color: "#FFC042" },
+                styles.t2l62,
+              ]}
+            >
+              +
+            </Text>
+          </TouchableWithoutFeedback>
         </Neomorphism>
       </View>
       <View style={styles.progressionpartdots}>

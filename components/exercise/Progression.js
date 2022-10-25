@@ -63,7 +63,7 @@ export const Progression = (props) => {
     if (prog.value) {
       const sendarr = [...props.progression.value];
       if (sendarr.length < 4) {
-        sendarr.push({ key: sendarr.length });
+        sendarr.push({ key: sendarr.length, reps: 0, weight: 0 });
         props.progression.value = sendarr;
       } else {
         props.progression.value = [];
@@ -125,7 +125,13 @@ export const Progression = (props) => {
           <>
             <View style={styles.Top15}>
               {props.data.map((prog) => {
-                return <Progressionpart key={prog.key} />;
+                return (
+                  <Progressionpart
+                    key={prog.key}
+                    progression={props.progression}
+                    id={prog.key}
+                  />
+                );
               })}
             </View>
             <GestureDetector gesture={add}>
