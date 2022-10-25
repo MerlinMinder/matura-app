@@ -67,8 +67,8 @@ export const Progressionpart = (props) => {
         >
           <TouchableWithoutFeedback
             onPress={() => {
-              onChangeWeightcount((prev) => prev - 1.25);
-              runcheck(repcount, weightcount - 1.25);
+              onChangeWeightcount((prev) => prev - 0.5);
+              runcheck(repcount, weightcount - 0.5);
             }}
           >
             <Text style={styles.progressionpartop}>-</Text>
@@ -78,8 +78,8 @@ export const Progressionpart = (props) => {
           </Text>
           <TouchableWithoutFeedback
             onPress={() => {
-              onChangeWeightcount((prev) => prev + 1.25);
-              runcheck(repcount, weightcount + 1.25);
+              onChangeWeightcount((prev) => prev + 0.5);
+              runcheck(repcount, weightcount + 0.5);
             }}
           >
             <Text

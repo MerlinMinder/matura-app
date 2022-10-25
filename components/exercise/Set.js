@@ -8,6 +8,18 @@ import styles from "../../Styles";
 export const Set = (props) => {
   const [reps, onChangeReps] = useState(0);
   const [weight, onChangeWeight] = useState(0);
+
+  const savechange = (reps, weight) => {
+    const sendarr = [...props.sets.value];
+    sendarr[props.set.num - 1] = {
+      num: props.set.num,
+      reps: reps,
+      weight: weight,
+      mes: props.set.mes,
+    };
+    props.sets.value = sendarr;
+  };
+
   return (
     <View>
       <Neomorphism
@@ -29,10 +41,11 @@ export const Set = (props) => {
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={reps}
               selectTextOnFocus={true}
-              keyboardType="default"
-              editable={true}
-              multiline={true}
-              numberOfLines={1}
+              keyboardType="number-pad"
+              onEndEditing={() => {
+                savechange(reps, weight);
+              }}
+              maxLength={2}
             ></TextInput>
           </Neomorphism>
         </View>
@@ -49,10 +62,11 @@ export const Set = (props) => {
               placeholderTextColor="rgba(255, 255, 255, 0.5)"
               value={weight}
               selectTextOnFocus={true}
-              keyboardType="default"
-              editable={true}
-              multiline={true}
-              numberOfLines={1}
+              keyboardType="number-pad"
+              onEndEditing={() => {
+                savechange(reps, weight);
+              }}
+              maxLength={5}
             ></TextInput>
           </Neomorphism>
         </View>

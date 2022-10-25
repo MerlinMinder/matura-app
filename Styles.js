@@ -572,7 +572,7 @@ const styles = {
     width: 264 / SCALE,
   },
   exercisepagetitle: {
-    width: 250 / SCALE,
+    width: 267 / SCALE,
     height: 40 / SCALE,
     left: 10 / SCALE,
     fontFamily: "WorkSans-SemiBold",
@@ -587,9 +587,10 @@ const styles = {
   },
   exercisepagepen: {
     position: "absolute",
-    top: 10 / SCALE,
-    width: 20 / SCALE,
-    height: 20 / SCALE,
+    display: "flex",
+    justifyContent: "center",
+    width: 30 / SCALE,
+    height: 40 / SCALE,
     left: 267 / SCALE,
   },
   counterwidth: {

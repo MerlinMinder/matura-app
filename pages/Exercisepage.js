@@ -118,7 +118,7 @@ export const Exercisepage = ({ route, navigation }) => {
           />
           <View style={styles.Top34}>
             {Object.values(data[workid].exercises[exid].sets).map((set) => {
-              return <Set key={set.num} set={set} />;
+              return <Set key={set.num} set={set} sets={sets} />;
             })}
           </View>
           <Counter
