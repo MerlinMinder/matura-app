@@ -22,6 +22,7 @@ export const Exercisepage = ({ route, navigation }) => {
   const [data, setData] = useState(null);
   const sets = useSharedValue([]);
   const progression = useSharedValue([]);
+  const rest = useSharedValue(0);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;
@@ -49,6 +50,16 @@ export const Exercisepage = ({ route, navigation }) => {
 
     Get("workouts", setData);
   }, progression);
+
+  useSharedValueEffect(() => {
+    const senddata = new Object();
+    const sendex = new Object();
+    sendex[exid] = { rest: rest.value };
+    senddata[workid] = { exercises: sendex };
+    Merge("workouts", senddata);
+
+    Get("workouts", setData);
+  }, rest);
 
   let extraHeight = sets.value.length * 61 + progression.value.length * 53;
 
@@ -115,6 +126,7 @@ export const Exercisepage = ({ route, navigation }) => {
             width={84 / SCALE}
             textwidth={23 / SCALE}
             sets={sets}
+            rest={rest}
           />
           <View style={styles.Top34}>
             {Object.values(data[workid].exercises[exid].sets).map((set) => {
@@ -127,6 +139,7 @@ export const Exercisepage = ({ route, navigation }) => {
             width={100 / SCALE}
             textwidth={47 / SCALE}
             sets={sets}
+            rest={rest}
           />
           <View style={styles.Top55}>
             <Progression

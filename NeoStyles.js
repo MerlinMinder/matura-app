@@ -188,6 +188,7 @@ export const neostyles = {
     colorB: BG2,
   },
   exercisepagecontainer: {
+    height: 330 / SCALE,
     width: 320 / SCALE,
     x: 10 / SCALE,
     y: 10 / SCALE,
