@@ -3,9 +3,10 @@ import { TextInput, View, Text, TouchableWithoutFeedback } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
+import { Merge } from "../../Store";
 import styles from "../../Styles";
 
-export const Name = () => {
+export const Name = (props) => {
   const [title, onChangeTitle] = useState("");
   const refTextInput = useRef({});
 
@@ -20,6 +21,11 @@ export const Name = () => {
         ref={refTextInput}
         selectTextOnFocus={true}
         keyboardType="default"
+        onEndEditing={() => {
+          const datasend = new Object();
+          datasend[props.id] = { title: title };
+          Merge("workouts", datasend);
+        }}
         multiline={false}
         numberOfLines={1}
       ></TextInput>
@@ -63,7 +69,7 @@ export const Name = () => {
           />
         </Svg>
       </View>
-      <Text style={styles.nameexercises}>{"12"} Exercises</Text>
+      <Text style={styles.nameexercises}>{props.exlength} Exercises</Text>
       <Text style={styles.namerecent}>recent</Text>
       <View style={styles.nametimer}>
         <Svg
@@ -79,7 +85,7 @@ export const Name = () => {
           />
         </Svg>
       </View>
-      <Text style={styles.nametime}>{"128m 47s"}</Text>
+      <Text style={styles.nametime}>{props.recent}</Text>
     </View>
   );
 };

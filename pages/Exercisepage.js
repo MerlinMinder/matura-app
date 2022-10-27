@@ -1,6 +1,6 @@
 import { useSharedValueEffect } from "@shopify/react-native-skia";
 import { useEffect, useRef, useState } from "react";
-import { ScrollView, Dimensions, View, SafeAreaView } from "react-native";
+import { ScrollView, Dimensions, View, SafeAreaView, Text } from "react-native";
 import {
   TextInput,
   TouchableWithoutFeedback,
@@ -23,6 +23,7 @@ export const Exercisepage = ({ route, navigation }) => {
   const sets = useSharedValue([]);
   const progression = useSharedValue([]);
   const rest = useSharedValue(0);
+  const on = useSharedValue(false);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;
@@ -61,6 +62,16 @@ export const Exercisepage = ({ route, navigation }) => {
     Get("workouts", setData);
   }, rest);
 
+  useSharedValueEffect(() => {
+    const senddata = new Object();
+    const sendex = new Object();
+    sendex[exid] = { on: on.value };
+    senddata[workid] = { exercises: sendex };
+    Merge("workouts", senddata);
+
+    Get("workouts", setData);
+  }, on);
+
   let extraHeight = sets.value.length * 61 + progression.value.length * 53;
 
   if (!data) {
@@ -80,7 +91,7 @@ export const Exercisepage = ({ route, navigation }) => {
           }}
           settings={{
             ...neostyles.exercisepagecontainer,
-            ...{ height: 330 / SCALE + extraHeight / SCALE },
+            ...{ height: 375 / SCALE + extraHeight / SCALE },
           }}
         >
           <View style={styles.t10h40}>
@@ -94,6 +105,15 @@ export const Exercisepage = ({ route, navigation }) => {
                 selectTextOnFocus={true}
                 keyboardType="default"
                 ref={refTextInput}
+                onEndEditing={() => {
+                  const senddata = new Object();
+                  const sendex = new Object();
+                  sendex[exid] = { name: title };
+                  senddata[workid] = { exercises: sendex };
+                  Merge("workouts", senddata);
+
+                  Get("workouts", setData);
+                }}
                 multiline={false}
                 numberOfLines={1}
               ></TextInput>
@@ -143,9 +163,26 @@ export const Exercisepage = ({ route, navigation }) => {
           />
           <View style={styles.Top55}>
             <Progression
+              on={on}
               progression={progression}
               data={Object.values(data[workid].exercises[exid].progression)}
             />
+          </View>
+
+          <View style={styles.Top65}>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate("workout", { id: workid });
+              }}
+            >
+              <Neomorphism
+                inset
+                center
+                settings={{ ...neostyles.exercisepagesubmit, ...{} }}
+              >
+                <Text style={[styles.font20, { color: "white" }]}>Save</Text>
+              </Neomorphism>
+            </TouchableWithoutFeedback>
           </View>
         </Neomorphism>
       </ScrollView>

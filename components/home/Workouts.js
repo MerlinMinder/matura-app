@@ -18,8 +18,11 @@ export const Workouts = (props) => {
   const pressed = useSharedValue(false);
 
   useEffect(() => {
-    Get("workouts", setData);
-  }, []);
+    const listener = props.nav.addListener("focus", () => {
+      Get("workouts", setData);
+    });
+    return listener;
+  }, [props.nav]);
 
   useSharedValueEffect(() => {
     colorS1.current = pressed.value
@@ -39,9 +42,9 @@ export const Workouts = (props) => {
       const datasend = new Object();
       datasend[timeid] = {
         title: "",
-        color: "",
+        color: "#42FFFF",
         exercises: "",
-        time: "",
+        time: 0,
         id: timeid,
       };
 

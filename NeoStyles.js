@@ -311,6 +311,17 @@ export const neostyles = {
   progressionpartmes: {
     width: 85 / SCALE,
   },
+  exercisepagesubmit: {
+    width: 120 / SCALE,
+    height: 30 / SCALE,
+    x: 3 / SCALE,
+    y: 3 / SCALE,
+    r: 10 / SCALE,
+    b: 2.5 / SCALE,
+    colorS2: "rgba(0, 0, 0, 0.6)",
+    colorS1: "rgba(153, 153, 153, 0.6)",
+    colorB: BG2,
+  },
   timercontainer: {
     width: 325 / SCALE,
     height: 115 / SCALE,

@@ -29,11 +29,12 @@ export const Workoutpage = ({ route, navigation }) => {
   const [data, setData] = useState(null);
   const pressed = useSharedValue(false);
 
-  console.log(id);
-
   useEffect(() => {
-    Get("workouts", setData);
-  }, []);
+    const listener = navigation.addListener("focus", () => {
+      Get("workouts", setData);
+    });
+    return listener;
+  }, [navigation]);
 
   useSharedValueEffect(() => {
     colorS1.current = pressed.value
@@ -99,7 +100,11 @@ export const Workoutpage = ({ route, navigation }) => {
               ...{ height: 315 / SCALE + extraHeight / SCALE },
             }}
           >
-            <Name />
+            <Name
+              id={id}
+              exlength={Object.values(data[id].exercises).length}
+              recent={data[id].time}
+            />
             <Start
               text="Start"
               color="#62FF42"
@@ -114,7 +119,7 @@ export const Workoutpage = ({ route, navigation }) => {
             <View style={styles.workoutpageexercise}>
               {Object.values(data[id].exercises).map((exercise) => {
                 return (
-                  <View style={styles.bottom15} key={exercise.name}>
+                  <View style={styles.bottom15} key={exercise.id}>
                     <ExerciseTrailer
                       name={exercise.name}
                       sets={exercise.sets}

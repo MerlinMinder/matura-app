@@ -15,7 +15,6 @@ import { Progressionpart } from "./Progressionpart";
 
 export const Progression = (props) => {
   const SCALE = 375 / Dimensions.get("screen").width;
-  const on = useSharedValue(false);
   const [progshow, onChangeProgshow] = useState(false);
   const colorB1 = useValue("rgba(98, 255, 66, 1)");
   const colorS1 = useValue("rgba(212, 255, 204, 0.8)");
@@ -25,32 +24,34 @@ export const Progression = (props) => {
   const addcolorS2 = useValue("rgba(0, 0, 0, 0.6)");
 
   useSharedValueEffect(() => {
-    colorB1.current = on.value ? "rgba(98, 255, 66, 1)" : "rgba(69, 69, 69, 1)";
-    colorS1.current = on.value
+    colorB1.current = props.on.value
+      ? "rgba(98, 255, 66, 1)"
+      : "rgba(69, 69, 69, 1)";
+    colorS1.current = props.on.value
       ? "rgba(212, 255, 204, 0.8)"
       : "rgba(173, 173, 173, 0.8)";
-    on.value ? onChangeProgshow(true) : onChangeProgshow(false);
-  }, on);
+    props.on.value ? onChangeProgshow(true) : onChangeProgshow(false);
+  }, props.on);
 
   const slideuas = useAnimatedStyle(() => {
     return {
       backgroundColor: withTiming(
-        on.value ? "rgba(98, 255, 66, 0.2)" : "rgba(40, 40, 40, 0.2)"
+        props.on.value ? "rgba(98, 255, 66, 0.2)" : "rgba(40, 40, 40, 0.2)"
       ),
       borderColor: withTiming(
-        on.value ? "rgba(98, 255, 66, 0.5)" : "rgba(40, 40, 40, 0.8)"
+        props.on.value ? "rgba(98, 255, 66, 0.5)" : "rgba(40, 40, 40, 0.8)"
       ),
     };
   });
 
   const slideruas = useAnimatedStyle(() => {
     return {
-      left: withTiming(on.value ? 31 / SCALE : 1 / SCALE),
+      left: withTiming(props.on.value ? 31 / SCALE : 1 / SCALE),
     };
   });
 
   const slide = Gesture.Tap().onBegin(() => {
-    on.value = !on.value;
+    props.on.value = !props.on.value;
   });
 
   useSharedValueEffect(() => {
