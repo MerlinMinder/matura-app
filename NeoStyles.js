@@ -71,6 +71,17 @@ export const neostyles = {
     colorB: BG2,
     pady: 24 / SCALE,
   },
+  workouttrailercolor: {
+    width: 90 / SCALE,
+    height: 15 / SCALE,
+    x: 3 / SCALE,
+    y: 3 / SCALE,
+    r: 7 / SCALE,
+    b: 3 / SCALE,
+    colorS2: "rgba(0, 0, 0, 0.5)",
+    colorS1: "rgba(255, 255, 255, 0.6)",
+    colorB: "#42FFFF",
+  },
   physiquecontainer: {
     height: 777 / SCALE,
     width: 300 / SCALE,

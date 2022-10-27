@@ -280,11 +280,9 @@ const styles = {
   },
   workouttrailercolor: {
     position: "absolute",
-    width: 90 / SCALE,
-    height: 15 / SCALE,
+
     left: 188 / SCALE,
     top: 12 / SCALE,
-    borderRadius: 7 / SCALE,
   },
   workouttrailerdots: {
     position: "absolute",

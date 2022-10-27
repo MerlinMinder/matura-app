@@ -8,12 +8,21 @@ export const WorkoutTrailer = (props) => {
   return (
     <Neomorphism settings={neostyles.workouttrailer}>
       <Text style={styles.workouttrailertitle}>{props.workout.title}</Text>
-      <View
+      {/* <View
         style={[
           styles.workouttrailercolor,
           { backgroundColor: props.workout.color },
         ]}
-      ></View>
+      ></View> */}
+      <View style={styles.workouttrailercolor}>
+        <Neomorphism
+          inset
+          settings={{
+            ...neostyles.workouttrailercolor,
+            ...{ backgroundColor: props.workout.color },
+          }}
+        ></Neomorphism>
+      </View>
       <View style={styles.workouttrailerdots}>
         <Svg
           width="24"
