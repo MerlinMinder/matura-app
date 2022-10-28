@@ -1,13 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TextInput, View, Text, TouchableWithoutFeedback } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
-import { Merge } from "../../Store";
+import { Get, Merge } from "../../Store";
 import styles from "../../Styles";
 
 export const Name = (props) => {
-  const [title, onChangeTitle] = useState("");
+  const [title, onChangeTitle] = useState(props.title);
   const refTextInput = useRef({});
 
   return (

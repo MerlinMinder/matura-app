@@ -80,7 +80,9 @@ export const Workouts = (props) => {
   return (
     <View>
       {Object.values(data).map((workout) => {
-        return <WorkoutTrailer key={workout.id} workout={workout} />;
+        return (
+          <WorkoutTrailer key={workout.id} workout={workout} nav={props.nav} />
+        );
       })}
       <GestureDetector gesture={gesture}>
         <View style={styles.workoutspluscontainer}>

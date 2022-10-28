@@ -1,6 +1,13 @@
 import { useSharedValueEffect } from "@shopify/react-native-skia";
 import { useEffect, useRef, useState } from "react";
-import { ScrollView, Dimensions, View, SafeAreaView, Text } from "react-native";
+import {
+  ScrollView,
+  Dimensions,
+  View,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import {
   TextInput,
   TouchableWithoutFeedback,
@@ -18,7 +25,7 @@ import styles from "../Styles";
 
 export const Exercisepage = ({ route, navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
-  const [title, onChangeTitle] = useState("");
+  const [title, onChangeTitle] = useState(route.params.name);
   const [data, setData] = useState(null);
   const sets = useSharedValue([]);
   const progression = useSharedValue([]);
@@ -170,7 +177,7 @@ export const Exercisepage = ({ route, navigation }) => {
           </View>
 
           <View style={styles.Top65}>
-            <TouchableWithoutFeedback
+            <TouchableOpacity
               onPress={() => {
                 navigation.navigate("workout", { id: workid });
               }}
@@ -182,7 +189,7 @@ export const Exercisepage = ({ route, navigation }) => {
               >
                 <Text style={[styles.font20, { color: "white" }]}>Save</Text>
               </Neomorphism>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           </View>
         </Neomorphism>
       </ScrollView>

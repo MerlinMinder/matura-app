@@ -66,7 +66,7 @@ export const Workoutpage = ({ route, navigation }) => {
 
       Get("workouts", setData).then(() => {
         pressed.value = false;
-        navigation.navigate("exercise", { workid: id, exid: timeid });
+        navigation.navigate("exercise", { workid: id, exid: timeid, name: "" });
       });
     }
   }, pressed);
@@ -104,6 +104,7 @@ export const Workoutpage = ({ route, navigation }) => {
               id={id}
               exlength={Object.values(data[id].exercises).length}
               recent={data[id].time}
+              title={data[id].title}
             />
             <Start
               text="Start"

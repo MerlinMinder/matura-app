@@ -26,7 +26,7 @@ export const Counter = (props) => {
         const sendarr = [...props.sets.value];
         if (sendarr.length < 6) {
           let num = sendarr.length + 1;
-          sendarr.push({ num: num, mes: "kg" });
+          sendarr.push({ num: num, mes: "kg", reps: 0, weight: 0 });
           props.sets.value = sendarr;
         } else {
           Alert.alert(
