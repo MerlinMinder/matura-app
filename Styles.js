@@ -311,7 +311,7 @@ const styles = {
     fontSize: 12 / SCALE,
     lineHeight: 14 / SCALE,
     color: "white",
-    textAlign: "center",
+    textAlign: "left",
   },
   workouttrailerrecent: {
     position: "absolute",
