@@ -78,7 +78,8 @@ export const Progression = (props) => {
   }, prog);
 
   const add = Gesture.Tap()
-    .onBegin(() => {
+    .maxDeltaY(10)
+    .onStart(() => {
       prog.value = true;
     })
     .onFinalize(() => {

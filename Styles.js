@@ -136,7 +136,7 @@ const styles = {
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: 24 / SCALE,
-    lineHeight: 28 / SCALE,
+    lineHeight: 30 / SCALE,
   },
   titletitle: {
     height: 40 / SCALE,

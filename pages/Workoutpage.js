@@ -112,6 +112,8 @@ export const Workoutpage = ({ route, navigation }) => {
               text="Start"
               color="#62FF42"
               shadow="rgba(213, 255, 204, 0.7)"
+              nav={navigation}
+              id={id}
             />
             <View style={styles.t200l20}>
               <GradientText text="Exercises" style={styles.font20} />
