@@ -1,7 +1,4 @@
-import { useSharedValueEffect, useValue } from "@shopify/react-native-skia";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { useSharedValue } from "react-native-reanimated";
 import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
@@ -12,7 +9,12 @@ export const Start = (props) => {
       <TouchableOpacity
         activeOpacity={0.5}
         onPress={() => {
-          props.nav.navigate("train", { id: props.id });
+          if (props.text == "Start") {
+            props.nav.navigate("train", { id: props.id });
+          }
+          if (props.text == "Finish") {
+            props.nav.navigate("home");
+          }
         }}
       >
         <Neomorphism settings={neostyles.startouter}>

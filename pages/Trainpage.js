@@ -7,8 +7,16 @@ import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Dots } from "../components/train/Dots";
 import { Workout } from "../components/train/Workout";
 import styles from "../Styles";
+import { useEffect, useState } from "react";
+import { Get } from "../Store";
 
 export const Trainpage = ({ navigation }) => {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    Get("workouts", setData);
+  }, []);
+
   let exercises = [
     {
       name: "Deadlift",
@@ -106,7 +114,7 @@ export const Trainpage = ({ navigation }) => {
 
         <ExerciseTrailer name={exercises[0].name} sets={exercises[0].sets} />
 
-        <Workout ex={exercises} />
+        <Workout ex={exercises} nav={navigation} />
       </ScrollView>
     </SafeAreaView>
   );
