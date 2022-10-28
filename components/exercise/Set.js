@@ -6,8 +6,8 @@ import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Set = (props) => {
-  const [reps, onChangeReps] = useState(0);
-  const [weight, onChangeWeight] = useState(0);
+  const [reps, onChangeReps] = useState(props.set.reps);
+  const [weight, onChangeWeight] = useState(props.set.weight);
 
   const savechange = (reps, weight) => {
     const sendarr = [...props.sets.value];

@@ -71,9 +71,11 @@ export const Workoutpage = ({ route, navigation }) => {
     }
   }, pressed);
 
-  const gesture = Gesture.Tap().onBegin(() => {
-    pressed.value = true;
-  });
+  const gesture = Gesture.Tap()
+    .maxDeltaY(10)
+    .onStart(() => {
+      pressed.value = true;
+    });
 
   if (!data) {
     return null;

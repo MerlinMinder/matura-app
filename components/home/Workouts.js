@@ -68,9 +68,11 @@ export const Workouts = (props) => {
     }
   }, pressed);
 
-  const gesture = Gesture.Tap().onBegin(() => {
-    pressed.value = true;
-  });
+  const gesture = Gesture.Tap()
+    .maxDeltaY(10)
+    .onStart(() => {
+      pressed.value = true;
+    });
 
   // testing
   const reset = Gesture.Tap().onBegin(() => {
