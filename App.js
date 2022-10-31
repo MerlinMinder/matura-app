@@ -7,34 +7,20 @@ import { Trainpage } from "./pages/Trainpage";
 import { Graphpage } from "./pages/Graphpage";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
-import { Del, Get, GetAll, Save } from "./Store";
+import { Del, Get, Save } from "./Store";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   // const SCALE = 375 / Dimensions.get("screen").width;
   // const BG2 = "#454545";
-  const [calendar, setCalendar] = useState({});
-  const [workouts, setWorkouts] = useState({});
+  const [calendar, setCalendar] = useState(0);
+  const [workouts, setWorkouts] = useState(0);
 
   useEffect(() => {
-    // get calendar/database or set first date in calendar
-
+    // get calendar/database
     Get("calendar", setCalendar);
-    if (calendar === null) {
-      console.log("first load");
-      Save("calendar", { calendar: { day: Date() } });
-      Get("calendar", setCalendar);
-    }
-
-    Get("workouts", setWorkouts).then(() => {
-      console.log(workouts);
-      if (workouts === null) {
-        console.log("first load");
-        Save("workouts", {});
-        Get("workouts", setWorkouts);
-      }
-    });
+    Get("workouts", setWorkouts);
   }, []);
 
   // load the WorkSans fonts
@@ -48,6 +34,31 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
+  // Check if workouts or calendars have already been created / saved
+  // if not it returns null and first save of empty calendar and
+  // workout takes place
+
+  if (!workouts) {
+    if (workouts === null) {
+      console.log("first load workouts");
+      Save("workouts", {});
+    }
+    if (workouts === 0) {
+      return null;
+    }
+  }
+
+  if (!calendar) {
+    if (calendar === null) {
+      console.log("first load calendar");
+      Save("calendar", {});
+    }
+    if (calendar === 0) {
+      return null;
+    }
+  }
+
   // Wrap App (SafeAreaView) in NavigationContainer for navigation
   // Wrap all in gestureHandlerRoot
   // to account for gesture detection over the whole app

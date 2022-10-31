@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Dimensions, Text, TouchableOpacity, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Week } from "./parts/Week";
@@ -6,68 +6,91 @@ import { Weektitle } from "./parts/Weektitle";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
+import { Get } from "../../Store";
+import { useValue } from "@shopify/react-native-skia";
 
 export const Calendar = () => {
-  let month1 = [
-    [
-      { number: "28", color: "" },
-      { number: "29", color: "" },
-      { number: "30", color: "#42FFFF" },
-      { number: "1", color: "" },
-      { number: "2", color: "#42FF62" },
-      { number: "3", color: "#FFFF42" },
-      { number: "4", color: "" },
-    ],
-    [
-      { number: "5", color: "#FFC042" },
-      { number: "6", color: "" },
-      { number: "7", color: "" },
-      { number: "8", color: "#42FFFF" },
-      { number: "9", color: "" },
-      { number: "10", color: "" },
-      { number: "11", color: "#FFFF42" },
-    ],
-    [
-      { number: "12", color: "" },
-      { number: "13", color: "#42FF62" },
-      { number: "14", color: "#FFC042" },
-      { number: "15", color: "#42FFFF" },
-      { number: "16", color: "#FFFF42" },
-      { number: "17", color: "#42FF62" },
-      { number: "18", color: "#FFC042" },
-    ],
-    [
-      { number: "19", color: "" },
-      { number: "20", color: "#42FFFF" },
-      { number: "21", color: "" },
-      { number: "22", color: "" },
-      { number: "23", color: "" },
-      { number: "24", color: "" },
-      { number: "25", color: "" },
-    ],
-    [
-      { number: "26", color: "#FFFF42" },
-      { number: "27", color: "" },
-      { number: "28", color: "" },
-      { number: "29", color: "#42FF62" },
-      { number: "30", color: "#FFC042" },
-      { number: "31", color: "" },
-      { number: "1", color: "" },
-    ],
+  const SCALE = 375 / Dimensions.get("screen").width;
+  const [yearmonth, onChangeYearmonth] = useState("");
+  const [displaymonth, onChangeDisplaymonth] = useState([]);
+  const [today, onChangeToday] = useState(new Date());
+  const [calendar, setCalendar] = useState(0);
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
-  const gesture = Gesture.Tap().onStart((evt) => {
-    console.log(evt.absoluteX > 200 ? "right" : "left");
-  });
+  const calendarMonth = (year, month) => {
+    const returnmonth = [[]];
+    let day = new Date();
+    day.setFullYear(year, month, 1);
+    day.setUTCHours(0, 0, 0, 0);
+    console.log(day);
+    while (day.getMonth() == month) {
+      returnmonth[returnmonth.length - 1].push({
+        number: day.getDate(),
+        color: "",
+      });
+      if (day.getDay() == 6) returnmonth.push([]);
+      day.setDate(day.getDate() + 1);
+    }
+    while (returnmonth[0].length < 7) {
+      returnmonth[0].unshift({ number: "", color: "" });
+    }
+    if (returnmonth[returnmonth.length - 1].length == 0) {
+      returnmonth.pop();
+    }
+    while (returnmonth[returnmonth.length - 1].length < 7) {
+      returnmonth[returnmonth.length - 1].push({ number: "", color: "" });
+    }
+    return returnmonth;
+  };
+
+  useEffect(() => {
+    Get("calendar", setCalendar);
+  }, []);
+
+  useEffect(() => {
+    onChangeYearmonth(`${months[today.getMonth()]} ${today.getFullYear()}`);
+    onChangeDisplaymonth(calendarMonth(today.getFullYear(), today.getMonth()));
+  }, [today]);
+
+  if (!calendar) {
+    return null;
+  }
+
+  let extraheight = (displaymonth.length == 6 ? 372 : 330) / SCALE;
 
   return (
     <Neomorphism
       style={styles.calendarcontainer}
-      settings={neostyles.calendarcontainer}
+      settings={{
+        ...neostyles.calendarcontainer,
+        ...{ height: extraheight },
+      }}
     >
       {/* title / month selector */}
       <View style={styles.calendartitle}>
-        <GestureDetector gesture={gesture}>
+        <TouchableOpacity
+          onPress={() => {
+            console.log("pressed");
+            const newdate = new Date(today);
+            newdate.setMonth(today.getMonth() - 1);
+            onChangeToday(newdate);
+          }}
+        >
           <View style={styles.calendararrow}>
             <Svg
               width="24"
@@ -82,9 +105,15 @@ export const Calendar = () => {
               />
             </Svg>
           </View>
-        </GestureDetector>
-        <Text style={styles.calendarmonth}>July 2022</Text>
-        <GestureDetector gesture={gesture}>
+        </TouchableOpacity>
+        <Text style={styles.calendarmonth}>{yearmonth}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            const newdate = new Date(today);
+            newdate.setMonth(today.getMonth() + 1);
+            onChangeToday(newdate);
+          }}
+        >
           <View style={styles.calendararrow}>
             <Svg
               width="24"
@@ -99,14 +128,14 @@ export const Calendar = () => {
               />
             </Svg>
           </View>
-        </GestureDetector>
+        </TouchableOpacity>
       </View>
 
       {/* weektitles */}
       <Weektitle />
 
       {/* Weeks mapped out containing days */}
-      {month1.map((week) => {
+      {displaymonth.map((week) => {
         return (
           <View key={Math.random()} style={styles.top5}>
             <Week days={week}></Week>
