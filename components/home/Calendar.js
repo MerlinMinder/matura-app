@@ -5,10 +5,8 @@ import { Week } from "./parts/Week";
 import { Weektitle } from "./parts/Weektitle";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { Get } from "../../Store";
-import { useValue } from "@shopify/react-native-skia";
 
 export const Calendar = () => {
   const SCALE = 375 / Dimensions.get("screen").width;
@@ -37,7 +35,6 @@ export const Calendar = () => {
     let day = new Date();
     day.setFullYear(year, month, 1);
     day.setUTCHours(0, 0, 0, 0);
-    console.log(day);
     while (day.getMonth() == month) {
       returnmonth[returnmonth.length - 1].push({
         number: day.getDate(),
@@ -69,6 +66,8 @@ export const Calendar = () => {
 
   if (!calendar) {
     return null;
+  } else {
+    console.log(calendar);
   }
 
   let extraheight = (displaymonth.length == 6 ? 372 : 330) / SCALE;
