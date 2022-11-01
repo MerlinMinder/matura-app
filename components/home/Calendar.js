@@ -8,7 +8,7 @@ import { neostyles } from "../../NeoStyles";
 import { useEffect, useState } from "react";
 import { Get } from "../../Store";
 
-export const Calendar = () => {
+export const Calendar = (props) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const [yearmonth, onChangeYearmonth] = useState("");
   const [displaymonth, onChangeDisplaymonth] = useState([]);
@@ -36,10 +36,18 @@ export const Calendar = () => {
     day.setFullYear(year, month, 1);
     day.setUTCHours(0, 0, 0, 0);
     while (day.getMonth() == month) {
-      returnmonth[returnmonth.length - 1].push({
-        number: day.getDate(),
-        color: "",
-      });
+      if (calendar[day.getTime()]) {
+        returnmonth[returnmonth.length - 1].push({
+          number: day.getDate(),
+          color: calendar[day.getTime()].color,
+          workout: calendar[day.getTime()],
+        });
+      } else {
+        returnmonth[returnmonth.length - 1].push({
+          number: day.getDate(),
+          color: "",
+        });
+      }
       if (day.getDay() == 6) returnmonth.push([]);
       day.setDate(day.getDate() + 1);
     }
@@ -137,7 +145,7 @@ export const Calendar = () => {
       {displaymonth.map((week) => {
         return (
           <View key={Math.random()} style={styles.top5}>
-            <Week days={week}></Week>
+            <Week days={week} nav={props.nav}></Week>
           </View>
         );
       })}

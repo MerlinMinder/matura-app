@@ -15,7 +15,7 @@ export const Homepage = ({ navigation }) => {
 
         {/* Calendar */}
         <View style={styles.top20}>
-          <Calendar />
+          <Calendar nav={navigation} />
         </View>
 
         {/* Workouts */}

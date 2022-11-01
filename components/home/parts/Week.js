@@ -17,7 +17,12 @@ export const Week = (props) => {
       {props.days.map((day) => {
         return (
           <View key={day.number + Math.random()} style={styles.h3}>
-            <Day color={day.color}>{day.number}</Day>
+            <Day
+              color={day.color}
+              number={day.number}
+              workout={day.workout}
+              nav={props.nav}
+            ></Day>
           </View>
         );
       })}

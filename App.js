@@ -19,6 +19,7 @@ export default function App() {
 
   useEffect(() => {
     // get calendar/database
+    Del("calendar");
     Get("calendar", setCalendar);
     Get("workouts", setWorkouts);
   }, []);
@@ -52,7 +53,9 @@ export default function App() {
   if (!calendar) {
     if (calendar === null) {
       console.log("first load calendar");
-      Save("calendar", {});
+      Save("calendar", {
+        1665792000000: { color: "#42FFFF", id: 1667045194003 },
+      });
     }
     if (calendar === 0) {
       return null;

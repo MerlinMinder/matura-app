@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Neomorphism } from "../../../Neomorphism";
 import { neostyles } from "../../../NeoStyles";
 import styles from "../../../Styles";
@@ -7,17 +7,23 @@ export const Day = (props) => {
   return (
     <>
       {props.color ? (
-        <Neomorphism
-          center
-          settings={{ ...neostyles.day, ...{ colorB: props.color } }}
-          inset
+        <TouchableOpacity
+          onPress={() => {
+            props.nav.navigate("workout", { id: props.workout.id });
+          }}
         >
-          <Text style={styles.daynumber}>{props.children}</Text>
-        </Neomorphism>
+          <Neomorphism
+            center
+            settings={{ ...neostyles.day, ...{ colorB: props.color } }}
+            inset
+          >
+            <Text style={styles.daynumber}>{props.number}</Text>
+          </Neomorphism>
+        </TouchableOpacity>
       ) : (
         <View style={styles.daycontainer}>
           <Text style={[styles.daynumber, { color: "white" }]}>
-            {props.children}
+            {props.number}
           </Text>
         </View>
       )}
