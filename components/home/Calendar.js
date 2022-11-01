@@ -37,11 +37,13 @@ export const Calendar = (props) => {
     day.setUTCHours(0, 0, 0, 0);
     while (day.getMonth() == month) {
       if (calendar[day.getTime()]) {
-        returnmonth[returnmonth.length - 1].push({
-          number: day.getDate(),
-          color: calendar[day.getTime()].color,
-          workout: calendar[day.getTime()],
-        });
+        if (calendar[day.getTime()].workout) {
+          returnmonth[returnmonth.length - 1].push({
+            number: day.getDate(),
+            color: calendar[day.getTime()].workout.color,
+            workout: calendar[day.getTime()].workout,
+          });
+        }
       } else {
         returnmonth[returnmonth.length - 1].push({
           number: day.getDate(),
@@ -74,8 +76,6 @@ export const Calendar = (props) => {
 
   if (!calendar) {
     return null;
-  } else {
-    console.log(calendar);
   }
 
   let extraheight = (displaymonth.length == 6 ? 372 : 330) / SCALE;

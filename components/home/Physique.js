@@ -127,7 +127,12 @@ export const Physique = () => {
           onPress={() => {
             onChangeEdittext(edittext === "Edit" ? "Save" : "Edit");
             if (edittext === "Save") {
+              let today = new Date();
+              today.setUTCHours(0, 0, 0, 0);
+              const senddata = {};
+              senddata[today.getTime()] = { physique: measurestate };
               Merge("physique", measurestate);
+              Merge("calendar", senddata);
               Get("physique", setMeasureState);
             }
           }}

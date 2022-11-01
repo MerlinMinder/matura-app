@@ -55,7 +55,7 @@ export default function App() {
     if (calendar === null) {
       console.log("first load calendar");
       Save("calendar", {
-        1665792000000: { color: "#42FFFF", id: 1667045194003 },
+        1665792000000: { workout: { color: "#42FFFF", id: 1667045194003 } },
       });
     }
     if (calendar === 0) {
