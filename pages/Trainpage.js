@@ -9,61 +9,16 @@ import { Workout } from "../components/train/Workout";
 import styles from "../Styles";
 import { useEffect, useState } from "react";
 import { Get } from "../Store";
+import { useSharedValue } from "react-native-reanimated";
 
 export const Trainpage = ({ navigation, route }) => {
   const [data, setData] = useState(0);
+  const exercises = useSharedValue(0);
   const { id } = route.params;
 
   useEffect(() => {
     Get("workouts", setData);
   }, []);
-
-  let exercises = [
-    {
-      name: "Deadlift",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-    {
-      name: "Seated Back Row",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-    {
-      name: "Hyperextensions",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-    {
-      name: "Straight Bar Bicep Curls",
-      sets: [
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-        { reps: 12, weight: 150, mes: "kg" },
-      ],
-    },
-  ];
 
   if (!data) {
     return null;
@@ -71,10 +26,14 @@ export const Trainpage = ({ navigation, route }) => {
     if (Object.values(data[id].exercises).length === 0) {
       Alert.alert(
         "No exercises",
-        "You need at least 1 exercise in your workout"
+        "You need at least 1 exercise to start your workout"
       );
       navigation.navigate("workout", { id: id });
       return null;
+    } else {
+      exercises.value = Object.entries(data[id].exercises)
+        .sort((a, b) => a[0] - b[0])
+        .map((ex) => ex[1]);
     }
   }
 
@@ -127,11 +86,11 @@ export const Trainpage = ({ navigation, route }) => {
         </View>
 
         <ExerciseTrailer
-          name={Object.values(data[id].exercises)[0].name}
-          sets={Object.values(data[id].exercises)[0].sets}
+          name={exercises.value[0].name}
+          sets={exercises.value[0].sets}
         />
 
-        <Workout ex={Object.values(data[id].exercises)} nav={navigation} />
+        <Workout ex={exercises.value} nav={navigation} />
       </ScrollView>
     </SafeAreaView>
   );
