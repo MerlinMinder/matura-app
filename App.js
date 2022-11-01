@@ -37,8 +37,8 @@ export default function App() {
     return null;
   }
 
-  // Check if workouts or calendars have already been created / saved
-  // if not it returns null and first save of empty calendar and
+  // Check if workouts or calendar or physique have already been created / saved
+  // if not it returns null and first save of empty calendar, physique and
   // workout takes place
 
   if (!workouts) {

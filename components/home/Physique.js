@@ -7,10 +7,7 @@ import { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
-import { useSharedValue } from "react-native-reanimated";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { Get, Merge } from "../../Store";
-import { useSharedValueEffect } from "@shopify/react-native-skia";
 
 export const Physique = () => {
   let bmi = 21.7;

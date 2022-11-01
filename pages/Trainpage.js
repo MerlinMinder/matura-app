@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, SafeAreaView } from "react-native";
+import { ScrollView, Text, View, SafeAreaView, Alert } from "react-native";
 import { Title } from "../components/Title";
 import { Timer } from "../components/train/Timer";
 import { Top } from "../components/train/Top";
@@ -10,8 +10,9 @@ import styles from "../Styles";
 import { useEffect, useState } from "react";
 import { Get } from "../Store";
 
-export const Trainpage = ({ navigation }) => {
-  const [data, setData] = useState();
+export const Trainpage = ({ navigation, route }) => {
+  const [data, setData] = useState(0);
+  const { id } = route.params;
 
   useEffect(() => {
     Get("workouts", setData);
@@ -64,6 +65,19 @@ export const Trainpage = ({ navigation }) => {
     },
   ];
 
+  if (!data) {
+    return null;
+  } else {
+    if (Object.values(data[id].exercises).length === 0) {
+      Alert.alert(
+        "No exercises",
+        "You need at least 1 exercise in your workout"
+      );
+      navigation.navigate("workout", { id: id });
+      return null;
+    }
+  }
+
   return (
     <SafeAreaView style={styles.appContainer}>
       <ScrollView
@@ -112,9 +126,12 @@ export const Trainpage = ({ navigation }) => {
           </Text>
         </View>
 
-        <ExerciseTrailer name={exercises[0].name} sets={exercises[0].sets} />
+        <ExerciseTrailer
+          name={Object.values(data[id].exercises)[0].name}
+          sets={Object.values(data[id].exercises)[0].sets}
+        />
 
-        <Workout ex={exercises} nav={navigation} />
+        <Workout ex={Object.values(data[id].exercises)} nav={navigation} />
       </ScrollView>
     </SafeAreaView>
   );
