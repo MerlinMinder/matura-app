@@ -1,14 +1,15 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import GradientText from "../../GradientText";
 import { Neomorphism } from "../../Neomorphism";
 import { Measure } from "./parts/Measure";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Svg, { Path } from "react-native-svg";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
 import { useSharedValue } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { Get, Merge } from "../../Store";
 import { useSharedValueEffect } from "@shopify/react-native-skia";
 
 export const Physique = () => {
@@ -16,7 +17,11 @@ export const Physique = () => {
   let bmiwidth = 130;
   const [mes, onChangeMes] = useState("cm");
   const [edittext, onChangeEdittext] = useState("Edit");
-  const edit = useSharedValue("Edit");
+  const [measurestate, setMeasureState] = useState(0);
+
+  useEffect(() => {
+    Get("physique", setMeasureState);
+  }, []);
 
   const measures = [
     "Arm (right)",
@@ -41,13 +46,10 @@ export const Physique = () => {
     "#FF8142",
     "#FF5242",
   ];
-  const gesture = Gesture.Tap().onStart(() => {
-    edit.value = edit.value === "Edit" ? "Save" : "Edit";
-  });
 
-  useSharedValueEffect(() => {
-    onChangeEdittext(edit.value);
-  }, edit);
+  if (!measurestate) {
+    return null;
+  }
 
   return (
     <View>
@@ -55,8 +57,22 @@ export const Physique = () => {
         <View style={styles.physiquebmi}>
           <GradientText text="BMI" style={styles.font20} />
         </View>
-        <Measure style={styles.top48} word="Height" mes={mes} edit={edit} />
-        <Measure style={styles.top10} word="Weight" mes="kg" edit={edit} />
+        <Measure
+          style={styles.top48}
+          word="Height"
+          mes={mes}
+          edit={edittext}
+          measures={measurestate}
+          onChangeMeasures={setMeasureState}
+        />
+        <Measure
+          style={styles.top10}
+          word="Weight"
+          mes="kg"
+          edit={edittext}
+          measures={measurestate}
+          onChangeMeasures={setMeasureState}
+        />
         <LinearGradient
           style={styles.physiquegradient}
           colors={colors}
@@ -100,12 +116,22 @@ export const Physique = () => {
                 style={styles.top10}
                 word={measure}
                 mes={mes}
-                edit={edit}
+                edit={edittext}
+                measures={measurestate}
+                onChangeMeasures={setMeasureState}
               />
             );
           })}
         </View>
-        <GestureDetector gesture={gesture}>
+        <TouchableOpacity
+          onPress={() => {
+            onChangeEdittext(edittext === "Edit" ? "Save" : "Edit");
+            if (edittext === "Save") {
+              Merge("physique", measurestate);
+              Get("physique", setMeasureState);
+            }
+          }}
+        >
           <View style={styles.top10}>
             <Neomorphism center inset settings={neostyles.physiqueedit}>
               <Text style={[styles.font20, { color: "white" }]}>
@@ -113,7 +139,7 @@ export const Physique = () => {
               </Text>
             </Neomorphism>
           </View>
-        </GestureDetector>
+        </TouchableOpacity>
       </Neomorphism>
     </View>
   );

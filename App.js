@@ -16,12 +16,13 @@ export default function App() {
   // const BG2 = "#454545";
   const [calendar, setCalendar] = useState(0);
   const [workouts, setWorkouts] = useState(0);
+  const [physique, setPhysique] = useState(0);
 
   useEffect(() => {
     // get calendar/database
-    Del("calendar");
     Get("calendar", setCalendar);
     Get("workouts", setWorkouts);
+    Get("physique", setPhysique);
   }, []);
 
   // load the WorkSans fonts
@@ -58,6 +59,16 @@ export default function App() {
       });
     }
     if (calendar === 0) {
+      return null;
+    }
+  }
+
+  if (!physique) {
+    if (physique === null) {
+      console.log("first load physique");
+      Save("physique", {});
+    }
+    if (physique === 0) {
       return null;
     }
   }
