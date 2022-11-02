@@ -10,10 +10,13 @@ import styles from "../Styles";
 import { useEffect, useState } from "react";
 import { Get } from "../Store";
 import { useSharedValue } from "react-native-reanimated";
+import GradientText from "../GradientText";
 
 export const Trainpage = ({ navigation, route }) => {
   const [data, setData] = useState(0);
+  const [currentex, conChangeCurrentex] = useState(2);
   const exercises = useSharedValue(0);
+
   const { id } = route.params;
 
   useEffect(() => {
@@ -37,6 +40,11 @@ export const Trainpage = ({ navigation, route }) => {
     }
   }
 
+  if (!exercises.value[0]) {
+    Get("workouts", setData);
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.appContainer}>
       <ScrollView
@@ -49,11 +57,11 @@ export const Trainpage = ({ navigation, route }) => {
         {/* Title */}
         <Title nav={navigation} />
 
-        <Top title="Incline Benchpress" />
+        <Top title={exercises.value[currentex].name} ex={exercises.value} />
 
         <Timer />
 
-        <Dots amount={5} />
+        <Dots amount={exercises.value.length} />
 
         <View style={styles.trainpagetext}>
           <Text style={[styles.trainpagetextstyle, styles.r100]}>
@@ -84,11 +92,16 @@ export const Trainpage = ({ navigation, route }) => {
             128m 23s
           </Text>
         </View>
-
-        <ExerciseTrailer
-          name={exercises.value[0].name}
-          sets={exercises.value[0].sets}
-        />
+        {exercises.value[currentex + 1] ? (
+          <ExerciseTrailer
+            name={exercises.value[currentex + 1].name}
+            sets={exercises.value[currentex + 1].sets}
+          />
+        ) : (
+          <View style={styles.lastexercise}>
+            <GradientText text="Last Exercise" style={styles.font22} />
+          </View>
+        )}
 
         <Workout ex={exercises.value} nav={navigation} />
       </ScrollView>

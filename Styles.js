@@ -790,9 +790,10 @@ const styles = {
   toptitle: {
     position: "absolute",
     width: 250 / SCALE,
-    height: 65 / SCALE,
+    maxHeight: 65 / SCALE,
+    height: "auto",
     left: 48 / SCALE,
-    top: -5 / SCALE,
+    bottom: 190 / SCALE,
     fontFamily: "WorkSans-SemiBold",
     fontStyle: "normal",
     fontWeight: "600",
@@ -885,6 +886,12 @@ const styles = {
     fontSize: 15 / SCALE,
     lineHeight: 18 / SCALE,
     color: "white",
+  },
+  lastexercise: {
+    height: 80 / SCALE,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   workouttitle: {
     width: 250 / SCALE,

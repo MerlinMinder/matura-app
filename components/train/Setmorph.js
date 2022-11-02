@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import Animated from "react-native-reanimated";
 import { Neomorphism } from "../../Neomorphism";
 
 export const Setmorph = (props) => {
@@ -14,7 +15,7 @@ export const Setmorph = (props) => {
     colorS2: "rgba(153, 153, 153, 0.7)",
   };
   return (
-    <View style={props.style}>
+    <Animated.View style={props.style}>
       <Neomorphism settings={settings}>
         <Neomorphism
           center
@@ -27,7 +28,7 @@ export const Setmorph = (props) => {
             },
           }}
         >
-          <Text
+          <Animated.Text
             style={[
               {
                 width: props.width * 0.9,
@@ -40,9 +41,9 @@ export const Setmorph = (props) => {
             ]}
           >
             {props.settext}
-          </Text>
+          </Animated.Text>
         </Neomorphism>
       </Neomorphism>
-    </View>
+    </Animated.View>
   );
 };

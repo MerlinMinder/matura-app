@@ -13,9 +13,9 @@ import styles from "../../Styles";
 
 export const Dots = (props) => {
   const SCALE = 375 / Dimensions.get("screen").width;
-  const stepsize = 320 / (props.amount - 1);
+  const stepsize = 320 / props.amount;
   const dotamount = [];
-  for (var i = 1; i <= props.amount; i++) {
+  for (var i = 0; i <= props.amount; i++) {
     dotamount.push(i);
   }
   let doneexercises = 3;
@@ -63,9 +63,9 @@ export const Dots = (props) => {
         return (
           <Dot
             key={dot}
-            color={colors[dot - 1]}
+            color={colors[dot]}
             number={dot}
-            left={((dot - 1) * stepsize) / SCALE}
+            left={(dot * stepsize) / SCALE}
           />
         );
       })}
