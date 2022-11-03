@@ -14,7 +14,7 @@ import GradientText from "../GradientText";
 
 export const Trainpage = ({ navigation, route }) => {
   const [data, setData] = useState(0);
-  const [currentex, onChangeCurrentex] = useState(3);
+  const [currentex, onChangeCurrentex] = useState(0);
   const [currentset, onChangeCurrentset] = useState(1);
   const exercises = useSharedValue(0);
 
@@ -55,7 +55,14 @@ export const Trainpage = ({ navigation, route }) => {
         <View style={styles.trainpageview}>
           <Top ex={exercises.value} currex={currentex} currset={currentset} />
 
-          <Timer onChangeCurrentset={onChangeCurrentset} />
+          <Timer
+            onChangeCurrentset={onChangeCurrentset}
+            onChangeCurrentex={onChangeCurrentex}
+            currset={currentset}
+            currex={currentex}
+            maxex={exercises.value.length}
+            maxset={exercises.value[currentex].sets.length}
+          />
 
           <Dots
             amount={exercises.value.length}

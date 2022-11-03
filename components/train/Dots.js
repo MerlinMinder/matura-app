@@ -35,12 +35,13 @@ export const Dots = (props) => {
       if (!i) {
         color = "rgb(66, 255, 255)";
       } else if (i <= props.currentex) {
-        color = `rgb(${66 + 189 / (props.currentex + 1 - i)}, ${
-          255 - 63 / (props.currentex + 1 - i)
-        }, ${255 - 189 / (props.currentex + 1 - i)})`;
+        color = `rgb(${66 + (189 / props.currentex) * i}, ${
+          255 - (63 / props.currentex) * i
+        }, ${255 - (189 / props.currentex) * i})`;
       }
       allcolors.push(color);
     }
+    console.log(allcolors);
     setColors(allcolors);
   }, [props.currentex, props.currentset, props.maxset]);
 

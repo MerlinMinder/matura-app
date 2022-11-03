@@ -4,6 +4,18 @@ import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Timer = (props) => {
+  const nextset = () => {
+    if (props.currset < props.maxset) {
+      props.onChangeCurrentset((prev) => prev + 1);
+    } else if (props.currex < props.maxex - 1) {
+      props.onChangeCurrentset(1);
+      props.onChangeCurrentex((prev) => prev + 1);
+    } else {
+      props.onChangeCurrentset(1);
+      props.onChangeCurrentex(0);
+    }
+  };
+
   return (
     <View style={styles.Top5}>
       <Neomorphism settings={neostyles.timercontainer}>
@@ -22,12 +34,7 @@ export const Timer = (props) => {
         <Text style={styles.timerexercisetext}>{"DO THE EXERCISE"}</Text>
         <Text style={styles.timerexercisetime}>{"01:23"}</Text>
 
-        <TouchableOpacity
-          onPressIn={() => {
-            console.log("press");
-            props.onChangeCurrentset((prev) => prev + 1);
-          }}
-        >
+        <TouchableOpacity onPressIn={nextset}>
           <View style={styles.t32r13}>
             <Neomorphism
               inset
