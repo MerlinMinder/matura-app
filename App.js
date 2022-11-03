@@ -10,6 +10,10 @@ import { useEffect, useState } from "react";
 import { Del, Get, Save } from "./Store";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Dimensions, Text } from "react-native";
+
+if (Text.defaultProps == null) Text.defaultProps = {};
+Text.defaultProps.allowFontScaling = false;
 
 export default function App() {
   // const SCALE = 375 / Dimensions.get("screen").width;

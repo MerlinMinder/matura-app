@@ -2,6 +2,7 @@ import Constants from "expo-constants";
 import { Dimensions } from "react-native";
 
 const SCALE = 375 / Dimensions.get("screen").width;
+console.log(Dimensions.get("window"));
 
 const styles = {
   appContainer: {
@@ -870,6 +871,12 @@ const styles = {
     lineHeight: 18 / SCALE,
     color: "white",
     textAlign: "center",
+  },
+  trainpageview: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: 375 / SCALE,
   },
   trainpagetext: {
     display: "flex",

@@ -40,7 +40,7 @@ export const Workout = (props) => {
             />
           </Svg>
         </View>
-        <Text style={styles.workouttitle}>Full Body Workout</Text>
+        <Text style={styles.workouttitle}>{props.title}</Text>
 
         <View style={styles.Top25}>
           <Neomorphism
@@ -61,7 +61,9 @@ export const Workout = (props) => {
               fill="white"
             />
           </Svg>
-          <Text style={styles.workoutexercisetext}>{"12"} exercises</Text>
+          <Text style={styles.workoutexercisetext}>
+            {props.ex.length} exercises
+          </Text>
           <Text style={styles.workoutdurationtext}>duration</Text>
           <View style={styles.workouttimer}>
             <Svg

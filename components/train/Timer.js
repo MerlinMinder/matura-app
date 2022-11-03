@@ -1,6 +1,4 @@
-import { processPaint } from "@shopify/react-native-skia";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
