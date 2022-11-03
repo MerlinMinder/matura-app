@@ -6,11 +6,6 @@ import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Timer = (props) => {
-  const gesture = Gesture.Tap()
-    .maxDeltaY(10)
-    .onStart(() => {
-      console.log("pressed");
-    });
   return (
     <View style={styles.Top5}>
       <Neomorphism settings={neostyles.timercontainer}>
@@ -35,17 +30,15 @@ export const Timer = (props) => {
             props.onChangeCurrentset((prev) => prev + 1);
           }}
         >
-          <GestureDetector gesture={gesture}>
-            <View style={styles.t32r13}>
-              <Neomorphism
-                inset
-                center
-                settings={{ ...neostyles.timerskip, ...neostyles.timerdone }}
-              >
-                <Image source={require("../../assets/pngs/Checkmark.png")} />
-              </Neomorphism>
-            </View>
-          </GestureDetector>
+          <View style={styles.t32r13}>
+            <Neomorphism
+              inset
+              center
+              settings={{ ...neostyles.timerskip, ...neostyles.timerdone }}
+            >
+              <Image source={require("../../assets/pngs/Checkmark.png")} />
+            </Neomorphism>
+          </View>
         </TouchableOpacity>
       </Neomorphism>
     </View>
