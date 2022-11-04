@@ -23,35 +23,37 @@ export const Setmorph = (props) => {
   const uasfont = useAnimatedStyle(() => {
     return {
       fontSize: withTiming(
-        props.set.num === props.currset ? 24 / SCALE : 12 / SCALE
+        props.set.num === props.currset ? 24 / SCALE : 12 / SCALE,
+        { duration: 500 }
       ),
     };
   });
   const uastop = useAnimatedStyle(() => {
     return {
       top: withTiming(
-        props.set.num === props.currset ? 60 / SCALE : 110 / SCALE
+        props.set.num === props.currset ? 60 / SCALE : 110 / SCALE,
+        { duration: 500 }
       ),
     };
   });
   const uaspos = useAnimatedStyle(() => {
     if (props.set.num === props.currset) {
-      return { left: withTiming(92.5 / SCALE) };
+      return { left: withTiming(92.5 / SCALE, { duration: 500 }) };
     } else if (props.set.num === props.currset - 1) {
       return {
-        left: withTiming(22 / SCALE),
+        left: withTiming(22 / SCALE, { duration: 500 }),
       };
     } else if (props.set.num === props.currset + 1) {
       return {
-        left: withTiming(257 / SCALE),
+        left: withTiming(257 / SCALE, { duration: 500 }),
       };
     } else if (props.set.num > props.currset) {
       return {
-        left: withTiming(360 / SCALE),
+        left: withTiming(360 / SCALE, { duration: 500 }),
       };
     } else {
       return {
-        left: withTiming(-100 / SCALE),
+        left: withTiming(-100 / SCALE, { duration: 500 }),
       };
     }
   });

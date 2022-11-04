@@ -27,7 +27,7 @@ export const ExerciseTrailer = (props) => {
       <View style={styles.exercisetrailersets}>
         {sets.map((set) => {
           return (
-            <View key={Math.random()} style={styles.m2}>
+            <View key={set.num} style={styles.m2}>
               <Settrailer set={set} />
             </View>
           );

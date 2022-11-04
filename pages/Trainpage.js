@@ -7,7 +7,7 @@ import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
 import { Dots } from "../components/train/Dots";
 import { Workout } from "../components/train/Workout";
 import styles from "../Styles";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Get } from "../Store";
 import { useSharedValue } from "react-native-reanimated";
 import GradientText from "../GradientText";
@@ -16,28 +16,49 @@ export const Trainpage = ({ navigation, route }) => {
   const [data, setData] = useState(0);
   const [currentex, onChangeCurrentex] = useState(0);
   const [currentset, onChangeCurrentset] = useState(1);
+  const [totaltime, onChangeTotaltime] = useState({
+    timestart: Date.now() / 1000,
+    seconds: 0,
+  });
   const exercises = useSharedValue(0);
+  const firstload = useRef(true);
+  const totaltimer = useRef();
 
   const { id } = route.params;
 
   useEffect(() => {
     Get("workouts", setData);
+    if (firstload.current) {
+      totaltimer.current = setInterval(() => {
+        onChangeTotaltime((prev) => {
+          return {
+            timestart: prev.timestart,
+            seconds: Date.now() / 1000 - prev.timestart,
+          };
+        });
+      }, 1000);
+    }
+    return () => clearInterval(totaltimer.current);
   }, []);
 
   if (!data) {
     return null;
   } else {
-    if (Object.values(data[id].exercises).length === 0) {
-      Alert.alert(
-        "No exercises",
-        "You need at least 1 exercise to start your workout"
-      );
-      navigation.navigate("workout", { id: id });
-      return null;
-    } else {
-      exercises.value = Object.entries(data[id].exercises)
-        .sort((a, b) => a[0] - b[0])
-        .map((ex) => ex[1]);
+    if (firstload.current) {
+      if (Object.values(data[id].exercises).length === 0) {
+        Alert.alert(
+          "No exercises",
+          "You need at least 1 exercise to start your workout"
+        );
+        navigation.navigate("workout", { id: id });
+        return null;
+      } else {
+        exercises.value = Object.entries(data[id].exercises)
+          .sort((a, b) => a[0] - b[0])
+          .map((ex) => ex[1]);
+      }
+
+      firstload.current = false;
     }
   }
 
@@ -62,6 +83,7 @@ export const Trainpage = ({ navigation, route }) => {
             currex={currentex}
             maxex={exercises.value.length}
             maxset={exercises.value[currentex].sets.length}
+            totaltime={totaltime}
           />
 
           <Dots
@@ -97,7 +119,9 @@ export const Trainpage = ({ navigation, route }) => {
                 styles.width72,
               ]}
             >
-              128m 23s
+              {`${Math.floor(totaltime.seconds / 60)}m ${Math.floor(
+                totaltime.seconds % 60
+              )}s`}
             </Text>
           </View>
           {exercises.value[currentex + 1] ? (

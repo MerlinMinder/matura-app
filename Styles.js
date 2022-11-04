@@ -835,7 +835,7 @@ const styles = {
   },
   timerexercisetime: {
     position: "absolute",
-    width: 51 / SCALE,
+    // width: 60 / SCALE,
     height: 23 / SCALE,
     left: 136 / SCALE,
     top: 78 / SCALE,

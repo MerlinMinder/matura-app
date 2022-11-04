@@ -41,17 +41,9 @@ export const Dots = (props) => {
       }
       allcolors.push(color);
     }
-    console.log(allcolors);
     setColors(allcolors);
   }, [props.currentex, props.currentset, props.maxset]);
 
-  // let colors = [
-  //   "rgba(66, 255, 255, 1)",
-  //   "rgba(160, 224, 160, 1)",
-  //   "rgba(255, 192, 66, 1)",
-  //   "rgba(69, 69, 69, 1)",
-  //   "rgba(69, 69, 69, 1)",
-  // ];
   return (
     <View style={styles.dotscontainer}>
       <Canvas style={styles.dotscanvas}>
