@@ -96,7 +96,7 @@ export const Workout = (props) => {
         <View style={styles.Top265}>
           {exercises.map((exercise) => {
             return (
-              <View style={styles.bottom15} key={exercise.name}>
+              <View style={styles.bottom15} key={exercise.id}>
                 <ExerciseTrailer name={exercise.name} sets={exercise.sets} />
               </View>
             );
