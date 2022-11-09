@@ -821,9 +821,9 @@ const styles = {
   },
   timerexercisetext: {
     position: "absolute",
-    width: 120 / SCALE,
+    width: 130 / SCALE,
     height: 56 / SCALE,
-    left: 102 / SCALE,
+    left: 97 / SCALE,
     top: 16 / SCALE,
     fontFamily: "WorkSans-SemiBold",
     fontStyle: "normal",

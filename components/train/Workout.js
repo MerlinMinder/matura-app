@@ -5,13 +5,22 @@ import { Start } from "../workout/Start";
 import { ExerciseTrailer } from "../workout/Exercisetrailer";
 import styles from "../../Styles";
 import { neostyles } from "../../NeoStyles";
+import { useEffect, useState } from "react";
 
 export const Workout = (props) => {
+  const [totaltime, onChangetotaltime] = useState("");
+
+  useEffect(() => {
+    onChangetotaltime(
+      `${Math.floor(props.time / 60)}m ${Math.floor(props.time % 60)}s`
+    );
+  }, [props.time]);
+
   const SCALE = 375 / Dimensions.get("screen").width;
 
-  let exercises = props.ex;
+  const exercises = props.ex;
 
-  let extraHeight = exercises.length * 95;
+  const extraHeight = exercises.length * 95;
 
   return (
     <View>
@@ -79,7 +88,7 @@ export const Workout = (props) => {
               />
             </Svg>
           </View>
-          <Text style={styles.workouttime}>{"128m 47s"}</Text>
+          <Text style={styles.workouttime}>{totaltime}</Text>
         </View>
 
         <Start

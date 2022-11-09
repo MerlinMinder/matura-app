@@ -15,7 +15,8 @@ import GradientText from "../GradientText";
 export const Trainpage = ({ navigation, route }) => {
   const [data, setData] = useState(0);
   const [currentex, onChangeCurrentex] = useState(0);
-  const [currentset, onChangeCurrentset] = useState(1);
+  const [currentset, onChangeCurrentset] = useState(0);
+  const [started, onChangeStarted] = useState(false);
   const [totaltime, onChangeTotaltime] = useState({
     timestart: Date.now() / 1000,
     seconds: 0,
@@ -28,7 +29,8 @@ export const Trainpage = ({ navigation, route }) => {
 
   useEffect(() => {
     Get("workouts", setData);
-    if (firstload.current) {
+    if (started) {
+      console.log("started");
       totaltimer.current = setInterval(() => {
         onChangeTotaltime((prev) => {
           return {
@@ -37,9 +39,13 @@ export const Trainpage = ({ navigation, route }) => {
           };
         });
       }, 1000);
+    } else {
+      return () => {
+        clearInterval(totaltimer.current);
+        console.log("cleared");
+      };
     }
-    return () => clearInterval(totaltimer.current);
-  }, []);
+  }, [started]);
 
   if (!data) {
     return null;
@@ -79,6 +85,7 @@ export const Trainpage = ({ navigation, route }) => {
           <Timer
             onChangeCurrentset={onChangeCurrentset}
             onChangeCurrentex={onChangeCurrentex}
+            onChangeStarted={onChangeStarted}
             currset={currentset}
             currex={currentex}
             maxex={exercises.value.length}
@@ -139,6 +146,7 @@ export const Trainpage = ({ navigation, route }) => {
             ex={exercises.value}
             nav={navigation}
             title={data[id].title}
+            time={totaltime.seconds}
           />
         </View>
       </ScrollView>
