@@ -17,7 +17,7 @@ export const Counter = (props) => {
 
   useSharedValueEffect(() => {
     if (props.text == "Rest") {
-      onChangeCounttext(String(restcount.value));
+      onChangeCounttext(String(restcount.value) + "s");
       props.rest.value = restcount.value;
     }
     if (props.text == "Sets") {

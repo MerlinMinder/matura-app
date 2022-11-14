@@ -97,6 +97,7 @@ export const Trainpage = ({ navigation, route }) => {
             totaltime={totaltime}
             nav={navigation}
             id={id}
+            resttime={exercises.value[currentex].rest}
           />
 
           <Dots
