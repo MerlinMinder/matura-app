@@ -9,7 +9,16 @@ export const Timer = (props) => {
   const [displaytext, onChangedisplaytext] = useState("START WORKOUT");
   const [trainstate, onChangeTrainstate] = useState("start");
 
-  useEffect(() => {}, [trainstate]);
+  useEffect(() => {
+    if (trainstate === "train") {
+      setTime((prev) => {
+        return {
+          timestart: prev.timestart,
+          seconds: Date.now() / 1000 - prev.timestart,
+        };
+      });
+    }
+  }, [props.totaltime]);
 
   const addzero = (num) => {
     let returnstring = String(num);
@@ -19,39 +28,111 @@ export const Timer = (props) => {
     return returnstring;
   };
 
+  const incex = () => {
+    if (props.currex < props.maxex - 1) {
+      props.onChangeCurrentex((prev) => prev + 1);
+      props.onChangeCurrentset(0);
+      return 1;
+    } else return 0;
+  };
+
   const mainpress = (state) => {
-    if (state === "start") {
-      props.onChangeStarted(true);
-      onChangeTrainstate("train");
-      return;
+    switch (state) {
+      case "start":
+        props.onChangeStarted(true);
+        onChangeTrainstate("ex");
+        onChangedisplaytext("START EXERCISE");
+        return;
+      case "ex":
+        setTime({ timestart: Date.now() / 1000, seconds: 0 });
+        onChangeTrainstate("train");
+        onChangedisplaytext("DO THE EXERCISE");
+        props.onChangeCurrentset((prev) => prev + 1);
+        return;
+      case "train":
+        props.onChangeCurrentset((prev) => prev + 1);
+        onChangedisplaytext("REST");
+        onChangeTrainstate("rest");
+        return;
+      case "rest":
+        if (props.currset > props.maxset) {
+          if (!incex()) {
+            onChangedisplaytext("FINISH WORKOUT");
+            onChangeTrainstate("end");
+            return;
+          } else {
+            onChangedisplaytext("START EXERCISE");
+            onChangeTrainstate("ex");
+            return;
+          }
+        } else {
+          setTime({ timestart: Date.now() / 1000, seconds: 0 });
+          onChangeTrainstate("train");
+          onChangedisplaytext("DO THE EXERCISE");
+        }
+        return;
+      case "end":
+        props.nav.navigate("home");
+        return;
     }
   };
 
-  const secpress = (state) => {};
+  const secpress = (state) => {
+    switch (state) {
+      case "start":
+        props.nav.navigate("workout", { id: props.id });
+        return;
+      case "ex":
+        if (!incex()) {
+          onChangedisplaytext("FINISH WORKOUT");
+          onChangeTrainstate("end");
+          return;
+        } else {
+          onChangedisplaytext("START EXERCISE");
+          onChangeTrainstate("ex");
+          return;
+        }
+      case "train":
+        props.onChangeCurrentset((prev) => prev + 1);
+        onChangedisplaytext("REST");
+        onChangeTrainstate("rest");
+        return;
+      case "rest":
+        return;
+    }
+  };
 
   return (
     <View style={styles.Top5}>
       <Neomorphism settings={neostyles.timercontainer}>
-        <TouchableOpacity
-          onPressIn={() => {
-            console.log("in");
-            secpress(trainstate);
-          }}
-        >
-          <View style={styles.t32l13}>
-            <Neomorphism inset center settings={neostyles.timerskip}>
-              <Text style={[styles.font22, { color: "#42FFFF" }]}>Skip</Text>
-            </Neomorphism>
-          </View>
-        </TouchableOpacity>
+        {trainstate != "end" ? (
+          <TouchableOpacity
+            onPressIn={() => {
+              console.log("in");
+              secpress(trainstate);
+            }}
+          >
+            <View style={styles.t32l13}>
+              <Neomorphism inset center settings={neostyles.timerskip}>
+                <Text style={[styles.font22, { color: "#42FFFF" }]}>Skip</Text>
+              </Neomorphism>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <></>
+        )}
 
         <Text style={styles.timerexercisetext}>{displaytext}</Text>
 
-        <Text style={styles.timerexercisetime}>
-          {`${addzero(Math.floor(time.seconds / 60))}:${addzero(
-            Math.floor(time.seconds % 60)
-          )}`}
-        </Text>
+        {trainstate === "train" || trainstate === "rest" ? (
+          <Text style={styles.timerexercisetime}>
+            {`${addzero(Math.floor(time.seconds / 60))}:${addzero(
+              Math.floor(time.seconds % 60)
+            )}`}
+          </Text>
+        ) : (
+          <></>
+        )}
 
         <TouchableOpacity
           onPressIn={() => {

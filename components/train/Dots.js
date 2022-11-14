@@ -27,7 +27,7 @@ export const Dots = (props) => {
   useEffect(() => {
     setGradientwidth(
       props.currentex * exstepsize +
-        ((props.currentset - 1) / props.maxset) * exstepsize
+        (props.currentset / (props.maxset + 1)) * exstepsize
     );
     const allcolors = [];
     for (let i = 0; i <= props.amount; i++) {

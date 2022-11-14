@@ -29,21 +29,25 @@ export const Trainpage = ({ navigation, route }) => {
 
   useEffect(() => {
     Get("workouts", setData);
+
+    totaltimer.current = setInterval(() => {
+      onChangeTotaltime((prev) => {
+        return {
+          timestart: prev.timestart,
+          seconds: Date.now() / 1000 - prev.timestart,
+        };
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(totaltimer.current);
+      console.log("cleared");
+    };
+  }, []);
+
+  useEffect(() => {
     if (started) {
-      console.log("started");
-      totaltimer.current = setInterval(() => {
-        onChangeTotaltime((prev) => {
-          return {
-            timestart: prev.timestart,
-            seconds: Date.now() / 1000 - prev.timestart,
-          };
-        });
-      }, 1000);
-    } else {
-      return () => {
-        clearInterval(totaltimer.current);
-        console.log("cleared");
-      };
+      onChangeTotaltime({ timestart: Date.now() / 1000, seconds: 0 });
     }
   }, [started]);
 
@@ -91,6 +95,8 @@ export const Trainpage = ({ navigation, route }) => {
             maxex={exercises.value.length}
             maxset={exercises.value[currentex].sets.length}
             totaltime={totaltime}
+            nav={navigation}
+            id={id}
           />
 
           <Dots
@@ -126,9 +132,13 @@ export const Trainpage = ({ navigation, route }) => {
                 styles.width72,
               ]}
             >
-              {`${Math.floor(totaltime.seconds / 60)}m ${Math.floor(
-                totaltime.seconds % 60
-              )}s`}
+              {started ? (
+                `${Math.floor(totaltime.seconds / 60)}m ${Math.floor(
+                  totaltime.seconds % 60
+                )}s`
+              ) : (
+                <></>
+              )}
             </Text>
           </View>
           {exercises.value[currentex + 1] ? (
