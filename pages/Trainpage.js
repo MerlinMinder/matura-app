@@ -158,6 +158,7 @@ export const Trainpage = ({ navigation, route }) => {
             nav={navigation}
             title={data[id].title}
             time={totaltime.seconds}
+            started={started}
           />
         </View>
       </ScrollView>

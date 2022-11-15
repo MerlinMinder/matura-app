@@ -88,7 +88,11 @@ export const Workout = (props) => {
               />
             </Svg>
           </View>
-          <Text style={styles.workouttime}>{totaltime}</Text>
+          {props.started ? (
+            <Text style={styles.workouttime}>{totaltime}</Text>
+          ) : (
+            <></>
+          )}
         </View>
 
         <Start
