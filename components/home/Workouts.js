@@ -55,17 +55,6 @@ export const Workouts = (props) => {
         props.nav.navigate("workout", { id: timeid });
       });
     }
-
-    // testing
-    if (pressed.value == "reset") {
-      Save("workouts", {})
-        .then(() => {
-          pressed.value = false;
-        })
-        .then(() => {
-          Get("workouts", setData);
-        });
-    }
   }, pressed);
 
   const gesture = Gesture.Tap()
@@ -73,11 +62,6 @@ export const Workouts = (props) => {
     .onStart(() => {
       pressed.value = true;
     });
-
-  // testing
-  const reset = Gesture.Tap().onBegin(() => {
-    pressed.value = "reset";
-  });
 
   return (
     <View>
@@ -99,10 +83,6 @@ export const Workouts = (props) => {
             <Image style={styles.workoutsplus} source={plus} />
           </Neomorphism>
         </View>
-      </GestureDetector>
-      {/* testing */}
-      <GestureDetector gesture={reset}>
-        <Text>Reset</Text>
       </GestureDetector>
     </View>
   );
