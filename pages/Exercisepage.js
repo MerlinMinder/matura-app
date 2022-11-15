@@ -27,10 +27,12 @@ export const Exercisepage = ({ route, navigation }) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const [title, onChangeTitle] = useState(route.params.name);
   const [data, setData] = useState(null);
-  const sets = useSharedValue([]);
-  const progression = useSharedValue([]);
-  const rest = useSharedValue(0);
-  const on = useSharedValue(false);
+  const sets = useSharedValue(route.params.sets ? route.params.sets : []);
+  const progression = useSharedValue(
+    route.params.prog ? route.params.prog : []
+  );
+  const rest = useSharedValue(route.params.rest ? route.params.rest : 0);
+  const on = useSharedValue(route.params.on ? route.params.on : false);
   const refTextInput = useRef({});
 
   const { workid, exid } = route.params;

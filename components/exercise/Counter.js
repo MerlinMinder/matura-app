@@ -9,8 +9,8 @@ import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Counter = (props) => {
-  const restcount = useSharedValue(0);
-  const setcount = useSharedValue(0);
+  const restcount = useSharedValue(props.rest.value);
+  const setcount = useSharedValue(props.sets.value.length);
   const plusset = useSharedValue(false);
   const minusset = useSharedValue(false);
   const [counttext, onChangeCounttext] = useState("");

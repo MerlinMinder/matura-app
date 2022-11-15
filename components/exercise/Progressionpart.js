@@ -6,8 +6,17 @@ import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
 export const Progressionpart = (props) => {
-  const [repcount, onChangeRepcount] = useState(0);
-  const [weightcount, onChangeWeightcount] = useState(0);
+  console.log(props.progression.value);
+  const [repcount, onChangeRepcount] = useState(
+    props.progression.value[props.id].reps
+      ? props.progression.value[props.id].reps
+      : 0
+  );
+  const [weightcount, onChangeWeightcount] = useState(
+    props.progression.value[props.id].weight
+      ? props.progression.value[props.id].weight
+      : 0
+  );
 
   const runcheck = (rep, weight) => {
     const sendarr = [...props.progression.value];

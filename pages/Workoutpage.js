@@ -4,6 +4,7 @@ import {
   Dimensions,
   View,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import { Title } from "../components/Title";
 import { ExerciseTrailer } from "../components/workout/Exercisetrailer";
@@ -124,12 +125,27 @@ export const Workoutpage = ({ route, navigation }) => {
             <View style={styles.workoutpageexercise}>
               {Object.values(data[id].exercises).map((exercise) => {
                 return (
-                  <View style={styles.bottom15} key={exercise.id}>
-                    <ExerciseTrailer
-                      name={exercise.name}
-                      sets={exercise.sets}
-                    />
-                  </View>
+                  <TouchableOpacity
+                    key={exercise.id}
+                    onPress={() => {
+                      navigation.navigate("exercise", {
+                        workid: id,
+                        exid: exercise.id,
+                        name: exercise.name,
+                        sets: exercise.sets,
+                        rest: exercise.rest,
+                        prog: exercise.progression,
+                        on: exercise.on,
+                      });
+                    }}
+                  >
+                    <View style={styles.bottom15}>
+                      <ExerciseTrailer
+                        name={exercise.name}
+                        sets={exercise.sets}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 );
               })}
             </View>
