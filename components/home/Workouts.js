@@ -1,4 +1,4 @@
-import { Image, View, Text } from "react-native";
+import { Image, View } from "react-native";
 import { WorkoutTrailer } from "./parts/WorkoutTrailer";
 import { Neomorphism } from "../../Neomorphism";
 import styles from "../../Styles";
@@ -7,7 +7,7 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useSharedValueEffect, useValue } from "@shopify/react-native-skia";
 import { useSharedValue } from "react-native-reanimated";
 import { useEffect, useState } from "react";
-import { Get, Merge, Save } from "../../Store";
+import { Get, Merge } from "../../Store";
 
 export const Workouts = (props) => {
   const [data, setData] = useState({});
@@ -66,9 +66,17 @@ export const Workouts = (props) => {
   return (
     <View>
       {Object.values(data).map((workout) => {
-        return (
-          <WorkoutTrailer key={workout.id} workout={workout} nav={props.nav} />
-        );
+        if (workout.id) {
+          return (
+            <WorkoutTrailer
+              key={workout.id}
+              workout={workout}
+              nav={props.nav}
+              setData={setData}
+            />
+          );
+        }
+        return <></>;
       })}
       <GestureDetector gesture={gesture}>
         <View style={styles.workoutspluscontainer}>
