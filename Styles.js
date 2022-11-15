@@ -275,8 +275,12 @@ const styles = {
     borderRadius: 8 / SCALE,
   },
   workouttrailerdeletetextcont: {
-    top: 7 / SCALE,
+    top: 3 / SCALE,
     left: 7 / SCALE,
+    height: 27 / SCALE,
+    width: 60 / SCALE,
+    display: "flex",
+    justifyContent: "center",
   },
   workouttrailerdeletetext: {
     fontFamily: "WorkSans-SemiBold",
