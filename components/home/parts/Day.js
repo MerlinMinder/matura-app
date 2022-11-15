@@ -9,7 +9,9 @@ export const Day = (props) => {
       {props.color ? (
         <TouchableOpacity
           onPress={() => {
-            props.nav.navigate("workout", { id: props.workout.id });
+            if (props.workout) {
+              props.nav.navigate("workout", { id: props.workout.id });
+            }
           }}
         >
           <Neomorphism

@@ -32,9 +32,13 @@ export const Calendar = (props) => {
 
   const calendarMonth = (year, month) => {
     const returnmonth = [[]];
+    const currday = new Date(Date.now());
+    currday.setUTCHours(0, 0, 0, 0);
+
     let day = new Date();
     day.setFullYear(year, month, 1);
     day.setUTCHours(0, 0, 0, 0);
+
     while (day.getMonth() == month) {
       if (calendar[day.getTime()]) {
         if (calendar[day.getTime()].workout) {
@@ -44,6 +48,12 @@ export const Calendar = (props) => {
             workout: calendar[day.getTime()].workout,
           });
         }
+      } else if (day.getTime() === currday.getTime()) {
+        returnmonth[returnmonth.length - 1].push({
+          number: day.getDate(),
+          color: "white",
+          workout: "",
+        });
       } else {
         returnmonth[returnmonth.length - 1].push({
           number: day.getDate(),
