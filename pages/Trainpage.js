@@ -106,8 +106,10 @@ export const Trainpage = ({ navigation, route }) => {
       } else {
         exercises.value = Object.entries(data[id].exercises)
           .sort((a, b) => a[0] - b[0])
+          .filter((ex) => ex[1] != "del")
           .map((ex) => {
-            console.log(ex[1]);
+            console.log("ex", ex[1]);
+
             if (ex[1].sets) {
               return ex[1];
             }

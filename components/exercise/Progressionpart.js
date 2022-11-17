@@ -13,8 +13,6 @@ import styles from "../../Styles";
 export const Progressionpart = (props) => {
   const [deleteshow, onChangeDeleteshow] = useState(false);
 
-  console.log(props.progression.value);
-
   const [repcount, onChangeRepcount] = useState(
     props.progression.value.filter((prog) => prog.key === props.id)[0].reps
       ? props.progression.value.filter((prog) => prog.key === props.id)[0].reps
