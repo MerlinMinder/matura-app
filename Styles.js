@@ -616,6 +616,15 @@ const styles = {
     left: 8 / SCALE,
     width: 264 / SCALE,
   },
+  exercisetrailerdeletecont: {
+    position: "absolute",
+    width: 100 / SCALE,
+    height: 34 / SCALE,
+    left: 175 / SCALE,
+    top: 3 / SCALE,
+    backgroundColor: "#666666",
+    borderRadius: 8 / SCALE,
+  },
   exercisepagetitle: {
     width: 267 / SCALE,
     height: 40 / SCALE,

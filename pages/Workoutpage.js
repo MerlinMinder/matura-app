@@ -82,7 +82,14 @@ export const Workoutpage = ({ route, navigation }) => {
     return null;
   }
 
-  const extraHeight = Object.values(data[id].exercises).length * 95;
+  console.log(
+    Object.values(data[id].exercises).map((ex) => {
+      if (ex.id) return 1;
+    })
+  );
+
+  const extraHeight =
+    Object.values(data[id].exercises).filter((ex) => ex != "del").length * 95;
 
   return (
     <SafeAreaView style={styles.appContainer}>
@@ -124,29 +131,34 @@ export const Workoutpage = ({ route, navigation }) => {
             </View>
             <View style={styles.workoutpageexercise}>
               {Object.values(data[id].exercises).map((exercise) => {
-                return (
-                  <TouchableOpacity
-                    key={exercise.id}
-                    onPress={() => {
-                      navigation.navigate("exercise", {
-                        workid: id,
-                        exid: exercise.id,
-                        name: exercise.name,
-                        sets: exercise.sets,
-                        rest: exercise.rest,
-                        prog: exercise.progression,
-                        on: exercise.on,
-                      });
-                    }}
-                  >
-                    <View style={styles.bottom15}>
-                      <ExerciseTrailer
-                        name={exercise.name}
-                        sets={exercise.sets}
-                      />
-                    </View>
-                  </TouchableOpacity>
-                );
+                if (exercise.id) {
+                  return (
+                    <TouchableOpacity
+                      key={exercise.id}
+                      onPress={() => {
+                        navigation.navigate("exercise", {
+                          workid: id,
+                          exid: exercise.id,
+                          name: exercise.name,
+                          sets: exercise.sets,
+                          rest: exercise.rest,
+                          prog: exercise.progression,
+                          on: exercise.on,
+                        });
+                      }}
+                    >
+                      <View style={styles.bottom15}>
+                        <ExerciseTrailer
+                          name={exercise.name}
+                          sets={exercise.sets}
+                          ids={{ workid: id, exid: exercise.id }}
+                          setData={setData}
+                          deletable
+                        />
+                      </View>
+                    </TouchableOpacity>
+                  );
+                }
               })}
             </View>
             <GestureDetector gesture={gesture}>
