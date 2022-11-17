@@ -82,12 +82,6 @@ export const Workoutpage = ({ route, navigation }) => {
     return null;
   }
 
-  console.log(
-    Object.values(data[id].exercises).map((ex) => {
-      if (ex.id) return 1;
-    })
-  );
-
   const extraHeight =
     Object.values(data[id].exercises).filter((ex) => ex != "del").length * 95;
 

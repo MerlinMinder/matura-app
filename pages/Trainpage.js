@@ -106,7 +106,14 @@ export const Trainpage = ({ navigation, route }) => {
       } else {
         exercises.value = Object.entries(data[id].exercises)
           .sort((a, b) => a[0] - b[0])
-          .map((ex) => ex[1]);
+          .map((ex) => {
+            console.log(ex[1]);
+            if (ex[1].sets) {
+              return ex[1];
+            }
+            Alert.alert("No sets", "You need at least 1 set in every exercise");
+            navigation.navigate("workout", { id: id });
+          });
       }
 
       firstload.current = false;
