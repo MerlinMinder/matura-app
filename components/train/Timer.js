@@ -12,14 +12,6 @@ const addzero = (num) => {
   return returnstring;
 };
 
-const incex = () => {
-  if (props.currex < props.maxex - 1) {
-    props.onChangeCurrentex((prev) => prev + 1);
-    props.onChangeCurrentset(0);
-    return 1;
-  } else return 0;
-};
-
 export const Timer = (props) => {
   const [time, setTime] = useState({});
   const [displaytext, onChangedisplaytext] = useState("START WORKOUT");
@@ -50,6 +42,14 @@ export const Timer = (props) => {
     }
   }, [props.totaltime]);
 
+  const incex = () => {
+    if (props.currex < props.maxex - 1) {
+      props.onChangeCurrentex((prev) => prev + 1);
+      props.onChangeCurrentset(0);
+      return 1;
+    } else return 0;
+  };
+
   const mainpress = (state) => {
     switch (state) {
       case "start":
@@ -65,7 +65,6 @@ export const Timer = (props) => {
         props.onChangeCurrentset((prev) => prev + 1);
         return;
       case "train":
-        props.onChangeCurrentset((prev) => prev + 1);
         onChangedisplaytext("REST");
         onChangeTrainstate("rest");
         onChangeSectext("+10s");
@@ -73,6 +72,11 @@ export const Timer = (props) => {
           timestart: Date.now() / 1000 + props.resttime,
           seconds: props.resttime,
         });
+        props.setDoneex((prev) => [
+          ...prev,
+          ...[{ ex: props.currex, set: props.currset }],
+        ]);
+        props.onChangeCurrentset((prev) => prev + 1);
         return;
       case "rest":
         if (props.currset > props.maxset) {
@@ -94,7 +98,7 @@ export const Timer = (props) => {
         }
         return;
       case "end":
-        props.nav.navigate("home");
+        props.setFinish(true);
         return;
     }
   };
@@ -136,7 +140,6 @@ export const Timer = (props) => {
         {trainstate != "end" ? (
           <TouchableOpacity
             onPressIn={() => {
-              console.log("in");
               secpress(trainstate);
             }}
           >
@@ -176,7 +179,6 @@ export const Timer = (props) => {
 
         <TouchableOpacity
           onPressIn={() => {
-            console.log("out");
             mainpress(trainstate);
           }}
         >
@@ -198,3 +200,27 @@ export const Timer = (props) => {
     </View>
   );
 };
+
+// const completeSet = () => {
+//   props.onChangeCompleted((prev) => {
+//     const returnobj = new Object();
+//     const cex = { ...props.ex[props.currex] };
+//     let cexsets = null;
+//     if (prev[props.ex[props.currex].id]) {
+//       if (prev[props.ex[props.currex].id].sets) {
+//         cexsets = [
+//           ...prev[props.ex[props.currex].id].sets,
+//           ...[cex.sets[props.currset - 1]],
+//         ];
+//       } else {
+//         cexsets = [cex.sets[props.currset - 1]];
+//       }
+//     } else {
+//       cexsets = [cex.sets[props.currset - 1]];
+//     }
+//     delete cex.sets;
+//     cex["sets"] = cexsets;
+//     returnobj[props.ex[props.currex].id] = cex;
+//     return { ...prev, ...returnobj };
+//   });
+// };

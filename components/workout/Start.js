@@ -13,7 +13,7 @@ export const Start = (props) => {
             props.nav.navigate("train", { id: props.id });
           }
           if (props.text == "Finish") {
-            props.nav.navigate("home");
+            props.setFinish(true);
           }
         }}
       >

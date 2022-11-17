@@ -8,7 +8,7 @@ import { Dots } from "../components/train/Dots";
 import { Workout } from "../components/train/Workout";
 import styles from "../Styles";
 import { useEffect, useRef, useState } from "react";
-import { Get } from "../Store";
+import { Get, Merge } from "../Store";
 import { useSharedValue } from "react-native-reanimated";
 import GradientText from "../GradientText";
 
@@ -21,11 +21,52 @@ export const Trainpage = ({ navigation, route }) => {
     timestart: Date.now() / 1000,
     seconds: 0,
   });
+  const [doneex, setDoneex] = useState([]);
+  const [finish, setFinish] = useState(false);
   const exercises = useSharedValue(0);
   const firstload = useRef(true);
   const totaltimer = useRef();
 
   const { id } = route.params;
+
+  useEffect(() => {
+    if (!finish) return;
+    const doneexlist = doneex.map((ex) => {
+      return {
+        set: exercises.value[ex.ex].sets[ex.set - 1],
+        exercise: exercises.value[ex.ex],
+      };
+    });
+    const doneexercises = {};
+    for (let [index, element] of doneexlist.entries()) {
+      if (doneexercises[element.exercise.id]) {
+        doneexercises[element.exercise.id].sets.push(element.set);
+      } else {
+        doneexercises[element.exercise.id] = {
+          name: element.exercise.name,
+          id: element.exercise.id,
+          progession: element.exercise.progression,
+          rest: element.exercise.rest,
+          on: element.exercise.on,
+          sets: [element.set],
+        };
+      }
+    }
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    const sendobj = new Object();
+    sendobj[today.getTime()] = {
+      workout: {
+        id: id,
+        title: data[id].title,
+        color: data[id].color,
+        time: Math.floor(totaltime.seconds),
+        exercises: doneexercises,
+      },
+    };
+    Merge("calendar", sendobj);
+    navigation.navigate("home");
+  }, [finish]);
 
   useEffect(() => {
     Get("workouts", setData);
@@ -97,6 +138,9 @@ export const Trainpage = ({ navigation, route }) => {
             totaltime={totaltime}
             nav={navigation}
             id={id}
+            setDoneex={setDoneex}
+            setFinish={setFinish}
+            ex={exercises.value}
             resttime={exercises.value[currentex].rest}
           />
 
@@ -159,9 +203,27 @@ export const Trainpage = ({ navigation, route }) => {
             title={data[id].title}
             time={totaltime.seconds}
             started={started}
+            setFinish={setFinish}
           />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+// useEffect(() => {
+//   if (firstload.current) return;
+//   const today = new Date();
+//   today.setHours(0, 0, 0, 0);
+//   const senddata = new Object();
+//   senddata[today.getTime()] = {
+//     workout: {
+//       name: data[id].title,
+//       id: id,
+//       color: data[id].color,
+//       time: totaltime.seconds,
+//       exercises: completed,
+//     },
+//   };
+//   Merge("calendar", senddata);
+// }, [completed]);

@@ -101,6 +101,7 @@ export const Workout = (props) => {
           shadow="rgba(255, 204, 204, 0.7)"
           buffer={styles.Top162}
           nav={props.nav}
+          setFinish={props.setFinish}
         />
 
         <View style={styles.t225l20}>

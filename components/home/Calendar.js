@@ -76,13 +76,16 @@ export const Calendar = (props) => {
   };
 
   useEffect(() => {
-    Get("calendar", setCalendar);
-  }, []);
+    const listener = props.nav.addListener("focus", () => {
+      Get("calendar", setCalendar);
+    });
+    return listener;
+  }, [props.nav]);
 
   useEffect(() => {
     onChangeYearmonth(`${months[today.getMonth()]} ${today.getFullYear()}`);
     onChangeDisplaymonth(calendarMonth(today.getFullYear(), today.getMonth()));
-  }, [today]);
+  }, [today, calendar]);
 
   if (!calendar) {
     return null;

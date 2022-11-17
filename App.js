@@ -24,6 +24,7 @@ export default function App() {
 
   useEffect(() => {
     // get calendar/database
+    Del("calendar");
     Get("calendar", setCalendar);
     Get("workouts", setWorkouts);
     Get("physique", setPhysique);
@@ -58,9 +59,7 @@ export default function App() {
   if (!calendar) {
     if (calendar === null) {
       console.log("first load calendar");
-      Save("calendar", {
-        1665792000000: { workout: { color: "#42FFFF", id: 1667045194003 } },
-      });
+      Save("calendar", {});
     }
     if (calendar === 0) {
       return null;
