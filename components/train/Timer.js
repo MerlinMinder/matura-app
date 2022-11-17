@@ -4,6 +4,22 @@ import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
 
+const addzero = (num) => {
+  let returnstring = String(num);
+  if (String(num).length === 1) {
+    returnstring = "0" + returnstring;
+  }
+  return returnstring;
+};
+
+const incex = () => {
+  if (props.currex < props.maxex - 1) {
+    props.onChangeCurrentex((prev) => prev + 1);
+    props.onChangeCurrentset(0);
+    return 1;
+  } else return 0;
+};
+
 export const Timer = (props) => {
   const [time, setTime] = useState({});
   const [displaytext, onChangedisplaytext] = useState("START WORKOUT");
@@ -33,22 +49,6 @@ export const Timer = (props) => {
       });
     }
   }, [props.totaltime]);
-
-  const addzero = (num) => {
-    let returnstring = String(num);
-    if (String(num).length === 1) {
-      returnstring = "0" + returnstring;
-    }
-    return returnstring;
-  };
-
-  const incex = () => {
-    if (props.currex < props.maxex - 1) {
-      props.onChangeCurrentex((prev) => prev + 1);
-      props.onChangeCurrentset(0);
-      return 1;
-    } else return 0;
-  };
 
   const mainpress = (state) => {
     switch (state) {
@@ -198,40 +198,3 @@ export const Timer = (props) => {
     </View>
   );
 };
-
-// const startTimer = () => {
-//   setTime({ timestamp: Date.now() / 1000, seconds: 0 });
-//   setActive(true);
-// };
-
-// const stopTimer = () => {
-//   setTime({ timestamp: 0, seconds: 0 }), setActive(false);
-// };
-
-// useEffect(() => {
-//   if (active) {
-//     setTime((prev) => {
-//       return {
-//         timestamp: prev.timestamp,
-//         seconds: Date.now() / 1000 - prev.timestamp,
-//       };
-//     });
-//   }
-// }, [props.totaltime]);
-
-// const nextset = () => {
-//   skipset();
-//   stopTimer();
-// };
-
-// const skipset = () => {
-//   if (props.currset < props.maxset) {
-//     props.onChangeCurrentset((prev) => prev + 1);
-//   } else if (props.currex < props.maxex - 1) {
-//     props.onChangeCurrentset(1);
-//     props.onChangeCurrentex((prev) => prev + 1);
-//   } else {
-//     props.onChangeCurrentset(1);
-//     props.onChangeCurrentex(0);
-//   }
-// };
