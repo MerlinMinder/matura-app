@@ -827,6 +827,15 @@ const styles = {
     justifyContent: "center",
     transform: [{ rotate: "90deg" }],
   },
+  progressionpartdeletecont: {
+    position: "absolute",
+    width: 90 / SCALE,
+    height: 34 / SCALE,
+    left: 158 / SCALE,
+    top: 3 / SCALE,
+    backgroundColor: "#666666",
+    borderRadius: 8 / SCALE,
+  },
   toppos: {
     display: "flex",
     alignItems: "center",

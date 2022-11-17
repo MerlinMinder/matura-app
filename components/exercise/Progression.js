@@ -1,6 +1,6 @@
 import { useSharedValueEffect, useValue } from "@shopify/react-native-skia";
 import { useState } from "react";
-import { Text, View, Dimensions, Alert } from "react-native";
+import { Text, View, Dimensions, Alert, TouchableOpacity } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
@@ -18,8 +18,6 @@ export const Progression = (props) => {
   const [progshow, onChangeProgshow] = useState(false);
   const colorB1 = useValue("rgba(98, 255, 66, 1)");
   const colorS1 = useValue("rgba(212, 255, 204, 0.8)");
-
-  const prog = useSharedValue(false);
   const addcolorS1 = useValue("rgba(153, 153, 153, 0.6)");
   const addcolorS2 = useValue("rgba(0, 0, 0, 0.6)");
 
@@ -54,37 +52,22 @@ export const Progression = (props) => {
     props.on.value = !props.on.value;
   });
 
-  useSharedValueEffect(() => {
-    addcolorS1.current = prog.value
-      ? "rgba(90, 90, 90, 0.6)"
-      : "rgba(153, 153, 153, 0.6)";
-    addcolorS2.current = prog.value
-      ? "rgba(50, 50, 50, 0.6)"
-      : "rgba(0, 0, 0, 0.6)";
-    if (prog.value) {
-      const sendarr = [...props.progression.value];
-      if (sendarr.length < 4) {
-        sendarr.push({ key: sendarr.length, reps: 0, weight: 0 });
-        props.progression.value = sendarr;
-      } else {
-        props.progression.value = [];
-        prog.value = 0;
-        Alert.alert(
-          "Max Steps",
-          "You can have a maximum of 4 steps per progression!"
-        );
-      }
+  const addprog = () => {
+    const sendarr = [...props.progression.value];
+    if (sendarr.length < 4) {
+      sendarr.push({
+        key: sendarr.length ? sendarr[sendarr.length - 1].key + 1 : 1,
+        reps: 0,
+        weight: 0,
+      });
+      props.progression.value = sendarr;
+    } else {
+      Alert.alert(
+        "Max Steps",
+        "You can have a maximum of 4 steps per progression!"
+      );
     }
-  }, prog);
-
-  const add = Gesture.Tap()
-    .maxDeltaY(10)
-    .onStart(() => {
-      prog.value = true;
-    })
-    .onFinalize(() => {
-      prog.value = false;
-    });
+  };
 
   return (
     <Neomorphism
@@ -136,7 +119,7 @@ export const Progression = (props) => {
                 );
               })}
             </View>
-            <GestureDetector gesture={add}>
+            <TouchableOpacity onPress={addprog}>
               <View style={styles.t40l61}>
                 <Neomorphism
                   inset
@@ -151,7 +134,7 @@ export const Progression = (props) => {
                   </Text>
                 </Neomorphism>
               </View>
-            </GestureDetector>
+            </TouchableOpacity>
           </>
         ) : (
           <></>

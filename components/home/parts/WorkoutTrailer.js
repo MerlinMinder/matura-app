@@ -64,7 +64,11 @@ export const WorkoutTrailer = (props) => {
           </Svg>
         </View>
         <Text style={styles.workouttrailerexercises}>
-          {Object.values(props.workout.exercises).length} Exercises
+          {
+            Object.values(props.workout.exercises).filter((ex) => ex != "del")
+              .length
+          }{" "}
+          Exercises
         </Text>
         <Text style={styles.workouttrailerrecent}>recent</Text>
         <View style={styles.workouttrailertimer}>
