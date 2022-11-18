@@ -22,13 +22,31 @@ export const Progress = (props) => {
   const SCALE = 375 / Dimensions.get("screen").width;
   const [progress, onChangeProgress] = useState(false);
   const gestureprogress = useSharedValue(false);
+  const progdir = useSharedValue(null);
+
+  const doProgression = (direction) => {
+    if (!direction) return;
+    console.log(direction);
+  };
 
   useSharedValueEffect(() => {
     onChangeProgress(gestureprogress.value);
   }, gestureprogress);
 
+  useSharedValueEffect(() => {
+    doProgression(progdir.value);
+  }, progdir);
+
   const quit = Gesture.Tap().onStart(() => {
     gestureprogress.value = false;
+  });
+
+  const gprogress = Gesture.Tap().onStart(() => {
+    progdir.value = "up";
+  });
+
+  const unprogress = Gesture.Tap().onStart(() => {
+    progdir.value = "down";
   });
 
   return (
@@ -174,9 +192,12 @@ export const Progress = (props) => {
               />
             </RoundedRect>
           </Canvas>
-          <Text style={styles.progresspopupprogress}>PROGRESS</Text>
-
-          <Text style={styles.progresspopupsmall}>reverse</Text>
+          <GestureDetector gesture={gprogress}>
+            <Text style={styles.progresspopupprogress}>PROGRESS</Text>
+          </GestureDetector>
+          <GestureDetector gesture={unprogress}>
+            <Text style={styles.progresspopupsmall}>reverse</Text>
+          </GestureDetector>
           <GestureDetector gesture={quit}>
             <Text style={[styles.progresspopupsmall, { left: 187 / SCALE }]}>
               cancel

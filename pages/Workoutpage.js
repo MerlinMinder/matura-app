@@ -106,7 +106,10 @@ export const Workoutpage = ({ route, navigation }) => {
           >
             <Name
               id={id}
-              exlength={Object.values(data[id].exercises).length}
+              exlength={
+                Object.values(data[id].exercises).filter((ex) => ex != "del")
+                  .length
+              }
               recent={data[id].time}
               title={data[id].title}
             />

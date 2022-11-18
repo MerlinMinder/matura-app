@@ -54,15 +54,15 @@ export const Top = (props) => {
         settext="12 x 150kg"
         fontsize={12 / SCALE}
       ></Setmorph> */}
-      <View style={styles.b6l27}>
+      {/* <View style={styles.b6l27}>
         <GradientText style={styles.font16thin} text="unprogress" />
-      </View>
+      </View> */}
       <Text style={styles.topamount}>{`${props.currset} / ${
         props.ex[props.currex].sets.length
       }`}</Text>
-      <View style={styles.b6r44}>
+      {/* <View style={styles.b6r44}>
         <GradientText style={styles.font16bold} text="progress" />
-      </View>
+      </View> */}
     </View>
   );
 };

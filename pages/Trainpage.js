@@ -65,6 +65,13 @@ export const Trainpage = ({ navigation, route }) => {
       },
     };
     Merge("calendar", sendobj);
+    Merge("workouts", {
+      [id]: {
+        time: `${Math.floor(totaltime.seconds / 60)}m ${Math.floor(
+          totaltime.seconds % 60
+        )}s`,
+      },
+    });
     navigation.navigate("home");
   }, [finish]);
 
