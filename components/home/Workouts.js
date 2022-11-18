@@ -76,7 +76,6 @@ export const Workouts = (props) => {
             />
           );
         }
-        return <></>;
       })}
       <GestureDetector gesture={gesture}>
         <View style={styles.workoutspluscontainer}>
