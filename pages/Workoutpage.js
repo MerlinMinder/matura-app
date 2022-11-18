@@ -120,9 +120,7 @@ export const Workoutpage = ({ route, navigation }) => {
             <View style={styles.t200l20}>
               <GradientText text="Exercises" style={styles.font20} />
             </View>
-            <View style={styles.workoutpageprogress}>
-              <Progress />
-            </View>
+
             <View style={styles.workoutpageexercise}>
               {Object.values(data[id].exercises).map((exercise) => {
                 if (exercise.id) {
@@ -154,6 +152,9 @@ export const Workoutpage = ({ route, navigation }) => {
                   );
                 }
               })}
+            </View>
+            <View style={styles.workoutpageprogress}>
+              <Progress font={"WorkSans-SemiBold"} />
             </View>
             <GestureDetector gesture={gesture}>
               <View style={styles.workoutpageplusc}>
