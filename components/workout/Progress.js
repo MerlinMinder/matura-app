@@ -8,7 +8,7 @@ import {
   useSharedValueEffect,
   vec,
 } from "@shopify/react-native-skia";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Dimensions } from "react-native";
 import {
   Gesture,
@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
+import { Get, Merge } from "../../Store";
 import styles from "../../Styles";
 
 export const Progress = (props) => {
@@ -24,17 +25,51 @@ export const Progress = (props) => {
   const gestureprogress = useSharedValue(false);
   const progdir = useSharedValue(null);
 
+  useEffect(() => {
+    gestureprogress.value = null;
+  }, [props.data]);
+
   const doProgression = (direction) => {
     if (!direction) return;
-    console.log(direction);
+    Object.values(props.data[props.id].exercises).map((ex) => {
+      if (ex.on) {
+        const changereps = ex.progression[ex.progressionstep].reps;
+        const changeweight = ex.progression[ex.progressionstep].weight;
+        const progsets = ex.sets.map((set) => {
+          set["reps"] = String(parseFloat(set.reps) + direction * changereps);
+          set["weight"] = String(
+            parseFloat(set.weight) + direction * changeweight
+          );
+          return set;
+        });
+        const incprogstep =
+          direction === 1
+            ? ex.progression.length - 1 > ex.progressionstep
+              ? ex.progressionstep + 1
+              : 0
+            : ex.progressionstep > 0
+            ? ex.progressionstep - 1
+            : 0;
+        Merge("workouts", {
+          [props.id]: {
+            exercises: {
+              [ex.id]: { sets: progsets, progressionstep: incprogstep },
+            },
+          },
+        });
+        Get("workouts", props.setData);
+      }
+    });
   };
 
   useSharedValueEffect(() => {
     onChangeProgress(gestureprogress.value);
+    progdir.value = null;
   }, gestureprogress);
 
   useSharedValueEffect(() => {
     doProgression(progdir.value);
+    progdir.value = null;
   }, progdir);
 
   const quit = Gesture.Tap().onStart(() => {
@@ -42,11 +77,11 @@ export const Progress = (props) => {
   });
 
   const gprogress = Gesture.Tap().onStart(() => {
-    progdir.value = "up";
+    progdir.value = 1;
   });
 
   const unprogress = Gesture.Tap().onStart(() => {
-    progdir.value = "down";
+    progdir.value = -1;
   });
 
   return (

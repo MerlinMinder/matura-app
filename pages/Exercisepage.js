@@ -38,8 +38,11 @@ export const Exercisepage = ({ route, navigation }) => {
   const { workid, exid } = route.params;
 
   useEffect(() => {
-    Get("workouts", setData);
-  }, []);
+    const listener = navigation.addListener("focus", () => {
+      Get("workouts", setData);
+    });
+    return listener;
+  }, [navigation]);
 
   useSharedValueEffect(() => {
     const senddata = new Object();
@@ -74,7 +77,7 @@ export const Exercisepage = ({ route, navigation }) => {
   useSharedValueEffect(() => {
     const senddata = new Object();
     const sendex = new Object();
-    sendex[exid] = { on: on.value };
+    sendex[exid] = { on: on.value, progressionstep: 0 };
     senddata[workid] = { exercises: sendex };
     Merge("workouts", senddata);
 
@@ -160,7 +163,13 @@ export const Exercisepage = ({ route, navigation }) => {
             />
             <View style={styles.Top34}>
               {Object.values(data[workid].exercises[exid].sets).map((set) => {
-                return <Set key={set.num} set={set} sets={sets} />;
+                return (
+                  <Set
+                    key={set.num}
+                    set={sets.value[set.num - 1]}
+                    sets={sets}
+                  />
+                );
               })}
             </View>
             <Counter

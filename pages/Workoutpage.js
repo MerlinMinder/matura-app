@@ -157,7 +157,9 @@ export const Workoutpage = ({ route, navigation }) => {
               })}
             </View>
             <View style={styles.workoutpageprogress}>
-              <Progress font={"WorkSans-SemiBold"} />
+              {data && (
+                <Progress key={data} data={data} id={id} setData={setData} />
+              )}
             </View>
             <GestureDetector gesture={gesture}>
               <View style={styles.workoutpageplusc}>
