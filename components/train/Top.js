@@ -22,7 +22,6 @@ export const Top = (props) => {
             currset={props.currset}
             currex={props.currex}
             ex={props.ex}
-            setData={props.setData}
           ></Setmorph>
         );
       })}

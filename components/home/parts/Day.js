@@ -10,7 +10,10 @@ export const Day = (props) => {
         <TouchableOpacity
           onPress={() => {
             if (props.workout) {
-              props.nav.navigate("workout", { id: props.workout.id });
+              props.nav.navigate("train", {
+                id: props.workout.id,
+                workout: props.workout,
+              });
             }
           }}
         >

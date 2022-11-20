@@ -76,7 +76,9 @@ export const Trainpage = ({ navigation, route }) => {
   }, [finish]);
 
   useEffect(() => {
-    Get("workouts", setData);
+    route.params.workout
+      ? setData({ [id]: route.params.workout })
+      : Get("workouts", setData);
 
     totaltimer.current = setInterval(() => {
       onChangeTotaltime((prev) => {
@@ -130,6 +132,10 @@ export const Trainpage = ({ navigation, route }) => {
   }
 
   if (!exercises.value[0]) {
+    if (route.params.workout) {
+      setData({ [id]: route.params.workout });
+      return;
+    }
     Get("workouts", setData);
     return null;
   }
@@ -141,12 +147,7 @@ export const Trainpage = ({ navigation, route }) => {
         <Title nav={navigation} />
 
         <View style={styles.trainpageview}>
-          <Top
-            ex={exercises}
-            currex={currentex}
-            currset={currentset}
-            setData={setData}
-          />
+          <Top ex={exercises} currex={currentex} currset={currentset} />
 
           <Timer
             onChangeCurrentset={onChangeCurrentset}
