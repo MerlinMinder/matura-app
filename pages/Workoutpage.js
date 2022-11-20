@@ -112,6 +112,7 @@ export const Workoutpage = ({ route, navigation }) => {
               }
               recent={data[id].time}
               title={data[id].title}
+              color={data[id].color}
             />
             <Start
               text="Start"

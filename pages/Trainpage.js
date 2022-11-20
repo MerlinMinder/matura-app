@@ -223,6 +223,7 @@ export const Trainpage = ({ navigation, route }) => {
             ex={exercises.value}
             nav={navigation}
             title={data[id].title}
+            color={data[id].color}
             time={totaltime.seconds}
             started={started}
             setFinish={setFinish}

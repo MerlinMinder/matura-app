@@ -54,7 +54,7 @@ export const Workout = (props) => {
         <View style={styles.Top25}>
           <Neomorphism
             inset
-            settings={{ ...neostyles.nameline, ...{ colorB: "#42FFFF" } }}
+            settings={{ ...neostyles.nameline, ...{ colorB: props.color } }}
           ></Neomorphism>
         </View>
         <View style={styles.workoutdumbbell}>

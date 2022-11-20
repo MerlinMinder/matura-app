@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { TextInput, View, Text, TouchableWithoutFeedback } from "react-native";
+import {
+  TextInput,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { Neomorphism } from "../../Neomorphism";
 import { neostyles } from "../../NeoStyles";
@@ -8,7 +14,32 @@ import styles from "../../Styles";
 
 export const Name = (props) => {
   const [title, onChangeTitle] = useState(props.title);
+  const [color, onChangeColor] = useState(props.color);
+  const [colorcounter, onChangeColorcounter] = useState(0);
   const refTextInput = useRef({});
+
+  const colors = [
+    "#42FFFF",
+    "#ff8142",
+    "#ffc042",
+    "#ffff42",
+    "#c0ff42",
+    "#42ff42",
+    "#42ffc0",
+    "#4281ff",
+    "#8142ff",
+    "#ff42ff",
+  ];
+
+  const changeColor = () => {
+    if (colorcounter < 9) {
+      onChangeColorcounter((prev) => prev + 1);
+    } else {
+      onChangeColorcounter(0);
+    }
+    onChangeColor(colors[colorcounter]);
+    Merge("workouts", { [props.id]: { color: colors[colorcounter] } });
+  };
 
   return (
     <View style={styles.width320}>
@@ -50,10 +81,12 @@ export const Name = (props) => {
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.l20t68}>
-        <Neomorphism
-          inset
-          settings={{ ...neostyles.nameline, ...{ colorB: "#42FFFF" } }}
-        ></Neomorphism>
+        <TouchableOpacity onPress={changeColor}>
+          <Neomorphism
+            inset
+            settings={{ ...neostyles.nameline, ...{ colorB: color } }}
+          ></Neomorphism>
+        </TouchableOpacity>
       </View>
       <View style={styles.namedumbbell}>
         <Svg

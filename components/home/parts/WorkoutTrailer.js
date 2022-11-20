@@ -9,6 +9,7 @@ import { Get, Merge } from "../../../Store";
 
 export const WorkoutTrailer = (props) => {
   const [deleteshow, onChangeDeleteshow] = useState(false);
+  console.log(props.workout.color);
   return (
     <TouchableOpacity
       onPress={() => {
@@ -23,7 +24,7 @@ export const WorkoutTrailer = (props) => {
             inset
             settings={{
               ...neostyles.workouttrailercolor,
-              ...{ backgroundColor: props.workout.color },
+              ...{ colorB: props.workout.color },
             }}
           ></Neomorphism>
         </View>
