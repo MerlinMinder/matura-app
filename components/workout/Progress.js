@@ -9,7 +9,7 @@ import {
   vec,
 } from "@shopify/react-native-skia";
 import { useEffect, useState } from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, Alert } from "react-native";
 import {
   Gesture,
   GestureDetector,
@@ -60,6 +60,13 @@ export const Progress = (props) => {
         Get("workouts", props.setData);
       }
     });
+    if (gestureprogress.value) {
+      Alert.alert(
+        "No progression",
+        "You have not added any progression steps to your exercises"
+      );
+      gestureprogress.value = null;
+    }
   };
 
   useSharedValueEffect(() => {

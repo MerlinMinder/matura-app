@@ -1,15 +1,14 @@
 import { Text, View, Dimensions } from "react-native";
-import GradientText from "../../GradientText";
 import styles from "../../Styles";
 import { Setmorph } from "./Setmorph";
 
 export const Top = (props) => {
   const SCALE = 375 / Dimensions.get("screen").width;
-  const sets = props.ex[props.currex].sets;
+  const sets = props.ex.value[props.currex].sets;
 
   return (
     <View style={styles.toppos}>
-      <Text style={styles.toptitle}>{props.ex[props.currex].name}</Text>
+      <Text style={styles.toptitle}>{props.ex.value[props.currex].name}</Text>
       {sets.map((set) => {
         return (
           <Setmorph
@@ -21,6 +20,9 @@ export const Top = (props) => {
             b={4 / SCALE}
             set={set}
             currset={props.currset}
+            currex={props.currex}
+            ex={props.ex}
+            setData={props.setData}
           ></Setmorph>
         );
       })}
@@ -58,7 +60,7 @@ export const Top = (props) => {
         <GradientText style={styles.font16thin} text="unprogress" />
       </View> */}
       <Text style={styles.topamount}>{`${props.currset} / ${
-        props.ex[props.currex].sets.length
+        props.ex.value[props.currex].sets.length
       }`}</Text>
       {/* <View style={styles.b6r44}>
         <GradientText style={styles.font16bold} text="progress" />

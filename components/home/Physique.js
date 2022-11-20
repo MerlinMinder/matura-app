@@ -87,7 +87,7 @@ export const Physique = () => {
         <View style={styles.physiquebody}>
           <GradientText text="Body" style={styles.font20} />
         </View>
-        <View style={styles.physiquesettings}>
+        {/* <View style={styles.physiquesettings}>
           <Svg
             width="30"
             height="30"
@@ -104,7 +104,7 @@ export const Physique = () => {
               fill="white"
             />
           </Svg>
-        </View>
+        </View> */}
         <View style={styles.top55}>
           {measures.map((measure) => {
             return (

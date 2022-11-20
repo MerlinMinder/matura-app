@@ -1,11 +1,23 @@
-import { Dimensions, Text, View } from "react-native";
+import { useState } from "react";
+import {
+  Dimensions,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
 import { Neomorphism } from "../../Neomorphism";
+import { neostyles } from "../../NeoStyles";
+import styles from "../../Styles";
 
 export const Setmorph = (props) => {
+  const [editing, onChangeEditing] = useState(false);
+  const [reps, onChangeReps] = useState(props.set.reps);
+  const [weight, onChangeWeight] = useState(props.set.weight);
   const SCALE = 375 / Dimensions.get("screen").width;
   const main = props.set.num === props.currset;
   let settings = {
@@ -18,6 +30,20 @@ export const Setmorph = (props) => {
     colorB: "#464646",
     colorS1: "rgba(0, 0, 0, 0.7)",
     colorS2: "rgba(153, 153, 153, 0.7)",
+  };
+
+  const savechange = (reps, weight) => {
+    const sendarr = [...props.ex.value];
+    console.log(sendarr[props.currex].sets[props.currset - 1]);
+
+    sendarr[props.currex].sets[props.currset - 1] = {
+      weight: weight,
+      reps: reps,
+      num: sendarr[props.currex].sets[props.currset - 1].num,
+      mes: "kg",
+    };
+    console.log(sendarr[props.currex].sets[props.currset - 1]);
+    props.ex.value = sendarr;
   };
 
   const uasfont = useAnimatedStyle(() => {
@@ -58,36 +84,134 @@ export const Setmorph = (props) => {
     }
   });
   return (
-    <Animated.View style={[{ position: "absolute" }, uastop, uaspos]}>
-      <Neomorphism settings={settings}>
-        <Neomorphism
-          center
-          inset
-          settings={{
-            ...settings,
-            ...{
-              colorS2: "rgba(0, 0, 0, 0.7)",
-              colorS1: "rgba(153, 153, 153, 0.7)",
-            },
+    <>
+      <Animated.View style={[{ position: "absolute" }, uastop, uaspos]}>
+        <TouchableOpacity
+          onPress={() => {
+            main && onChangeEditing(true);
           }}
         >
-          <Animated.Text
-            style={[
-              {
-                width: main ? 108 / SCALE : 45 / SCALE,
-                fontFamily: "WorkSans-SemiBold",
-                fontWeight: "600",
-                color: "white",
-                textAlign: "center",
-              },
-              uasfont,
-            ]}
+          <Neomorphism settings={settings}>
+            <Neomorphism
+              center
+              inset
+              settings={{
+                ...settings,
+                ...{
+                  colorS2: "rgba(0, 0, 0, 0.7)",
+                  colorS1: "rgba(153, 153, 153, 0.7)",
+                },
+              }}
+            >
+              <Animated.Text
+                style={[
+                  {
+                    width: main ? 108 / SCALE : 45 / SCALE,
+                    fontFamily: "WorkSans-SemiBold",
+                    fontWeight: "600",
+                    color: "white",
+                    textAlign: "center",
+                  },
+                  uasfont,
+                ]}
+              >
+                {`${props.set.reps} x ${props.set.weight}${props.set.mes}`}
+              </Animated.Text>
+            </Neomorphism>
+          </Neomorphism>
+        </TouchableOpacity>
+      </Animated.View>
+      {editing && (
+        <TouchableOpacity
+          onPress={() => {
+            onChangeEditing(false);
+          }}
+        >
+          <View
+            style={{
+              width: 100 / SCALE,
+              height: 100 / SCALE,
+              backgroundColor: "#666666",
+              borderRadius: 10 / SCALE,
+              top: 92 / SCALE,
+            }}
           >
-            {`${props.set.reps} x ${props.set.weight}${props.set.mes}`}
-          </Animated.Text>
-        </Neomorphism>
-      </Neomorphism>
-    </Animated.View>
+            <Text
+              style={[
+                styles.font16,
+                {
+                  color: "white",
+                  left: 5 / SCALE,
+                  top: 17 / SCALE,
+                  position: "absolute",
+                },
+              ]}
+            >
+              reps
+            </Text>
+            <View
+              style={{
+                top: 6 / SCALE,
+                right: 6 / SCALE,
+                position: "absolute",
+              }}
+            >
+              <Neomorphism inset settings={neostyles.trainsetpopuptop}>
+                <TextInput
+                  style={styles.setrepsinput}
+                  onChangeText={onChangeReps}
+                  placeholder="0"
+                  placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                  value={reps}
+                  selectTextOnFocus={true}
+                  keyboardType="number-pad"
+                  onEndEditing={() => {
+                    savechange(reps, weight);
+                  }}
+                  maxLength={2}
+                ></TextInput>
+              </Neomorphism>
+            </View>
+            <View
+              style={{
+                top: 54 / SCALE,
+                right: 6 / SCALE,
+                position: "absolute",
+              }}
+            >
+              <Neomorphism inset settings={neostyles.trainsetpopupbottom}>
+                <TextInput
+                  style={[styles.setrepsinput, styles.setmesinput]}
+                  onChangeText={onChangeWeight}
+                  placeholder="0"
+                  placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                  value={weight}
+                  selectTextOnFocus={true}
+                  keyboardType="number-pad"
+                  onEndEditing={() => {
+                    savechange(reps, weight);
+                  }}
+                  maxLength={5}
+                ></TextInput>
+              </Neomorphism>
+            </View>
+            <Text
+              style={[
+                styles.font16,
+                {
+                  color: "white",
+                  left: 8 / SCALE,
+                  top: 65 / SCALE,
+                  position: "absolute",
+                },
+              ]}
+            >
+              kg
+            </Text>
+          </View>
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 

@@ -141,7 +141,12 @@ export const Trainpage = ({ navigation, route }) => {
         <Title nav={navigation} />
 
         <View style={styles.trainpageview}>
-          <Top ex={exercises.value} currex={currentex} currset={currentset} />
+          <Top
+            ex={exercises}
+            currex={currentex}
+            currset={currentset}
+            setData={setData}
+          />
 
           <Timer
             onChangeCurrentset={onChangeCurrentset}

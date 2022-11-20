@@ -24,7 +24,6 @@ export default function App() {
 
   useEffect(() => {
     // get calendar/database
-    Del("calendar");
     Get("calendar", setCalendar);
     Get("workouts", setWorkouts);
     Get("physique", setPhysique);
