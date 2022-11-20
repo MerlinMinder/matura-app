@@ -12,6 +12,7 @@ import { Get, Merge } from "../../Store";
 export const Physique = () => {
   let bmi = 21.7;
   let bmiwidth = 130;
+  let bmicolor = "#62FF42";
   const [mes, onChangeMes] = useState("cm");
   const [edittext, onChangeEdittext] = useState("Edit");
   const [measurestate, setMeasureState] = useState(0);
@@ -46,6 +47,27 @@ export const Physique = () => {
 
   if (!measurestate) {
     return null;
+  } else {
+    if (measurestate.Height && measurestate.Weight) {
+      bmi =
+        Math.round(
+          (parseFloat(measurestate.Weight) /
+            Math.pow(parseFloat(measurestate.Height) / 100, 2)) *
+            100
+        ) / 100;
+      bmiwidth = 10.75 * (bmi - 12);
+      if (bmi < 18.5) {
+        bmicolor = colors[0];
+      } else if (bmi < 25) {
+        bmicolor = colors[2];
+      } else if (bmi < 30) {
+        bmicolor = colors[4];
+      } else if (bmi < 35) {
+        bmicolor = colors[6];
+      } else {
+        bmicolor = colors[7];
+      }
+    }
   }
 
   return (
@@ -73,13 +95,13 @@ export const Physique = () => {
         <LinearGradient
           style={styles.physiquegradient}
           colors={colors}
-          locations={[0, 0.15, 0.3, 0.6, 0.7, 0.8, 0.9, 1]}
+          locations={[0, 0.15, 0.3, 0.5, 0.6, 0.75, 0.85, 1]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
         ></LinearGradient>
         <View style={[styles.physiquecircle, { left: bmiwidth }]}>
           <Neomorphism
-            settings={{ ...neostyles.physiqueball, ...{ colorB: "#62FF42" } }}
+            settings={{ ...neostyles.physiqueball, ...{ colorB: bmicolor } }}
             inset
           ></Neomorphism>
           <Text style={styles.physiquebmitext}>{bmi}</Text>
