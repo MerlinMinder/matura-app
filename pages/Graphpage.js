@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { ScrollView, Text, View, SafeAreaView } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Graphcontainer } from "../components/graph/Graphcontainer";
 import { Title } from "../components/Title";
 import GradientText from "../GradientText";
@@ -7,6 +9,10 @@ import { neostyles } from "../NeoStyles";
 import styles from "../Styles";
 
 export const Graphpage = ({ navigation }) => {
+  const [chosentitle, onChangeChosentitle] = useState("");
+  const titles = ["Workouts", "Exercises", "Physique"];
+  const positions = [styles.l20, {}, styles.r20];
+
   return (
     <SafeAreaView style={styles.appContainer}>
       <ScrollView contentContainerStyle={styles.scrollview}>
@@ -23,20 +29,34 @@ export const Graphpage = ({ navigation }) => {
             }}
             settings={neostyles.graphmenu}
           >
-            <Text style={styles.graphworkouttext}>Workouts</Text>
-            <View>
-              <GradientText
-                style={[
-                  styles.font16bold,
-                  {
-                    textShadowOffset: { width: 1, height: 1 },
-                    textShadowRadius: 2,
-                  },
-                ]}
-                text="Exercises"
-              />
-            </View>
-            <Text style={styles.graphphysiquetext}>Physique</Text>
+            {titles.map((title, index) => {
+              return (
+                <View style={positions[index]}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      onChangeChosentitle(title);
+                    }}
+                  >
+                    {title === chosentitle ? (
+                      <GradientText
+                        style={[
+                          styles.font16bold,
+                          {
+                            textShadowOffset: { width: 1, height: 1 },
+                            textShadowRadius: 2,
+                          },
+                        ]}
+                        text={title}
+                      ></GradientText>
+                    ) : (
+                      <Text style={[styles.font16bold, { color: "white" }]}>
+                        {title}
+                      </Text>
+                    )}
+                  </TouchableOpacity>
+                </View>
+              );
+            })}
           </Neomorphism>
         </View>
 
