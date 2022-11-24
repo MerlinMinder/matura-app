@@ -3,7 +3,7 @@ import GradientText from "../GradientText";
 import { Workouts } from "../components/home/Workouts";
 import { Physique } from "../components/home/Physique";
 import { Calendar } from "../components/home/Calendar";
-import { View, ScrollView, SafeAreaView } from "react-native";
+import { View, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
 import styles from "../Styles";
 
 export const Homepage = ({ navigation }) => {
@@ -34,6 +34,16 @@ export const Homepage = ({ navigation }) => {
 
         <View>
           <Physique />
+        </View>
+
+        <View style={styles.l100t20}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("graph");
+            }}
+          >
+            <GradientText text="Graphs" style={styles.hometitles} />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>

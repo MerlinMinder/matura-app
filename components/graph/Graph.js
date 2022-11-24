@@ -1,10 +1,8 @@
 import { Canvas, Fill, Path, Skia } from "@shopify/react-native-skia";
 import { View } from "react-native";
+import styles from "../../Styles";
 
 export const Graph = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
-
   const data = [[0, 60]];
 
   const path = Skia.Path.Make();
@@ -16,13 +14,8 @@ export const Graph = (props) => {
   path.lineTo(90, 50);
 
   return (
-    <View style={{ top: 90 / SCALE, left: 50 / SCALE }}>
-      <Canvas
-        style={{
-          height: 220 / SCALE,
-          width: 220 / SCALE,
-        }}
-      >
+    <View style={styles.t90l50}>
+      <Canvas style={styles.graphcanvas}>
         <Path
           path={path}
           color="#42FFFF"

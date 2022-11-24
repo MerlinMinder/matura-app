@@ -2,71 +2,19 @@ import { Text, View } from "react-native";
 import { Neomorphism } from "../../Neomorphism";
 import Svg, { Path } from "react-native-svg";
 import { Graph } from "./Graph";
+import { neostyles } from "../../NeoStyles";
+import styles from "../../Styles";
 
 export const Graphcontainer = (props) => {
   let SCALE = props.scale;
   let BG2 = props.bg2;
   return (
-    <Neomorphism
-      width={320 / SCALE}
-      height={360 / SCALE}
-      x={8 / SCALE}
-      y={8 / SCALE}
-      r={15 / SCALE}
-      b={6 / SCALE}
-      colorB={BG2}
-      colorS1="rgba(0, 0, 0, 0.7)"
-      colorS2="rgba(128, 128, 128, 0.7)"
-    >
-      <Text
-        style={{
-          top: 20 / SCALE,
-          left: 20 / SCALE,
-          position: "absolute",
-          fontFamily: "WorkSans-SemiBold",
-          fontSize: 20 / SCALE,
-          fontWeight: "600",
-          lineHeight: 23 / SCALE,
-          color: "white",
-        }}
-      >
-        Hyperextensions
-      </Text>
-      <View
-        style={{ left: 170 / SCALE, top: 19 / SCALE, position: "absolute" }}
-      >
-        <Neomorphism
-          width={90 / SCALE}
-          height={25 / SCALE}
-          x={2 / SCALE}
-          y={2 / SCALE}
-          r={10 / SCALE}
-          b={2 / SCALE}
-          colorB={BG2}
-          colorS1="rgba(0, 0, 0, 0.7)"
-          colorS2="rgba(153, 153, 153, 0.7)"
-          inset={true}
-        >
-          <Text
-            style={{
-              position: "absolute",
-              width: 60 / SCALE,
-              height: 16 / SCALE,
-              left: 7 / SCALE,
-              top: 5 / SCALE,
-              fontFamily: "WorkSans-SemiBold",
-              fontStyle: "normal",
-              fontWeight: "600",
-              fontSize: 14 / SCALE,
-              lineHeight: 16 / SCALE,
-              color: "white",
-            }}
-          >
-            3 month
-          </Text>
-          <View
-            style={{ top: 9 / SCALE, left: 68 / SCALE, position: "absolute" }}
-          >
+    <Neomorphism settings={neostyles.graphcontainer}>
+      <Text style={styles.graphtitle}>Hyperextensions</Text>
+      <View style={styles.t19l170}>
+        <Neomorphism settings={neostyles.graphtimeframe} inset>
+          <Text style={styles.graphtimeframetext}>3 month</Text>
+          <View style={styles.t9l68}>
             <Svg
               width="15"
               height="10"
@@ -82,9 +30,7 @@ export const Graphcontainer = (props) => {
           </View>
         </Neomorphism>
       </View>
-      <View
-        style={{ top: 17 / SCALE, left: 273 / SCALE, position: "absolute" }}
-      >
+      <View style={styles.t17l273}>
         <Svg
           width="30"
           height="30"
@@ -102,7 +48,7 @@ export const Graphcontainer = (props) => {
           />
         </Svg>
       </View>
-      <Graph scale={SCALE} bg2={BG2} />
+      <Graph />
     </Neomorphism>
   );
 };

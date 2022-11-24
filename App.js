@@ -94,6 +94,7 @@ export default function App() {
         <Stack.Screen name="workout" component={Workoutpage} />
         <Stack.Screen name="exercise" component={Exercisepage} />
         <Stack.Screen name="train" component={Trainpage} />
+        <Stack.Screen name="graph" component={Graphpage} />
       </Stack.Navigator>
       {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
     </NavigationContainer>
