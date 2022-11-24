@@ -96,7 +96,6 @@ export default function App() {
         <Stack.Screen name="train" component={Trainpage} />
         <Stack.Screen name="graph" component={Graphpage} />
       </Stack.Navigator>
-      {/* <Graphpage scale={SCALE} bg2={BG2} /> */}
     </NavigationContainer>
   ));
 

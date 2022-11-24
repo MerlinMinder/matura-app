@@ -233,20 +233,3 @@ export const Trainpage = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
-
-// useEffect(() => {
-//   if (firstload.current) return;
-//   const today = new Date();
-//   today.setHours(0, 0, 0, 0);
-//   const senddata = new Object();
-//   senddata[today.getTime()] = {
-//     workout: {
-//       name: data[id].title,
-//       id: id,
-//       color: data[id].color,
-//       time: totaltime.seconds,
-//       exercises: completed,
-//     },
-//   };
-//   Merge("calendar", senddata);
-// }, [completed]);

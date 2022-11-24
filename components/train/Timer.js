@@ -200,27 +200,3 @@ export const Timer = (props) => {
     </View>
   );
 };
-
-// const completeSet = () => {
-//   props.onChangeCompleted((prev) => {
-//     const returnobj = new Object();
-//     const cex = { ...props.ex[props.currex] };
-//     let cexsets = null;
-//     if (prev[props.ex[props.currex].id]) {
-//       if (prev[props.ex[props.currex].id].sets) {
-//         cexsets = [
-//           ...prev[props.ex[props.currex].id].sets,
-//           ...[cex.sets[props.currset - 1]],
-//         ];
-//       } else {
-//         cexsets = [cex.sets[props.currset - 1]];
-//       }
-//     } else {
-//       cexsets = [cex.sets[props.currset - 1]];
-//     }
-//     delete cex.sets;
-//     cex["sets"] = cexsets;
-//     returnobj[props.ex[props.currex].id] = cex;
-//     return { ...prev, ...returnobj };
-//   });
-// };
