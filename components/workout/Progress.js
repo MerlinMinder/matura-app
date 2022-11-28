@@ -4,7 +4,6 @@ import {
   LinearGradient,
   RoundedRect,
   Shadow,
-  useFont,
   useSharedValueEffect,
   vec,
 } from "@shopify/react-native-skia";

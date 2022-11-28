@@ -4,13 +4,20 @@ import Svg, { Path } from "react-native-svg";
 import { Graph } from "./Graph";
 import { neostyles } from "../../NeoStyles";
 import styles from "../../Styles";
+import { useEffect, useState } from "react";
 
 export const Graphcontainer = (props) => {
-  let SCALE = props.scale;
-  let BG2 = props.bg2;
+  const [firstday, onChangeFirstday] = useState();
+  const [timeframe, onChangeTimeframe] = useState("All");
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todaytimestamp = today.getTime();
+
+  useEffect(() => {}, [timeframe]);
+
   return (
     <Neomorphism settings={neostyles.graphcontainer}>
-      <Text style={styles.graphtitle}>Hyperextensions</Text>
+      <Text style={styles.graphtitle}>{props.graphdata[0]}</Text>
       <View style={styles.t19l170}>
         <Neomorphism settings={neostyles.graphtimeframe} inset>
           <Text style={styles.graphtimeframetext}>3 month</Text>
