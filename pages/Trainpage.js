@@ -45,7 +45,7 @@ export const Trainpage = ({ navigation, route }) => {
         doneexercises[element.exercise.id] = {
           name: element.exercise.name,
           id: element.exercise.id,
-          progession: element.exercise.progression,
+          progression: element.exercise.progression,
           rest: element.exercise.rest,
           on: element.exercise.on,
           sets: [element.set],
